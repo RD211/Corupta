@@ -28,11 +28,11 @@ namespace SaboteurX
                 }
             }
         }
-        public Bitmap GetPictureBitmap()
+        public Bitmap GetPictureBitmap(int width, int height)
         {
-            Bitmap bmp = new Bitmap(600, 600);
+            Bitmap bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
-            g.FillRectangle(new SolidBrush(Color.DarkGreen), 0, 0, 600, 600);
+            g.FillRectangle(new SolidBrush(Color.DarkGreen), 0, 0, width, height);
             Pen pn = new Pen(Color.Chartreuse, 1);
             SolidBrush blackBrush = new SolidBrush(Color.Black);
             for (int i = 0; i < 15; i++)
@@ -41,7 +41,7 @@ namespace SaboteurX
                 {
                     if (picture[i, j])
                     {
-                        g.FillRectangle(blackBrush, i * (600f / 15f), j * (600f / 15f), 600f / 15f, 600f / 15f);
+                        g.FillRectangle(blackBrush, i * (width / 15f), j * (height / 15f), width / 15f, height / 15f);
                     }
                 }
             }

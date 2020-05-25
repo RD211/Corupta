@@ -44,19 +44,19 @@
             this.lbl_name_6 = new System.Windows.Forms.Label();
             this.lbl_name_5 = new System.Windows.Forms.Label();
             this.lbl_name_4 = new System.Windows.Forms.Label();
-            this.lbl_name_3 = new System.Windows.Forms.Label();
-            this.lbl_name_2 = new System.Windows.Forms.Label();
-            this.lbl_name_1 = new System.Windows.Forms.Label();
-            this.lbl_name_0 = new System.Windows.Forms.Label();
-            this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.pbox_player_7 = new System.Windows.Forms.PictureBox();
             this.pbox_player_6 = new System.Windows.Forms.PictureBox();
             this.pbox_player_5 = new System.Windows.Forms.PictureBox();
             this.pbox_player_4 = new System.Windows.Forms.PictureBox();
+            this.lbl_name_3 = new System.Windows.Forms.Label();
+            this.lbl_name_2 = new System.Windows.Forms.Label();
+            this.lbl_name_1 = new System.Windows.Forms.Label();
+            this.lbl_name_0 = new System.Windows.Forms.Label();
             this.pbox_player_3 = new System.Windows.Forms.PictureBox();
             this.pbox_player_2 = new System.Windows.Forms.PictureBox();
             this.pbox_player_1 = new System.Windows.Forms.PictureBox();
             this.pbox_player_0 = new System.Windows.Forms.PictureBox();
+            this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_player_7)).BeginInit();
@@ -288,6 +288,46 @@
             this.lbl_name_4.Text = resources.GetString("lbl_name_4.Text");
             this.lbl_name_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pbox_player_7
+            // 
+            this.pbox_player_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_player_7.Location = new System.Drawing.Point(510, 350);
+            this.pbox_player_7.Name = "pbox_player_7";
+            this.pbox_player_7.Size = new System.Drawing.Size(100, 100);
+            this.pbox_player_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_player_7.TabIndex = 19;
+            this.pbox_player_7.TabStop = false;
+            // 
+            // pbox_player_6
+            // 
+            this.pbox_player_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_player_6.Location = new System.Drawing.Point(510, 244);
+            this.pbox_player_6.Name = "pbox_player_6";
+            this.pbox_player_6.Size = new System.Drawing.Size(100, 100);
+            this.pbox_player_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_player_6.TabIndex = 18;
+            this.pbox_player_6.TabStop = false;
+            // 
+            // pbox_player_5
+            // 
+            this.pbox_player_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_player_5.Location = new System.Drawing.Point(510, 138);
+            this.pbox_player_5.Name = "pbox_player_5";
+            this.pbox_player_5.Size = new System.Drawing.Size(100, 100);
+            this.pbox_player_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_player_5.TabIndex = 17;
+            this.pbox_player_5.TabStop = false;
+            // 
+            // pbox_player_4
+            // 
+            this.pbox_player_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_player_4.Location = new System.Drawing.Point(510, 32);
+            this.pbox_player_4.Name = "pbox_player_4";
+            this.pbox_player_4.Size = new System.Drawing.Size(100, 100);
+            this.pbox_player_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_player_4.TabIndex = 16;
+            this.pbox_player_4.TabStop = false;
+            // 
             // lbl_name_3
             // 
             this.lbl_name_3.BackColor = System.Drawing.Color.Transparent;
@@ -340,52 +380,6 @@
             this.lbl_name_0.Text = resources.GetString("lbl_name_0.Text");
             this.lbl_name_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // timer_update
-            // 
-            this.timer_update.Enabled = true;
-            this.timer_update.Interval = 2000;
-            this.timer_update.Tick += new System.EventHandler(this.timer_update_Tick);
-            // 
-            // pbox_player_7
-            // 
-            this.pbox_player_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox_player_7.Location = new System.Drawing.Point(510, 350);
-            this.pbox_player_7.Name = "pbox_player_7";
-            this.pbox_player_7.Size = new System.Drawing.Size(100, 100);
-            this.pbox_player_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_player_7.TabIndex = 19;
-            this.pbox_player_7.TabStop = false;
-            // 
-            // pbox_player_6
-            // 
-            this.pbox_player_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox_player_6.Location = new System.Drawing.Point(510, 244);
-            this.pbox_player_6.Name = "pbox_player_6";
-            this.pbox_player_6.Size = new System.Drawing.Size(100, 100);
-            this.pbox_player_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_player_6.TabIndex = 18;
-            this.pbox_player_6.TabStop = false;
-            // 
-            // pbox_player_5
-            // 
-            this.pbox_player_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox_player_5.Location = new System.Drawing.Point(510, 138);
-            this.pbox_player_5.Name = "pbox_player_5";
-            this.pbox_player_5.Size = new System.Drawing.Size(100, 100);
-            this.pbox_player_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_player_5.TabIndex = 17;
-            this.pbox_player_5.TabStop = false;
-            // 
-            // pbox_player_4
-            // 
-            this.pbox_player_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox_player_4.Location = new System.Drawing.Point(510, 32);
-            this.pbox_player_4.Name = "pbox_player_4";
-            this.pbox_player_4.Size = new System.Drawing.Size(100, 100);
-            this.pbox_player_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_player_4.TabIndex = 16;
-            this.pbox_player_4.TabStop = false;
-            // 
             // pbox_player_3
             // 
             this.pbox_player_3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -425,6 +419,12 @@
             this.pbox_player_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_0.TabIndex = 2;
             this.pbox_player_0.TabStop = false;
+            // 
+            // timer_update
+            // 
+            this.timer_update.Enabled = true;
+            this.timer_update.Interval = 2000;
+            this.timer_update.Tick += new System.EventHandler(this.timer_update_Tick);
             // 
             // LobbyWaitingRoom
             // 

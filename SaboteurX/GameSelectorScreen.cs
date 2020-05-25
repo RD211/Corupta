@@ -129,7 +129,7 @@ namespace SaboteurX
             var model = new LobbyModel
             {
                 Players = new List<string>() { info.ToCompressedString() },
-                Moves = new List<string>() { "createdlobby" },
+                Moves = new List<MoveModel>(),
                 Messages = new List<string>() { $"{info.name} created the lobby." },
                 Started = false,
                 Active = true,

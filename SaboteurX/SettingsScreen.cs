@@ -37,7 +37,7 @@ namespace SaboteurX
 
         void UpdateAvatarImage()
         {
-            Bitmap bmp = information.GetPictureBitmap();
+            Bitmap bmp = information.GetPictureBitmap(600,600);
             Graphics g = Graphics.FromImage(bmp);
             Pen pn = new Pen(Color.Chartreuse,1);
             for(int j = 0;j<15;j++)

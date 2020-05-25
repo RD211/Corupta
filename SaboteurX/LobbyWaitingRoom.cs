@@ -4,6 +4,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using Newtonsoft.Json;
 using QuickType;
+using SaboteurX.Game;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -69,7 +70,7 @@ namespace SaboteurX
                     var player = new PlayerInformation(lobby.Players[i]);
                     lbl_players[i].Tag = $"{player.name};NO";
                     lbl_players[i].Text = player.name.ToAsciiArt();
-                    pbox_players[i].Image = player.GetPictureBitmap();
+                    pbox_players[i].Image = player.GetPictureBitmap(pbox_players[i].Width,pbox_players[i].Height);
                 }
                 this.BackColor = Color.LimeGreen;
                 this.TransparencyKey = Color.LimeGreen;
@@ -104,6 +105,7 @@ namespace SaboteurX
         {
             StartGame();
         }
+
         private async void StartGame()
         {
             IFirebaseConfig config = new FirebaseConfig
@@ -112,6 +114,17 @@ namespace SaboteurX
             };
             IFirebaseClient client = new FirebaseClient(config);
             lobby.Started = true;
+            lobby.remainingCards = 100;
+            this.lobby.Players.ForEach((player) => {
+                Random rnd = new Random();
+                lobby.roles.Add(rnd.Next(0, 2));
+                List<Card> paths = new List<Card>();
+                lobby.cards.Add(new List<Card>());
+                for(int i = 0;i<5;i++)
+                {
+                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator()) ;
+                }
+            });
             await client.UpdateAsync($"lobbies/{id}", lobby);
         }
         private void lbl_quit_Click(object sender, EventArgs e)

@@ -59,7 +59,7 @@ namespace SaboteurX
                         pbox = pbox_player_7;
                         break;
                 }
-                pbox.Image = new PlayerInformation(lobbyData.Value.Players[i]).GetPictureBitmap();
+                pbox.Image = new PlayerInformation(lobbyData.Value.Players[i]).GetPictureBitmap(600,600);
             }
         }
         private void LobbyItem_Load(object sender, EventArgs e)
