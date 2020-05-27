@@ -9,7 +9,21 @@ namespace SaboteurX.Game
 {
     public class Card
     {
+        #region Variables
         public static int Width = 100, Height = 100;
+        [JsonProperty("type")]
+        public CardType type;
+        [JsonProperty("power")]
+        public PowerUp power;
+        [JsonProperty("connections")]
+        public List<Tuple<Gate, Gate>> connections = new List<Tuple<Gate, Gate>>();
+        [JsonProperty("special")]
+        public Special special;
+        [JsonProperty("empty")]
+        public bool isEmpty = false;
+        [JsonProperty("hidden")]
+        public bool isHidden = false;
+        #endregion
 
         PointF FromGateToPointF(Gate gate)
         {
@@ -45,15 +59,7 @@ namespace SaboteurX.Game
                         connections.ForEach((con) =>
                         {
                             var left = con.Item1;
-                            if (left != Gate.Middle)
-                            {
-                                left = (Gate)(((int)left + (int)orientation) % 4);
-                            }
                             var right = con.Item2;
-                            if (right != Gate.Middle)
-                            {
-                                right = (Gate)(((int)right + (int)orientation) % 4);
-                            }
                             con = new Tuple<Gate, Gate>(left, right);
                             PointF start = FromGateToPointF(left);
                             PointF end = FromGateToPointF(right);
@@ -84,29 +90,21 @@ namespace SaboteurX.Game
                                 break;
                         }
                         break;
+                    case CardType.PathX:
+                        Pen redPen = new Pen(Color.Red, 10);
+                        g.DrawLine(redPen, 0, 0, Width, Height);
+                        g.DrawLine(redPen, 0, Width, 0, Height);
+                        break;
                 }
                 return tmp;
 
             } }
 
-        [JsonProperty("type")]
-        public CardType type;
-        [JsonProperty("power")]
-        public PowerUp power;
-        [JsonProperty("orientation")]
-        public Orientation orientation;
-        [JsonProperty("connections")]
-        public List<Tuple<Gate, Gate>> connections = new List<Tuple<Gate, Gate>>();
-        [JsonProperty("special")]
-        public Special special;
-        [JsonProperty("empty")]
-        public bool isEmpty = true;
-        [JsonProperty("hidden")]
-        public bool isHidden = false;
-        public Card(List<Tuple<Gate,Gate>> connections, Orientation orientation, Special special)
+
+        #region Constructors
+        public Card(List<Tuple<Gate,Gate>> connections,Special special)
         {
             this.connections = connections;
-            this.orientation = orientation;
             this.special = special;
             isEmpty = false;
             type = CardType.Path;
@@ -119,7 +117,23 @@ namespace SaboteurX.Game
         public Card()
         {
             this.type = CardType.Path;
+            this.isEmpty = true;
         }
+        #endregion
 
+        public void Rotate()
+        {
+            for(int i = 0;i<connections.Count;i++)
+            {
+                var left = connections[i].Item1;
+                var right = connections[i].Item2;
+                if (left != Gate.Middle)
+                    left = (Gate)(((int)left + 1) % 4);
+                if (right != Gate.Middle)
+                    right = (Gate)(((int)right + 1) % 4);
+                connections[i] = new Tuple<Gate, Gate>(left,right);
+
+            }
+        }
     }
 }

@@ -120,10 +120,12 @@ namespace SaboteurX
                 lobby.roles.Add(rnd.Next(0, 2));
                 List<Card> paths = new List<Card>();
                 lobby.cards.Add(new List<Card>());
+
                 for(int i = 0;i<5;i++)
                 {
-                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator()) ;
+                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator());
                 }
+                lobby.effects.Add(player.Split(';')[0], CardHelpers.PowerUp.Build);
             });
             await client.UpdateAsync($"lobbies/{id}", lobby);
         }

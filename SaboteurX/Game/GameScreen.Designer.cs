@@ -218,6 +218,8 @@
             this.pbox_avatar_8.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_8.TabIndex = 21;
             this.pbox_avatar_8.TabStop = false;
+            this.pbox_avatar_8.Tag = "7";
+            this.pbox_avatar_8.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_7
             // 
@@ -226,6 +228,8 @@
             this.pbox_avatar_7.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_7.TabIndex = 20;
             this.pbox_avatar_7.TabStop = false;
+            this.pbox_avatar_7.Tag = "6";
+            this.pbox_avatar_7.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_6
             // 
@@ -234,6 +238,8 @@
             this.pbox_avatar_6.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_6.TabIndex = 19;
             this.pbox_avatar_6.TabStop = false;
+            this.pbox_avatar_6.Tag = "5";
+            this.pbox_avatar_6.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_5
             // 
@@ -242,6 +248,8 @@
             this.pbox_avatar_5.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_5.TabIndex = 18;
             this.pbox_avatar_5.TabStop = false;
+            this.pbox_avatar_5.Tag = "4";
+            this.pbox_avatar_5.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_4
             // 
@@ -250,6 +258,8 @@
             this.pbox_avatar_4.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_4.TabIndex = 17;
             this.pbox_avatar_4.TabStop = false;
+            this.pbox_avatar_4.Tag = "3";
+            this.pbox_avatar_4.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_3
             // 
@@ -258,6 +268,8 @@
             this.pbox_avatar_3.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_3.TabIndex = 16;
             this.pbox_avatar_3.TabStop = false;
+            this.pbox_avatar_3.Tag = "2";
+            this.pbox_avatar_3.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_2
             // 
@@ -266,6 +278,8 @@
             this.pbox_avatar_2.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_2.TabIndex = 15;
             this.pbox_avatar_2.TabStop = false;
+            this.pbox_avatar_2.Tag = "1";
+            this.pbox_avatar_2.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_avatar_1
             // 
@@ -274,6 +288,8 @@
             this.pbox_avatar_1.Size = new System.Drawing.Size(80, 80);
             this.pbox_avatar_1.TabIndex = 14;
             this.pbox_avatar_1.TabStop = false;
+            this.pbox_avatar_1.Tag = "0";
+            this.pbox_avatar_1.Click += new System.EventHandler(this.pbox_avatar_Click);
             // 
             // pbox_card_5
             // 
@@ -409,6 +425,7 @@
             this.pbox_game.Size = new System.Drawing.Size(1066, 537);
             this.pbox_game.TabIndex = 1;
             this.pbox_game.TabStop = false;
+            this.pbox_game.Click += new System.EventHandler(this.pbox_game_Click);
             this.pbox_game.Paint += new System.Windows.Forms.PaintEventHandler(this.pbox_game_Paint);
             this.pbox_game.DoubleClick += new System.EventHandler(this.pbox_game_Click);
             this.pbox_game.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseDown);

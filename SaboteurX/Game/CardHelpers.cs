@@ -9,13 +9,6 @@ namespace SaboteurX.Game
     public class CardHelpers
     {
         #region Enums
-        public enum Orientation
-        {
-            Angle0,
-            Angle90,
-            Angle180,
-            Angle270,
-        };
         public enum Gate
         {
             Up,
@@ -47,15 +40,16 @@ namespace SaboteurX.Game
         public static Card RandomCardGenerator()
         {
             Random rnd = new Random();
-            switch(rnd.Next(0,2))
+            switch(rnd.Next(0,100))
             {
-                case 0:
+                case int n when (n<=80):
                     Card path = new Card(CardType.Path);
                     int connections = rnd.Next(1, 6);
                     for (int i = 0; i < connections; i++)
                     {
                         Gate x = (Gate)rnd.Next(0, 4);
                         Gate y = (Gate)rnd.Next(0, 4);
+                        if (x == y) continue;
                         path.connections.Add(new Tuple<Gate, Gate>(x, y));
                     }
                     if (rnd.Next(0, 30) == 10)
@@ -65,7 +59,7 @@ namespace SaboteurX.Game
                     path.isEmpty = false;
                     path.isHidden = false;
                     return path;
-                case 1:
+                case int n when (n > 80 && n<90):
                     Card power = new Card(CardType.Power);
                     switch(rnd.Next(0,2))
                     {
@@ -77,9 +71,21 @@ namespace SaboteurX.Game
                             break;
                     }
                     return power;
+                case int n when (n >= 90):
+                    Card pathx = new Card(CardType.PathX);
+                    return pathx;
             }
             return null;
 
+        }
+        public static bool ContainsGate(Card card, Gate gate)
+        {
+            bool ok = false;
+            card.connections.ForEach((con) => {
+                if (con.Item1 == gate || con.Item2 == gate)
+                    ok=true;
+            });
+            return ok;
         }
     }
 }
