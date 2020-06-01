@@ -37,9 +37,9 @@ namespace SaboteurX.Game
         }
         #endregion
 
-        public static Card RandomCardGenerator()
+        public static Card RandomCardGenerator(int cardnumber = 1)
         {
-            Random rnd = new Random();
+            Random rnd = new Random(System.Environment.TickCount);
             switch(rnd.Next(0,100))
             {
                 case int n when (n<=80):

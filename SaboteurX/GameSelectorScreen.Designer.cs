@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameSelectorScreen));
             this.bunifuCards2 = new Bunifu.Framework.UI.BunifuCards();
             this.lbl_maximize = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_create_lobby = new System.Windows.Forms.Label();
             this.lbl_lobby_title = new System.Windows.Forms.Label();
+            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
             this.SuspendLayout();
@@ -210,6 +212,8 @@
             this.lbl_create_lobby.Text = resources.GetString("lbl_create_lobby.Text");
             this.lbl_create_lobby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_create_lobby.Click += new System.EventHandler(this.lbl_create_lobby_Click);
+            this.lbl_create_lobby.MouseEnter += new System.EventHandler(this.lbl_create_lobby_MouseEnter);
+            this.lbl_create_lobby.MouseLeave += new System.EventHandler(this.lbl_create_lobby_MouseLeave);
             // 
             // lbl_lobby_title
             // 
@@ -223,6 +227,12 @@
             this.lbl_lobby_title.Tag = "Lobbies;NO";
             this.lbl_lobby_title.Text = resources.GetString("lbl_lobby_title.Text");
             this.lbl_lobby_title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer_animation
+            // 
+            this.timer_animation.Enabled = true;
+            this.timer_animation.Interval = 500;
+            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
             // 
             // GameSelectorScreen
             // 
@@ -257,5 +267,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_join;
+        private System.Windows.Forms.Timer timer_animation;
     }
 }

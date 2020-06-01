@@ -33,6 +33,7 @@ namespace SaboteurX
         PlayerInformation playerInfo;
         bool isHost = false;
         bool updateInformation = true;
+        Label selectedLabel;
         public LobbyWaitingRoom(KeyValuePair<string,LobbyModel> lobby, PlayerInformation playerInfo)
         {
             
@@ -123,7 +124,7 @@ namespace SaboteurX
 
                 for(int i = 0;i<5;i++)
                 {
-                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator());
+                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator(i));
                 }
                 lobby.effects.Add(player.Split(';')[0], CardHelpers.PowerUp.Build);
             });
@@ -196,6 +197,51 @@ namespace SaboteurX
         {
             this.WindowState = FormWindowState.Minimized;
 
+        }
+
+        private void timer_animation_Tick(object sender, EventArgs e)
+        {
+            if (selectedLabel != null)
+            {
+                if (selectedLabel.Tag.ToString().Split(';')[1] == "NO")
+                {
+                    selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+                    selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
+                }
+                else
+                {
+                    selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+                    selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
+                }
+            }
+        }
+
+        private void lbl_start_MouseEnter(object sender, EventArgs e)
+        {
+            selectedLabel = (Label)sender;
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+            selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
+        }
+
+        private void lbl_start_MouseLeave(object sender, EventArgs e)
+        {
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+            selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
+            selectedLabel = null;
+        }
+
+        private void lbl_quit_MouseEnter(object sender, EventArgs e)
+        {
+            selectedLabel = (Label)sender;
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+            selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
+        }
+
+        private void lbl_quit_MouseLeave(object sender, EventArgs e)
+        {
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+            selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
+            selectedLabel = null;
         }
     }
 }

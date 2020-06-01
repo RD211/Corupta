@@ -39,6 +39,8 @@
         public List<int> roles { get; set; }
         [JsonProperty("effects")]
         public Dictionary<string, PowerUp> effects { get; set; }
+        [JsonProperty("target")]
+        public int indexOfTarget { get; set; }
         public LobbyModel()
         {
             this.Active = false;
@@ -48,6 +50,7 @@
             this.cards = new List<List<Card>>();
             this.roles = new List<int>();
             this.effects = new Dictionary<string, PowerUp>();
+            indexOfTarget = 0;
         }
 
     }

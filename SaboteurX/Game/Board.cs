@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SaboteurX.Game
 {
@@ -16,10 +17,12 @@ namespace SaboteurX.Game
         Card[,] board = new Card[Height, Width];
         int[] addX = new int[]{ 0, 1, 0, -1 };
         int[] addY = new int[]{ -1, 0, 1, 0 };
-
+        public Card selectedCard = null;
         public Bitmap image { get
             {
-                
+                if(selectedCard!=null)
+                    Dfs(CardHelpers.Gate.Middle, startX, startY);
+
                 int realWidth = Width * WidthCell, realHeight = Height * HeightCell;
                 Bitmap tmp = new Bitmap(realWidth, realHeight);
                 Graphics g = Graphics.FromImage(tmp);
@@ -28,7 +31,17 @@ namespace SaboteurX.Game
                 {
                     for(int j  = 0;j<Width;j++)
                     {
-                        g.DrawImage(board[i, j].image,j * WidthCell, i * HeightCell,WidthCell,HeightCell);
+                        if (selectedCard != null && IsCompatible(selectedCard, j, i, false))
+                        {
+                            Bitmap bmp = new Bitmap(WidthCell, HeightCell);
+                            Graphics g2 = Graphics.FromImage(bmp);
+                            g2.Clear(Color.Purple);
+                            g.DrawImage(bmp, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                        }
+                        else
+                        {
+                            g.DrawImage(board[i, j].image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                        }
                     }
                 }
                 return tmp;
@@ -37,6 +50,33 @@ namespace SaboteurX.Game
         public void ChangeAt(Card cell, int x, int y)
         {
             board[y, x] = cell;
+        }
+        public Bitmap HighlightSpecialImage(Card card)
+        {
+            int realWidth = Width * WidthCell, realHeight = Height * HeightCell;
+            Bitmap tmp = new Bitmap(realWidth, realHeight);
+            Graphics g = Graphics.FromImage(tmp);
+            g.FillRectangle(new SolidBrush(Color.Red), 0, 0, realWidth, realHeight);
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    if (IsCompatible(card, j, i, false))
+                    {
+                        Bitmap bmp = new Bitmap(WidthCell, HeightCell);
+                        Graphics g2 = Graphics.FromImage(bmp);
+                        g2.Clear(Color.Purple);
+                        //g.DrawImage(bmp, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                    }
+                   // else
+                        //g.DrawImage(board[i, j].image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                }
+            }
+            return tmp;
+        }
+        public void SetEndPoint(int index)
+        {
+            this.board[ends[index].Y, ends[index].X].special = CardHelpers.Special.Portal;
         }
         public Board()
         {
@@ -53,6 +93,15 @@ namespace SaboteurX.Game
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Right,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Up,CardHelpers.Gate.Middle),
             }, CardHelpers.Special.None);
+            this.ends.ForEach((end) => {
+                board[end.Y, end.X] = new Card(new List<Tuple<CardHelpers.Gate, CardHelpers.Gate>>() {
+            new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Down,CardHelpers.Gate.Middle),
+            new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Left,CardHelpers.Gate.Middle),
+            new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Right,CardHelpers.Gate.Middle),
+            new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Up,CardHelpers.Gate.Middle),
+            }, CardHelpers.Special.None);
+                board[end.Y, end.X].isHidden = true;
+            });
             
         }
         bool[,,] visited = new bool[5,Height, Width];
@@ -65,7 +114,7 @@ namespace SaboteurX.Game
         private bool CheckEnd()
         {
             bool ok = false;
-            this.ends.ForEach((end)=>ok = ok?ok:visited[(int)CardHelpers.Gate.Middle,end.Y,end.X]);
+            this.ends.ForEach((end)=>ok = ok?ok:board[end.Y,end.X].special==CardHelpers.Special.Portal&&visited[(int)CardHelpers.Gate.Middle,end.Y,end.X]);
             return ok;
         }
         private void ResetVisited()
@@ -74,6 +123,7 @@ namespace SaboteurX.Game
         }
         private void Dfs(CardHelpers.Gate gate,int x, int y)
         {
+            board[y, x].isHidden = false;
             if (!visited[(int)gate, y, x])
             {
                 visited[(int)gate, y, x] = true;
@@ -96,16 +146,24 @@ namespace SaboteurX.Game
                 }
             }
         }
-        public bool IsCompatible(Card cell, int x, int y)
+        public bool IsCompatible(Card cell, int x, int y,bool checkDone = true)
         {
             if (board[y, x].isEmpty == false)
                 return false;
-            CheckIfDone();
+            if (y == startY && x == startX)
+                return false;
+            bool ok = true;
+            ends.ForEach((end)=> { if (y == end.Y && x == end.X) ok = false; });
+            if (!ok)
+                return false;
+            if(checkDone)
+                CheckIfDone();
             bool hasOneConnection = false;
             for(int i = 0;i<4;i++)
             {
                 int nx = x + addX[i];
                 int ny = y + addY[i];
+                if (nx >= Width || ny >= Height || nx<0||ny<0) continue;
                 bool iHave = CardHelpers.ContainsGate(cell, (CardHelpers.Gate)i);
                 bool heHas = CardHelpers.ContainsGate(board[ny, nx], (CardHelpers.Gate)(((int)i + 2) % 4));
                 if (board[ny,nx].isEmpty==false && (iHave^heHas))

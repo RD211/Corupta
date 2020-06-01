@@ -57,6 +57,7 @@
             this.pbox_player_1 = new System.Windows.Forms.PictureBox();
             this.pbox_player_0 = new System.Windows.Forms.PictureBox();
             this.timer_update = new System.Windows.Forms.Timer(this.components);
+            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_player_7)).BeginInit();
@@ -221,6 +222,8 @@
             this.lbl_quit.Text = resources.GetString("lbl_quit.Text");
             this.lbl_quit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_quit.Click += new System.EventHandler(this.lbl_quit_Click);
+            this.lbl_quit.MouseEnter += new System.EventHandler(this.lbl_quit_MouseEnter);
+            this.lbl_quit.MouseLeave += new System.EventHandler(this.lbl_quit_MouseLeave);
             // 
             // lbl_start
             // 
@@ -235,6 +238,8 @@
             this.lbl_start.Text = resources.GetString("lbl_start.Text");
             this.lbl_start.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_start.Click += new System.EventHandler(this.lbl_start_Click);
+            this.lbl_start.MouseEnter += new System.EventHandler(this.lbl_start_MouseEnter);
+            this.lbl_start.MouseLeave += new System.EventHandler(this.lbl_start_MouseLeave);
             // 
             // lbl_name_7
             // 
@@ -426,6 +431,12 @@
             this.timer_update.Interval = 2000;
             this.timer_update.Tick += new System.EventHandler(this.timer_update_Tick);
             // 
+            // timer_animation
+            // 
+            this.timer_animation.Enabled = true;
+            this.timer_animation.Interval = 500;
+            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            // 
             // LobbyWaitingRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -482,5 +493,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lbl_vertical_divider_1;
         private System.Windows.Forms.Timer timer_update;
+        private System.Windows.Forms.Timer timer_animation;
     }
 }

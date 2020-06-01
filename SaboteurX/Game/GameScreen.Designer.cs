@@ -185,7 +185,6 @@
             this.bunifuCards1.ShadowDepth = 20;
             this.bunifuCards1.Size = new System.Drawing.Size(1374, 722);
             this.bunifuCards1.TabIndex = 8;
-            this.bunifuCards1.Paint += new System.Windows.Forms.PaintEventHandler(this.bunifuCards1_Paint);
             // 
             // lbl_player
             // 
@@ -201,6 +200,7 @@
             // 
             // lbl_role
             // 
+            this.lbl_role.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_role.Font = new System.Drawing.Font("Consolas", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_role.ForeColor = System.Drawing.Color.Black;
             this.lbl_role.Location = new System.Drawing.Point(621, 633);
@@ -209,7 +209,6 @@
             this.lbl_role.TabIndex = 22;
             this.lbl_role.Text = "label1";
             this.lbl_role.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_role.Click += new System.EventHandler(this.lbl_role_Click);
             // 
             // pbox_avatar_8
             // 
@@ -293,6 +292,7 @@
             // 
             // pbox_card_5
             // 
+            this.pbox_card_5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbox_card_5.Image = global::SaboteurX.Properties.Resources.shapes_and_symbols;
             this.pbox_card_5.Location = new System.Drawing.Point(362, 633);
             this.pbox_card_5.Name = "pbox_card_5";
@@ -307,6 +307,7 @@
             // 
             // pbox_card_4
             // 
+            this.pbox_card_4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbox_card_4.Image = global::SaboteurX.Properties.Resources.signs;
             this.pbox_card_4.Location = new System.Drawing.Point(276, 633);
             this.pbox_card_4.Name = "pbox_card_4";
@@ -321,6 +322,7 @@
             // 
             // pbox_card_3
             // 
+            this.pbox_card_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbox_card_3.Image = global::SaboteurX.Properties.Resources.signs;
             this.pbox_card_3.Location = new System.Drawing.Point(190, 633);
             this.pbox_card_3.Name = "pbox_card_3";
@@ -335,6 +337,7 @@
             // 
             // pbox_card_2
             // 
+            this.pbox_card_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbox_card_2.Image = global::SaboteurX.Properties.Resources.shapes_and_symbols;
             this.pbox_card_2.Location = new System.Drawing.Point(104, 633);
             this.pbox_card_2.Name = "pbox_card_2";
@@ -349,6 +352,7 @@
             // 
             // pbox_card_1
             // 
+            this.pbox_card_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbox_card_1.Image = global::SaboteurX.Properties.Resources.signs;
             this.pbox_card_1.Location = new System.Drawing.Point(18, 633);
             this.pbox_card_1.Name = "pbox_card_1";
@@ -420,6 +424,9 @@
             // 
             // pbox_game
             // 
+            this.pbox_game.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbox_game.Location = new System.Drawing.Point(3, 90);
             this.pbox_game.Name = "pbox_game";
             this.pbox_game.Size = new System.Drawing.Size(1066, 537);

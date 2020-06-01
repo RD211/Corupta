@@ -6,13 +6,8 @@ using QuickType;
 using SaboteurX.Game;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SaboteurX
@@ -33,12 +28,14 @@ namespace SaboteurX
         LobbyModel game;
         string id;
         PlayerInformation me;
-        #endregion
-
         Image gameImage;
         Board board = new Board();
         int myId;
         int selectedCard = -1;
+        int[] rotations = new int[5] { 0, 0, 0, 0, 0 };
+        #endregion
+
+        #region Constructor and on load
         public GameScreen(string id,LobbyModel game, PlayerInformation me)
         {
             InitializeComponent();
@@ -64,9 +61,64 @@ namespace SaboteurX
             gameImage = board.image;
             
         }
+        #endregion
+
+        #region Loading lobby and processing
         void LoadLobby()
         {
-            this.game.Moves.ForEach((move) => {
+            if (!game.Active) return;
+            if (board.CheckIfDone()||game.remainingCards<=0)
+            {
+                game.Active = false;
+                UpdateLobby();
+                if (game.roles[myId] == 2)
+                {
+                    if (game.remainingCards <= 0)
+                    {
+                        DialogScreen dialog = new DialogScreen("fuck", "fuck", "You like lost");
+                        dialog.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        DialogScreen dialog = new DialogScreen("Yay", "Yay", "You like won");
+                        dialog.ShowDialog();
+                        this.Close();
+                    }
+
+                }
+                else if(game.roles[myId]==1)
+                {
+                    if (game.remainingCards > 0)
+                    {
+                        DialogScreen dialog = new DialogScreen("fuck", "fuck", "You like lost");
+                        dialog.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        DialogScreen dialog = new DialogScreen("Yay", "Yay", "You like won");
+                        dialog.ShowDialog();
+                        this.Close();
+                    }
+                }
+            }
+            else
+            {
+                ProcessMoves();
+                board.CheckIfDone();
+                ProcessMessages();
+                ProcessAvatars();
+                ProcessCards();
+                ProcessRoles();
+                board.SetEndPoint(game.indexOfTarget);
+                
+            }
+        }
+        private void ProcessMoves()
+        {
+            this.game.Moves.ForEach((move) =>
+            {
                 if (move.destination.Split(';')[0] == "1")
                 {
                     this.board.ChangeAt(move.card, int.Parse(move.destination.Split(';')[1]), int.Parse(move.destination.Split(';')[2]));
@@ -75,32 +127,59 @@ namespace SaboteurX
                 {
                     this.game.effects[move.destination.Split(';')[1]] = move.card.power;
                 }
-            });
+            }); 
+            board.SetEndPoint(game.indexOfTarget);
+        }
+        private void ProcessRoles()
+        {
+            List<string> rolesToStrings = new List<string>() { "Miner", "Saboteur", "Arheologist" };
+            this.lbl_role.Text = rolesToStrings[game.roles[myId]];
+            this.lbl_player.Text = (game.Players[game.currentPlayer].Split(';')[0] + "s turn").ToAsciiArt();
+        }
+        private void ProcessMessages()
+        {
             txt_chat_screen.Text = "";
             game.Messages.ForEach((message) => this.txt_chat_screen.Text += $"{message}\n");
+        }
+        private void ProcessCards()
+        {
+            var pictureCards = new PictureBox[] { pbox_card_1, pbox_card_2, pbox_card_3, pbox_card_4, pbox_card_5 };
+
+            for (int i = 0; i < 5; i++)
+            {
+                Bitmap temp = game.cards[myId][i].image;
+                switch (rotations[i])
+                {
+                    case 1:
+                        temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                    case 2:
+                        temp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+                    case 3:
+                        temp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+                }
+                pictureCards[i].Image = temp;
+            }
+        }
+        private void ProcessAvatars()
+        {
             var pictureBoxes = new PictureBox[] { pbox_avatar_1, pbox_avatar_2, pbox_avatar_3, pbox_avatar_4, pbox_avatar_5, pbox_avatar_6, pbox_avatar_7, pbox_avatar_8 }; ;
-            for(int i =  0;i<game.Players.Count;i++)
+            for (int i = 0; i < game.Players.Count; i++)
             {
                 var playerBmp = new PlayerInformation(game.Players[i]).GetPictureBitmap(pictureBoxes[i].Width, pictureBoxes[i].Height);
-                if (game.effects[game.Players[i].Split(';')[0]]==CardHelpers.PowerUp.NoBuild)
+                if (game.effects[game.Players[i].Split(';')[0]] == CardHelpers.PowerUp.NoBuild)
                 {
                     Graphics g = Graphics.FromImage(playerBmp);
                     g.DrawLine(new Pen(Color.Red, 10), 0, 0, playerBmp.Width, playerBmp.Height);
                 }
                 pictureBoxes[i].Image = playerBmp;
             }
-            var pictureCards = new PictureBox[] { pbox_card_1, pbox_card_2, pbox_card_3, pbox_card_4, pbox_card_5 };
-
-            for(int i = 0;i<5;i++)
-            {
-                pictureCards[i].Image = this.game.cards[myId][i].image;
-            }
-            List<string> rolesToStrings = new List<string>() { "Miner", "Saboteur", "Arheologist" };
-            this.lbl_role.Text = rolesToStrings[game.roles[myId]];
-            this.lbl_player.Text = (game.Players[game.currentPlayer].Split(';')[0]+"s turn").ToAsciiArt();
-            this.pbox_game.Image = board.image;
-            this.pbox_game.Invalidate();
         }
+        #endregion
+
+
         private void card_moveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -128,6 +207,7 @@ namespace SaboteurX
         #endregion
 
 
+        #region Check if we are out of date and json compare helper function
         public bool JsonCompare(object obj, object another)
         {
             if (ReferenceEquals(obj, another)) return true;
@@ -149,7 +229,6 @@ namespace SaboteurX
             var ngame = JsonConvert.DeserializeObject<LobbyModel>((await client.GetAsync($"lobbies/{id}")).Body);
             if(!JsonCompare(game,ngame))
             {
-                MessageBox.Show("updating");
                 game = ngame;
                 LoadLobby();
                 this.pbox_game.Image = board.image;
@@ -157,6 +236,8 @@ namespace SaboteurX
                 this.pbox_game.Update();
             }
         }
+        #endregion
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateData();
@@ -167,8 +248,9 @@ namespace SaboteurX
             game.Messages.Add($"{me.name}: {txt_message.Text}");
             txt_message.Text = "";
             UpdateLobby();
-            LoadLobby();
+            ProcessMessages();
         }
+
         private void UpdateLobby()
         {
             IFirebaseConfig config = new FirebaseConfig
@@ -181,12 +263,13 @@ namespace SaboteurX
         }
         private void txt_message_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
                 lbl_send_message_Click(null, null);
             }
         }
 
+        #region Main picturebox moving logic
         private Point startingPoint = Point.Empty;
         private Point movingPoint = Point.Empty;
         private bool panning = false;
@@ -234,6 +317,8 @@ namespace SaboteurX
                 pbox_game.Update();
             }
         }
+        #endregion
+
 
         private void pbox_game_Click(object sender, EventArgs e)
         {
@@ -244,16 +329,21 @@ namespace SaboteurX
             if (game.currentPlayer == myId
                 && selectedCard != -1)
             {
-                if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.Path && game.effects[me.name] == CardHelpers.PowerUp.Build
-                && board.IsCompatible(this.game.cards[myId][selectedCard], x, y))
+                if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.Path)
                 {
-                    board.ChangeAt(this.game.cards[myId][selectedCard], x, y);
-                    gameImage = board.image;
-                    pbox_game.Invalidate();
-                    game.Moves.Add(new MoveModel(this.game.cards[myId][selectedCard], $"1;{x};{y}"));
-                    UpdateCardsAfterUse();
-                    UpdateLobby();
+                    for (int i = 0; i < rotations[selectedCard]; i++)
+                        game.cards[myId][selectedCard].Rotate();
+                    if (game.effects[me.name] == CardHelpers.PowerUp.Build
+                    && board.IsCompatible(this.game.cards[myId][selectedCard], x, y))
+                    {
 
+                        board.ChangeAt(this.game.cards[myId][selectedCard], x, y);
+                        gameImage = board.image;
+                        pbox_game.Invalidate();
+                        game.Moves.Add(new MoveModel(this.game.cards[myId][selectedCard], $"1;{x};{y}"));
+                        UpdateCardsAfterUse();
+                        UpdateLobby();
+                    }
                 }
                 else if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.PathX)
                 {
@@ -284,26 +374,36 @@ namespace SaboteurX
             pbox.Location = new Point(pbox.Location.X + 5, pbox.Location.Y + 5);
         }
 
-        private void lbl_role_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuCards1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void card_Click(object sender, EventArgs e)
         {
             this.selectedCard = int.Parse(((PictureBox)sender).Tag.ToString());
 
             if (((MouseEventArgs)e).Button == MouseButtons.Right)
             {
-                this.game.cards[myId][selectedCard].Rotate();
-                ((PictureBox)sender).Image = this.game.cards[myId][selectedCard].image;
-                UpdateLobby();
+                rotations[selectedCard]= (rotations[selectedCard]+1)% 4;
+                Bitmap temp = game.cards[myId][selectedCard].image;
+                switch(rotations[selectedCard])
+                {
+                    case 1:
+                        temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                    case 2:
+                        temp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+                    case 3:
+                        temp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+                }
+                ((PictureBox)sender).Image = temp;
+                ((PictureBox)sender).Invalidate();
+                ((PictureBox)sender).Update();
             }
+            Card card = (Card)game.cards[myId][selectedCard].Clone();
+            for (int i = 0; i < rotations[selectedCard]; i++) card.Rotate();
+
+            board.selectedCard = card;
+            gameImage = board.image;
+            this.pbox_game.Invalidate();
         }
 
         private void pbox_avatar_Click(object sender, EventArgs e)
@@ -315,14 +415,20 @@ namespace SaboteurX
                 game.Moves.Add(new MoveModel(this.game.cards[myId][selectedCard], "2;" + playerName));
                 this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.Players.Count;
                 UpdateCardsAfterUse();
+                this.ProcessAvatars();
                 UpdateLobby();
             }
         }
         private void UpdateCardsAfterUse()
         {
+            this.board.selectedCard = null;
+            this.gameImage = board.image;
             this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.Players.Count;
             this.game.cards[myId].RemoveAt(selectedCard);
-            this.game.cards[myId].Add(CardHelpers.RandomCardGenerator());
+            this.game.cards[myId].Insert(selectedCard, CardHelpers.RandomCardGenerator());
+            this.rotations[selectedCard] = 0;
+            this.ProcessCards();
+
             this.game.remainingCards--;
         }
     }

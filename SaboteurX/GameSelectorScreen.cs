@@ -29,6 +29,7 @@ namespace SaboteurX
         public PlayerInformation information;
         List<KeyValuePair<string, LobbyModel>> lobbies = new List<KeyValuePair<string, LobbyModel>>();
         int lobbyNumber = 0;
+        Label selectedLabel;
         async void GetLobbies()
         {
             IFirebaseConfig config = new FirebaseConfig
@@ -39,7 +40,7 @@ namespace SaboteurX
             FirebaseResponse response = await client.GetAsync("lobbies");
             var temporaryList = response.ResultAs<Dictionary<string, LobbyModel>>().ToList();
             lobbies = new List<KeyValuePair<string,LobbyModel>>();
-            temporaryList.ForEach((kvp) => lobbies.Add(kvp));
+            temporaryList.ForEach((kvp) => { if(kvp.Value.Active)lobbies.Add(kvp); });
             var IsInGame = FindIfInGame();
             if (IsInGame.Value!=null)
             {
@@ -76,11 +77,12 @@ namespace SaboteurX
             this.BackColor = Color.LimeGreen;
             this.TransparencyKey = Color.LimeGreen;
             GetLobbies();
+            this.lbl_create_lobby.Text = lbl_create_lobby.Tag.ToString().Split(';')[0].ToAsciiArt();
         }
 
         private void GameSelectorScreen_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void card_moveForm_MouseDown(object sender, MouseEventArgs e)
@@ -160,6 +162,37 @@ namespace SaboteurX
         private void lbl_create_lobby_Click(object sender, EventArgs e)
         {
             MakeNewLobby();
+        }
+
+        private void timer_animation_Tick(object sender, EventArgs e)
+        {
+            if(selectedLabel!=null)
+            {
+                if(selectedLabel.Tag.ToString().Split(';')[1]=="NO")
+                {
+                    selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+                    selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
+                }
+                else
+                {
+                    selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+                    selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
+                }
+            }
+        }
+
+        private void lbl_create_lobby_MouseLeave(object sender, EventArgs e)
+        {
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+            selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt(); 
+            selectedLabel = null;
+        }
+
+        private void lbl_create_lobby_MouseEnter(object sender, EventArgs e)
+        {
+            selectedLabel = (Label)sender;
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+            selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
         }
     }
 }

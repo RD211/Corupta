@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using static SaboteurX.Game.CardHelpers;
 
-namespace SaboteurX.Game
+namespace SaboteurX.Game 
 {
-    public class Card
+    public class Card : ICloneable
     {
         #region Variables
         public static int Width = 100, Height = 100;
@@ -54,30 +54,37 @@ namespace SaboteurX.Game
                 switch (type)
                 {
                     case CardType.Path:
-                        g.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
-                        g.DrawRectangle(new Pen(Color.FromArgb(100, Color.LimeGreen), 3), 1, 1, Width - 1, Height - 1);
-                        connections.ForEach((con) =>
+                        if (isHidden)
                         {
-                            var left = con.Item1;
-                            var right = con.Item2;
-                            con = new Tuple<Gate, Gate>(left, right);
-                            PointF start = FromGateToPointF(left);
-                            PointF end = FromGateToPointF(right);
-                            Pen pn = new Pen(Color.DarkGreen, 20);
-                            g.DrawLine(pn, start, end);
-                        });
-                        switch (special)
+                            g.FillRectangle(new SolidBrush(Color.Gray), 0, 0, Width, Height);
+                        }
+                        else
                         {
-                            case Special.Diamond:
-                                g.DrawPolygon(new Pen(Color.Red), new PointF[] { new PointF(Width/2-15,Height/2), new PointF(Width/2 + 15, Height / 2),
+                            g.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
+                            g.DrawRectangle(new Pen(Color.FromArgb(100, Color.LimeGreen), 3), 1, 1, Width - 1, Height - 1);
+                            connections.ForEach((con) =>
+                            {
+                                var left = con.Item1;
+                                var right = con.Item2;
+                                con = new Tuple<Gate, Gate>(left, right);
+                                PointF start = FromGateToPointF(left);
+                                PointF end = FromGateToPointF(right);
+                                Pen pn = new Pen(Color.DarkGreen, 20);
+                                g.DrawLine(pn, start, end);
+                            });
+                            switch (special)
+                            {
+                                case Special.Diamond:
+                                    g.DrawPolygon(new Pen(Color.Red), new PointF[] { new PointF(Width/2-15,Height/2), new PointF(Width/2 + 15, Height / 2),
                              new PointF(Width/2,Height/2+15), new PointF(Width/2,Height/2-15) });
-                                break;
-                            case Special.Portal:
-                                g.FillEllipse(new SolidBrush(Color.Pink), Width / 2 - 5, Height / 2 - 5, 10, 10);
-                                break;
-                            case Special.Switch:
+                                    break;
+                                case Special.Portal:
+                                    g.FillEllipse(new SolidBrush(Color.Pink), Width / 2 - 5, Height / 2 - 5, 10, 10);
+                                    break;
+                                case Special.Switch:
 
-                                break;
+                                    break;
+                            }
                         }
                         break;
                     case CardType.Power:
@@ -134,6 +141,20 @@ namespace SaboteurX.Game
                 connections[i] = new Tuple<Gate, Gate>(left,right);
 
             }
+        }
+
+        public object Clone()
+        {
+            Card clone = new Card
+            {
+                connections = new List<Tuple<Gate, Gate>>(connections),
+                isEmpty = isEmpty,
+                isHidden = isHidden,
+                power = power,
+                special = special,
+                type = type
+            };
+            return clone;
         }
     }
 }
