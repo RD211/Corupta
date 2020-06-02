@@ -51,29 +51,6 @@ namespace SaboteurX.Game
         {
             board[y, x] = cell;
         }
-        public Bitmap HighlightSpecialImage(Card card)
-        {
-            int realWidth = Width * WidthCell, realHeight = Height * HeightCell;
-            Bitmap tmp = new Bitmap(realWidth, realHeight);
-            Graphics g = Graphics.FromImage(tmp);
-            g.FillRectangle(new SolidBrush(Color.Red), 0, 0, realWidth, realHeight);
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width; j++)
-                {
-                    if (IsCompatible(card, j, i, false))
-                    {
-                        Bitmap bmp = new Bitmap(WidthCell, HeightCell);
-                        Graphics g2 = Graphics.FromImage(bmp);
-                        g2.Clear(Color.Purple);
-                        //g.DrawImage(bmp, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
-                    }
-                   // else
-                        //g.DrawImage(board[i, j].image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
-                }
-            }
-            return tmp;
-        }
         public void SetEndPoint(int index)
         {
             this.board[ends[index].Y, ends[index].X].special = CardHelpers.Special.Portal;

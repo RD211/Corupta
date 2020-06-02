@@ -116,6 +116,7 @@ namespace SaboteurX
             IFirebaseClient client = new FirebaseClient(config);
             lobby.Started = true;
             lobby.remainingCards = 100;
+            lobby.discardsLeft = 3;
             this.lobby.Players.ForEach((player) => {
                 Random rnd = new Random();
                 lobby.roles.Add(rnd.Next(0, 2));

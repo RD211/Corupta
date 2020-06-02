@@ -420,6 +420,7 @@
             this.txt_message.Size = new System.Drawing.Size(256, 27);
             this.txt_message.TabIndex = 2;
             this.txt_message.Text = "asdasd";
+            this.txt_message.TextChanged += new System.EventHandler(this.txt_message_TextChanged);
             this.txt_message.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_message_KeyDown);
             // 
             // pbox_game
@@ -436,6 +437,7 @@
             this.pbox_game.Paint += new System.Windows.Forms.PaintEventHandler(this.pbox_game_Paint);
             this.pbox_game.DoubleClick += new System.EventHandler(this.pbox_game_Click);
             this.pbox_game.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseDown);
+            this.pbox_game.MouseLeave += new System.EventHandler(this.pbox_game_MouseLeave);
             this.pbox_game.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseMove);
             this.pbox_game.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseUp);
             // 
@@ -457,6 +459,7 @@
             this.Name = "GameScreen";
             this.Text = "GameScreen";
             this.Load += new System.EventHandler(this.GameScreen_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
             this.bunifuCards2.ResumeLayout(false);
             this.bunifuCards1.ResumeLayout(false);
             this.bunifuCards1.PerformLayout();

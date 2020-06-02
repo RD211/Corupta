@@ -1,6 +1,7 @@
 ﻿using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
+using Microsoft.VisualBasic.Devices;
 using Newtonsoft.Json;
 using QuickType;
 using SaboteurX.Game;
@@ -112,7 +113,9 @@ namespace SaboteurX
                 ProcessCards();
                 ProcessRoles();
                 board.SetEndPoint(game.indexOfTarget);
-                
+                gameImage = board.image;
+                pbox_game.Invalidate();
+
             }
         }
         private void ProcessMoves()
@@ -231,9 +234,8 @@ namespace SaboteurX
             {
                 game = ngame;
                 LoadLobby();
-                this.pbox_game.Image = board.image;
-                this.pbox_game.Invalidate();
-                this.pbox_game.Update();
+                gameImage = board.image;
+                pbox_game.Update();
             }
         }
         #endregion
@@ -267,6 +269,10 @@ namespace SaboteurX
             {
                 lbl_send_message_Click(null, null);
             }
+            else if(e.KeyData == Keys.Delete)
+            {
+                this.GameScreen_KeyUp(null, e);
+            }
         }
 
         #region Main picturebox moving logic
@@ -288,6 +294,7 @@ namespace SaboteurX
 
         void pbox_game_MouseMove(object sender, MouseEventArgs e)
         {
+            HandleOnMouseOverCoordinateLabel();
             if (panning)
             {
                 movingPoint = new Point(e.Location.X - startingPoint.X,
@@ -333,14 +340,15 @@ namespace SaboteurX
                 {
                     for (int i = 0; i < rotations[selectedCard]; i++)
                         game.cards[myId][selectedCard].Rotate();
+
                     if (game.effects[me.name] == CardHelpers.PowerUp.Build
                     && board.IsCompatible(this.game.cards[myId][selectedCard], x, y))
                     {
-
                         board.ChangeAt(this.game.cards[myId][selectedCard], x, y);
                         gameImage = board.image;
                         pbox_game.Invalidate();
                         game.Moves.Add(new MoveModel(this.game.cards[myId][selectedCard], $"1;{x};{y}"));
+                        game.Messages.Add($"{me.name} Added path at x:{x}, y:{y}.");
                         UpdateCardsAfterUse();
                         UpdateLobby();
                     }
@@ -351,6 +359,7 @@ namespace SaboteurX
                     gameImage = board.image;
                     pbox_game.Invalidate();
                     game.Moves.Add(new MoveModel(new Card(), $"1;{x};{y}"));
+                    game.Messages.Add($"{me.name} Removed path at x:{x}, y:{y}.");
                     UpdateCardsAfterUse();
                     UpdateLobby();
                 }
@@ -376,7 +385,14 @@ namespace SaboteurX
 
         private void card_Click(object sender, EventArgs e)
         {
-            this.selectedCard = int.Parse(((PictureBox)sender).Tag.ToString());
+            var pictureCards = new PictureBox[] { pbox_card_1, pbox_card_2, pbox_card_3, pbox_card_4, pbox_card_5 };
+
+            if (selectedCard!=-1)
+            {
+                pictureCards[selectedCard].BorderStyle = BorderStyle.None;
+            }
+            selectedCard = int.Parse(((PictureBox)sender).Tag.ToString());
+            pictureCards[selectedCard].BorderStyle = BorderStyle.Fixed3D;
 
             if (((MouseEventArgs)e).Button == MouseButtons.Right)
             {
@@ -403,7 +419,7 @@ namespace SaboteurX
 
             board.selectedCard = card;
             gameImage = board.image;
-            this.pbox_game.Invalidate();
+            pbox_game.Invalidate();
         }
 
         private void pbox_avatar_Click(object sender, EventArgs e)
@@ -413,23 +429,89 @@ namespace SaboteurX
                 string playerName = game.Players[int.Parse(((PictureBox)sender).Tag.ToString())].Split(';')[0];
                 game.effects[playerName] = this.game.cards[myId][selectedCard].power;
                 game.Moves.Add(new MoveModel(this.game.cards[myId][selectedCard], "2;" + playerName));
-                this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.Players.Count;
+                game.Messages.Add($"{me.name} used a power card on {playerName}.");
+                game.currentPlayer = (this.game.currentPlayer + 1) % this.game.Players.Count;
                 UpdateCardsAfterUse();
-                this.ProcessAvatars();
+                ProcessAvatars();
                 UpdateLobby();
             }
         }
-        private void UpdateCardsAfterUse()
+        private void UpdateCardsAfterUse(bool changeRound = true)
         {
-            this.board.selectedCard = null;
-            this.gameImage = board.image;
-            this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.Players.Count;
-            this.game.cards[myId].RemoveAt(selectedCard);
-            this.game.cards[myId].Insert(selectedCard, CardHelpers.RandomCardGenerator());
-            this.rotations[selectedCard] = 0;
-            this.ProcessCards();
+            board.selectedCard = null;
+            gameImage = board.image;
+            if(changeRound)
+                game.currentPlayer = (this.game.currentPlayer + 1) % this.game.Players.Count;
+            RemoveSelectedCard();
 
-            this.game.remainingCards--;
+            if (selectedCard != -1)
+            {
+                var pictureCards = new PictureBox[] { pbox_card_1, pbox_card_2, pbox_card_3, pbox_card_4, pbox_card_5 };
+                pictureCards[selectedCard].BorderStyle = BorderStyle.None;
+                selectedCard = -1;
+            }
+            game.discardsLeft = 3;
+        }
+        private void RemoveSelectedCard()
+        {
+            game.cards[myId].RemoveAt(selectedCard);
+            game.cards[myId].Insert(selectedCard, CardHelpers.RandomCardGenerator());
+            rotations[selectedCard] = 0;
+            game.remainingCards--;
+            ProcessCards();
+        }
+        #region Coordinate label preview
+        Label coordinateLabel;
+        private void HandleOnMouseOverCoordinateLabel()
+        {
+            var pInitial = new Point(MousePosition.X, MousePosition.Y);
+            var p = pbox_game.PointToClient(pInitial);
+            int x = (int)((float)(p.X - movingPoint.X) / ((float)Board.WidthCell * imageZoom));
+            int y = (int)((float)(p.Y - movingPoint.Y) / ((float)Board.HeightCell * imageZoom));
+            if (coordinateLabel == null)
+            {
+                coordinateLabel = new Label
+                {
+                    ForeColor = Color.White,
+                    Font = new Font("Consolas", 15f, FontStyle.Regular),
+                };
+                this.bunifuCards1.Controls.Add(coordinateLabel);
+            }
+            coordinateLabel.Text = $"x:{x} y:{y}";
+            coordinateLabel.Location = this.PointToClient(pInitial);
+            
+            coordinateLabel.BringToFront();
+        }
+        #endregion
+
+        private void pbox_game_MouseLeave(object sender, EventArgs e)
+        {
+            this.bunifuCards1.Controls.Remove(coordinateLabel);
+            coordinateLabel = null;
+        }
+
+        private void GameScreen_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (game.currentPlayer == myId && e.KeyData == Keys.Delete && selectedCard != -1)
+            {
+                if (game.discardsLeft > 0)
+                {
+                    game.discardsLeft--;
+                    UpdateCardsAfterUse(false);
+                    UpdateLobby();
+                }
+                else
+                {
+                    UpdateCardsAfterUse();
+                    game.discardsLeft = 3;
+                }
+                UpdateLobby();
+            }
+        }
+
+        private void txt_message_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
