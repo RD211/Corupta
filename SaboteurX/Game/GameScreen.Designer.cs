@@ -356,7 +356,6 @@
             // pbox_card_5
             // 
             this.pbox_card_5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbox_card_5.Image = global::SaboteurX.Properties.Resources.shapes_and_symbols;
             this.pbox_card_5.Location = new System.Drawing.Point(362, 633);
             this.pbox_card_5.Name = "pbox_card_5";
             this.pbox_card_5.Size = new System.Drawing.Size(80, 80);
@@ -371,7 +370,6 @@
             // pbox_card_4
             // 
             this.pbox_card_4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbox_card_4.Image = global::SaboteurX.Properties.Resources.signs;
             this.pbox_card_4.Location = new System.Drawing.Point(276, 633);
             this.pbox_card_4.Name = "pbox_card_4";
             this.pbox_card_4.Size = new System.Drawing.Size(80, 80);
@@ -386,7 +384,6 @@
             // pbox_card_3
             // 
             this.pbox_card_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbox_card_3.Image = global::SaboteurX.Properties.Resources.signs;
             this.pbox_card_3.Location = new System.Drawing.Point(190, 633);
             this.pbox_card_3.Name = "pbox_card_3";
             this.pbox_card_3.Size = new System.Drawing.Size(80, 80);
@@ -401,7 +398,6 @@
             // pbox_card_2
             // 
             this.pbox_card_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbox_card_2.Image = global::SaboteurX.Properties.Resources.shapes_and_symbols;
             this.pbox_card_2.Location = new System.Drawing.Point(104, 633);
             this.pbox_card_2.Name = "pbox_card_2";
             this.pbox_card_2.Size = new System.Drawing.Size(80, 80);
@@ -416,7 +412,6 @@
             // pbox_card_1
             // 
             this.pbox_card_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbox_card_1.Image = global::SaboteurX.Properties.Resources.signs;
             this.pbox_card_1.Location = new System.Drawing.Point(18, 633);
             this.pbox_card_1.Name = "pbox_card_1";
             this.pbox_card_1.Size = new System.Drawing.Size(80, 80);

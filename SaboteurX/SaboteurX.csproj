@@ -122,24 +122,24 @@
       <DependentUpon>GameSelectorScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Game\Card.cs" />
-    <Compile Include="LobbyItem.cs">
+    <Compile Include="Lobby\LobbyItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LobbyItem.Designer.cs">
+    <Compile Include="Lobby\LobbyItem.Designer.cs">
       <DependentUpon>LobbyItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="LobbyModel.cs" />
-    <Compile Include="LobbySettings.cs">
+    <Compile Include="Lobby\LobbyModel.cs" />
+    <Compile Include="Lobby\LobbySettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LobbySettings.Designer.cs">
+    <Compile Include="Lobby\LobbySettings.Designer.cs">
       <DependentUpon>LobbySettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="LobbySettingsModel.cs" />
-    <Compile Include="LobbyWaitingRoom.cs">
+    <Compile Include="Lobby\LobbySettingsModel.cs" />
+    <Compile Include="Lobby\LobbyWaitingRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LobbyWaitingRoom.Designer.cs">
+    <Compile Include="Lobby\LobbyWaitingRoom.Designer.cs">
       <DependentUpon>LobbyWaitingRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="MoveModel.cs" />
@@ -173,13 +173,13 @@
     <EmbeddedResource Include="GameSelectorScreen.resx">
       <DependentUpon>GameSelectorScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LobbyItem.resx">
+    <EmbeddedResource Include="Lobby\LobbyItem.resx">
       <DependentUpon>LobbyItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LobbySettings.resx">
+    <EmbeddedResource Include="Lobby\LobbySettings.resx">
       <DependentUpon>LobbySettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LobbyWaitingRoom.resx">
+    <EmbeddedResource Include="Lobby\LobbyWaitingRoom.resx">
       <DependentUpon>LobbyWaitingRoom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -208,15 +208,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3624765.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\shapes-and-symbols.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\signs.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
@@ -227,6 +218,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
