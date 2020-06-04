@@ -18,18 +18,31 @@ namespace SaboteurX
 {
     public partial class GameSelectorScreen : Form
     {
+        #region Hacks
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
+        private void Card_moveForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        #endregion
 
+        #region Variables
         public PlayerInformation information;
         List<KeyValuePair<string, LobbyModel>> lobbies = new List<KeyValuePair<string, LobbyModel>>();
         int lobbyNumber = 0;
         Label selectedLabel;
+        #endregion
+
         async void GetLobbies()
         {
             IFirebaseConfig config = new FirebaseConfig
@@ -55,6 +68,13 @@ namespace SaboteurX
             }
             else
             {
+                var itemsMarkedForRemove = new List<KeyValuePair<string, LobbyModel>>();
+                lobbies.ForEach((lobby) => {
+                    if (lobby.Value.Started)
+                        itemsMarkedForRemove.Add(lobby);
+                });
+                itemsMarkedForRemove.ForEach((lb) => lobbies.Remove(lb));
+                lobbies.RemoveAt(0);
                 LoadLobby();
             }
         }
@@ -67,12 +87,17 @@ namespace SaboteurX
         }
         void LoadLobby()
         {
-            this.bunifuCards1.Controls.OfType<LobbyItem>().ToList().ForEach((itemremove) => this.bunifuCards1.Controls.Remove(itemremove));
-            LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this)
+            try
             {
-                Location = new Point(210, 200)
-            };
-            this.bunifuCards1.Controls.Add(item);
+                this.bunifuCards1.Controls.OfType<LobbyItem>().ToList().ForEach((itemremove) => this.bunifuCards1.Controls.Remove(itemremove));
+                LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this)
+                {
+                    Location = new Point(210, 200)
+                };
+                this.bunifuCards1.Controls.Add(item);
+            }
+            catch { }
+            CheckLabelsViz();
         }
         public GameSelectorScreen(PlayerInformation information)
         {
@@ -91,14 +116,7 @@ namespace SaboteurX
             
         }
 
-        private void Card_moveForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
+
 
         private void Lbl_close_Click(object sender, EventArgs e)
         {
@@ -115,7 +133,7 @@ namespace SaboteurX
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void Lbl_join_Click(object sender, EventArgs e)
+        private void Lbl_right_Click(object sender, EventArgs e)
         {
             if(lobbies.Count>lobbyNumber+1)
             {
@@ -124,13 +142,32 @@ namespace SaboteurX
             LoadLobby();
         }
 
-        private void Label3_Click(object sender, EventArgs e)
+        private void Lbl_left_Click(object sender, EventArgs e)
         {
             if (0 <= lobbyNumber - 1)
             {
                 lobbyNumber--;
             }
             LoadLobby();
+        }
+        private void CheckLabelsViz()
+        {
+            if (lobbies.Count <= lobbyNumber + 1)
+            {
+                lbl_right.Hide();
+            }
+            else
+            {
+                lbl_right.Show();
+            }
+            if (lobbyNumber == 0)
+            {
+                lbl_left.Hide();
+            }
+            else
+            {
+                lbl_left.Show();
+            }
         }
         public LobbyModel FromInfoToLobby(PlayerInformation info)
         {

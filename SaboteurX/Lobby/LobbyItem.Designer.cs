@@ -80,6 +80,9 @@
             this.pbox_player_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_0.TabIndex = 8;
             this.pbox_player_0.TabStop = false;
+            this.pbox_player_0.Tag = "0";
+            this.pbox_player_0.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_0.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_7
             // 
@@ -90,6 +93,9 @@
             this.pbox_player_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_7.TabIndex = 7;
             this.pbox_player_7.TabStop = false;
+            this.pbox_player_7.Tag = "7";
+            this.pbox_player_7.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_7.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_6
             // 
@@ -100,6 +106,9 @@
             this.pbox_player_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_6.TabIndex = 6;
             this.pbox_player_6.TabStop = false;
+            this.pbox_player_6.Tag = "6";
+            this.pbox_player_6.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_6.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_5
             // 
@@ -110,6 +119,9 @@
             this.pbox_player_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_5.TabIndex = 5;
             this.pbox_player_5.TabStop = false;
+            this.pbox_player_5.Tag = "5";
+            this.pbox_player_5.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_5.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_4
             // 
@@ -120,6 +132,9 @@
             this.pbox_player_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_4.TabIndex = 3;
             this.pbox_player_4.TabStop = false;
+            this.pbox_player_4.Tag = "4";
+            this.pbox_player_4.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_4.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_3
             // 
@@ -130,6 +145,9 @@
             this.pbox_player_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_3.TabIndex = 2;
             this.pbox_player_3.TabStop = false;
+            this.pbox_player_3.Tag = "3";
+            this.pbox_player_3.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_3.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_2
             // 
@@ -140,6 +158,9 @@
             this.pbox_player_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_2.TabIndex = 1;
             this.pbox_player_2.TabStop = false;
+            this.pbox_player_2.Tag = "2";
+            this.pbox_player_2.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_2.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_player_1
             // 
@@ -150,6 +171,9 @@
             this.pbox_player_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_player_1.TabIndex = 0;
             this.pbox_player_1.TabStop = false;
+            this.pbox_player_1.Tag = "1";
+            this.pbox_player_1.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_player_1.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // timer_animation
             // 

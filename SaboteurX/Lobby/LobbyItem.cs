@@ -119,5 +119,32 @@ namespace SaboteurX
             waitingRoom.ShowDialog();
             this.fatherForm.Close();
         }
+
+
+        Label nameHelperLabel = null;
+        private void avatar_MouseEnter(object sender, EventArgs e)
+        {
+            int playerId = int.Parse(((PictureBox)sender).Tag.ToString());
+            if (playerId >= lobbyData.Value.Players.Count)
+                return;
+            if (nameHelperLabel == null)
+            {
+                nameHelperLabel = new Label()
+                {
+                    ForeColor = Color.White,
+                    Font = new Font("Consolas", 15f, FontStyle.Regular),
+                };
+                this.Controls.Add(nameHelperLabel);
+            }
+            nameHelperLabel.Text = lobbyData.Value.Players[playerId].Split(';')[0];
+            nameHelperLabel.Location = ((PictureBox)sender).Location;
+            nameHelperLabel.BringToFront();
+        }
+
+        private void avatar_MouseLeave(object sender, EventArgs e)
+        {
+            this.Controls.Remove(nameHelperLabel);
+            nameHelperLabel = null;
+        }
     }
 }

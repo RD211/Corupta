@@ -36,9 +36,9 @@
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_left = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbl_join = new System.Windows.Forms.Label();
+            this.lbl_right = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_create_lobby = new System.Windows.Forms.Label();
             this.lbl_lobby_title = new System.Windows.Forms.Label();
@@ -131,9 +131,9 @@
             this.bunifuCards1.BorderRadius = 5;
             this.bunifuCards1.BottomSahddow = true;
             this.bunifuCards1.color = System.Drawing.Color.DarkGreen;
-            this.bunifuCards1.Controls.Add(this.label3);
+            this.bunifuCards1.Controls.Add(this.lbl_left);
             this.bunifuCards1.Controls.Add(this.label2);
-            this.bunifuCards1.Controls.Add(this.lbl_join);
+            this.bunifuCards1.Controls.Add(this.lbl_right);
             this.bunifuCards1.Controls.Add(this.label1);
             this.bunifuCards1.Controls.Add(this.lbl_create_lobby);
             this.bunifuCards1.Controls.Add(this.lbl_lobby_title);
@@ -145,18 +145,18 @@
             this.bunifuCards1.Size = new System.Drawing.Size(1083, 670);
             this.bunifuCards1.TabIndex = 9;
             // 
-            // label3
+            // lbl_left
             // 
-            this.label3.Font = new System.Drawing.Font("Consolas", 18.25F);
-            this.label3.ForeColor = System.Drawing.Color.Chartreuse;
-            this.label3.Location = new System.Drawing.Point(3, 141);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(185, 367);
-            this.label3.TabIndex = 13;
-            this.label3.Tag = "Join;NO";
-            this.label3.Text = "    __\r\n   / /\r\n  / / \r\n < <  \r\n  \\ \\ \r\n   \\_\\\r\n      \r\n      ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.Label3_Click);
+            this.lbl_left.Font = new System.Drawing.Font("Consolas", 18.25F);
+            this.lbl_left.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_left.Location = new System.Drawing.Point(3, 141);
+            this.lbl_left.Name = "lbl_left";
+            this.lbl_left.Size = new System.Drawing.Size(185, 367);
+            this.lbl_left.TabIndex = 13;
+            this.lbl_left.Tag = "Join;NO";
+            this.lbl_left.Text = "    __\r\n   / /\r\n  / / \r\n < <  \r\n  \\ \\ \r\n   \\_\\\r\n      \r\n      ";
+            this.lbl_left.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_left.Click += new System.EventHandler(this.Lbl_left_Click);
             // 
             // label2
             // 
@@ -172,18 +172,18 @@
     "------------------------------------------------------------------------------";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_join
+            // lbl_right
             // 
-            this.lbl_join.Font = new System.Drawing.Font("Consolas", 18.25F);
-            this.lbl_join.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_join.Location = new System.Drawing.Point(895, 141);
-            this.lbl_join.Name = "lbl_join";
-            this.lbl_join.Size = new System.Drawing.Size(185, 367);
-            this.lbl_join.TabIndex = 10;
-            this.lbl_join.Tag = "Join;NO";
-            this.lbl_join.Text = " __   \r\n \\ \\  \r\n  \\ \\ \r\n   > >\r\n  / / \r\n /_/  \r\n      \r\n      ";
-            this.lbl_join.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_join.Click += new System.EventHandler(this.Lbl_join_Click);
+            this.lbl_right.Font = new System.Drawing.Font("Consolas", 18.25F);
+            this.lbl_right.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_right.Location = new System.Drawing.Point(895, 141);
+            this.lbl_right.Name = "lbl_right";
+            this.lbl_right.Size = new System.Drawing.Size(185, 367);
+            this.lbl_right.TabIndex = 10;
+            this.lbl_right.Tag = "Join;NO";
+            this.lbl_right.Text = " __   \r\n \\ \\  \r\n  \\ \\ \r\n   > >\r\n  / / \r\n /_/  \r\n      \r\n      ";
+            this.lbl_right.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_right.Click += new System.EventHandler(this.Lbl_right_Click);
             // 
             // label1
             // 
@@ -264,9 +264,9 @@
         private System.Windows.Forms.Label lbl_lobby_title;
         private System.Windows.Forms.Label lbl_create_lobby;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_left;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbl_join;
+        private System.Windows.Forms.Label lbl_right;
         private System.Windows.Forms.Timer timer_animation;
     }
 }
