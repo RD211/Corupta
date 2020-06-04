@@ -3,6 +3,7 @@ using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using static SaboteurX.Game.CardHelpers;
 
 namespace SaboteurX.Game 
@@ -69,20 +70,36 @@ namespace SaboteurX.Game
                                 con = new Tuple<Gate, Gate>(left, right);
                                 PointF start = FromGateToPointF(left);
                                 PointF end = FromGateToPointF(right);
+
                                 Pen pn = new Pen(Color.DarkGreen, 20);
+                                if (left == right)
+                                {
+                                    switch(left)
+                                    {
+                                        case Gate.Down:
+                                            end.Y -= Height / 4;
+                                            break;
+                                        case Gate.Up:
+                                            end.Y += Height / 4;
+                                            break;
+                                        case Gate.Left:
+                                            end.X += Width / 4;
+                                            break;
+                                        case Gate.Right:
+                                            end.X -= Width / 4;
+                                            break;
+                                    }
+                                }
                                 g.DrawLine(pn, start, end);
+                                
                             });
                             switch (special)
                             {
                                 case Special.Diamond:
-                                    g.DrawPolygon(new Pen(Color.Red), new PointF[] { new PointF(Width/2-15,Height/2), new PointF(Width/2 + 15, Height / 2),
-                             new PointF(Width/2,Height/2+15), new PointF(Width/2,Height/2-15) });
+                                    g.FillPolygon(new SolidBrush(Color.Blue),new PointF[] {new PointF(Width/10*3,Height/10*6), new PointF(Width/10*4,Height/2), new PointF(Width/10*6,Height/2), new PointF(Width/10*7,Height/10*6), new PointF(Width/2, Height/10*8), new PointF(Width / 10 * 3, Height / 10 * 6) });
                                     break;
                                 case Special.Portal:
-                                    g.FillEllipse(new SolidBrush(Color.Pink), Width / 2 - 5, Height / 2 - 5, 10, 10);
-                                    break;
-                                case Special.Switch:
-
+                                    g.FillEllipse(new SolidBrush(Color.Gold), Width / 2 - 10, Height / 2 - 10, 20, 20);
                                     break;
                             }
                         }
@@ -94,6 +111,9 @@ namespace SaboteurX.Game
                                 break;
                             case PowerUp.NoBuild:
                                 g.FillRectangle(new SolidBrush(Color.Red), Width / 2 - 20, Height / 2 - 20, 40, 40);
+                                break;
+                            case PowerUp.Switch:
+                                g.FillRectangle(new SolidBrush(Color.Orange), Width / 2 - 20, Height / 2 - 20, 40, 40);
                                 break;
                         }
                         break;

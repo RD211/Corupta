@@ -36,6 +36,8 @@
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
+            this.lbl_settings = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lbl_vertical_divider_1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lbl_quit = new System.Windows.Forms.Label();
@@ -102,7 +104,6 @@
             this.bunifuCards2.ShadowDepth = 20;
             this.bunifuCards2.Size = new System.Drawing.Size(188, 51);
             this.bunifuCards2.TabIndex = 4;
-            this.bunifuCards2.Paint += new System.Windows.Forms.PaintEventHandler(this.bunifuCards2_Paint);
             // 
             // lbl_maximize
             // 
@@ -152,6 +153,8 @@
             this.bunifuCards1.BorderRadius = 5;
             this.bunifuCards1.BottomSahddow = true;
             this.bunifuCards1.color = System.Drawing.Color.DarkGreen;
+            this.bunifuCards1.Controls.Add(this.lbl_settings);
+            this.bunifuCards1.Controls.Add(this.label1);
             this.bunifuCards1.Controls.Add(this.lbl_vertical_divider_1);
             this.bunifuCards1.Controls.Add(this.label10);
             this.bunifuCards1.Controls.Add(this.lbl_quit);
@@ -179,7 +182,36 @@
             this.bunifuCards1.ShadowDepth = 20;
             this.bunifuCards1.Size = new System.Drawing.Size(988, 610);
             this.bunifuCards1.TabIndex = 6;
-            this.bunifuCards1.Paint += new System.Windows.Forms.PaintEventHandler(this.bunifuCards1_Paint);
+            // 
+            // lbl_settings
+            // 
+            this.lbl_settings.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_settings.Font = new System.Drawing.Font("Consolas", 7.25F);
+            this.lbl_settings.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_settings.Location = new System.Drawing.Point(313, 499);
+            this.lbl_settings.Name = "lbl_settings";
+            this.lbl_settings.Size = new System.Drawing.Size(353, 100);
+            this.lbl_settings.TabIndex = 28;
+            this.lbl_settings.Tag = "Settings;NO";
+            this.lbl_settings.Text = "settings";
+            this.lbl_settings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_settings.Click += new System.EventHandler(this.lbl_settings_Click);
+            this.lbl_settings.MouseEnter += new System.EventHandler(this.Label_MouseEnter);
+            this.lbl_settings.MouseLeave += new System.EventHandler(this.Label_MouseLeave);
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Chartreuse;
+            this.label1.Location = new System.Drawing.Point(-3, -4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(985, 33);
+            this.label1.TabIndex = 27;
+            this.label1.Tag = "off";
+            this.label1.Text = "---------------------------------------------------------------------------------" +
+    "------------------------------------------------------------------------";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_vertical_divider_1
             // 
@@ -216,30 +248,30 @@
             this.lbl_quit.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_quit.Location = new System.Drawing.Point(37, 499);
             this.lbl_quit.Name = "lbl_quit";
-            this.lbl_quit.Size = new System.Drawing.Size(337, 100);
+            this.lbl_quit.Size = new System.Drawing.Size(280, 100);
             this.lbl_quit.TabIndex = 25;
             this.lbl_quit.Tag = "Quit;NO";
-            this.lbl_quit.Text = resources.GetString("lbl_quit.Text");
+            this.lbl_quit.Text = "Quit";
             this.lbl_quit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_quit.Click += new System.EventHandler(this.lbl_quit_Click);
-            this.lbl_quit.MouseEnter += new System.EventHandler(this.lbl_quit_MouseEnter);
-            this.lbl_quit.MouseLeave += new System.EventHandler(this.lbl_quit_MouseLeave);
+            this.lbl_quit.MouseEnter += new System.EventHandler(this.Label_MouseEnter);
+            this.lbl_quit.MouseLeave += new System.EventHandler(this.Label_MouseLeave);
             // 
             // lbl_start
             // 
             this.lbl_start.BackColor = System.Drawing.Color.Transparent;
             this.lbl_start.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_start.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_start.Location = new System.Drawing.Point(616, 499);
+            this.lbl_start.Location = new System.Drawing.Point(672, 499);
             this.lbl_start.Name = "lbl_start";
-            this.lbl_start.Size = new System.Drawing.Size(337, 100);
+            this.lbl_start.Size = new System.Drawing.Size(281, 100);
             this.lbl_start.TabIndex = 24;
             this.lbl_start.Tag = "Start;NO";
-            this.lbl_start.Text = resources.GetString("lbl_start.Text");
+            this.lbl_start.Text = "start";
             this.lbl_start.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_start.Click += new System.EventHandler(this.lbl_start_Click);
-            this.lbl_start.MouseEnter += new System.EventHandler(this.lbl_start_MouseEnter);
-            this.lbl_start.MouseLeave += new System.EventHandler(this.lbl_start_MouseLeave);
+            this.lbl_start.MouseEnter += new System.EventHandler(this.Label_MouseEnter);
+            this.lbl_start.MouseLeave += new System.EventHandler(this.Label_MouseLeave);
             // 
             // lbl_name_7
             // 
@@ -494,5 +526,7 @@
         private System.Windows.Forms.Label lbl_vertical_divider_1;
         private System.Windows.Forms.Timer timer_update;
         private System.Windows.Forms.Timer timer_animation;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_settings;
     }
 }

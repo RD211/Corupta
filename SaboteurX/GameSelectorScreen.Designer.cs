@@ -77,7 +77,7 @@
             this.lbl_maximize.Tag = "off";
             this.lbl_maximize.Text = "□";
             this.lbl_maximize.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lbl_maximize.Click += new System.EventHandler(this.lbl_maximize_Click);
+            this.lbl_maximize.Click += new System.EventHandler(this.Lbl_maximize_Click);
             // 
             // lbl_minimize
             // 
@@ -91,7 +91,7 @@
             this.lbl_minimize.Tag = "off";
             this.lbl_minimize.Text = "____";
             this.lbl_minimize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lbl_minimize.Click += new System.EventHandler(this.lbl_minimize_Click);
+            this.lbl_minimize.Click += new System.EventHandler(this.Lbl_minimize_Click);
             // 
             // lbl_close
             // 
@@ -105,7 +105,7 @@
             this.lbl_close.Tag = "off";
             this.lbl_close.Text = "\\/\r\n/\\";
             this.lbl_close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_close.Click += new System.EventHandler(this.lbl_close_Click);
+            this.lbl_close.Click += new System.EventHandler(this.Lbl_close_Click);
             // 
             // card_moveForm
             // 
@@ -120,7 +120,7 @@
             this.card_moveForm.ShadowDepth = 20;
             this.card_moveForm.Size = new System.Drawing.Size(512, 51);
             this.card_moveForm.TabIndex = 8;
-            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.card_moveForm_MouseDown);
+            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
             // 
             // bunifuCards1
             // 
@@ -156,7 +156,7 @@
             this.label3.Tag = "Join;NO";
             this.label3.Text = "    __\r\n   / /\r\n  / / \r\n < <  \r\n  \\ \\ \r\n   \\_\\\r\n      \r\n      ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label3.Click += new System.EventHandler(this.Label3_Click);
             // 
             // label2
             // 
@@ -183,7 +183,7 @@
             this.lbl_join.Tag = "Join;NO";
             this.lbl_join.Text = " __   \r\n \\ \\  \r\n  \\ \\ \r\n   > >\r\n  / / \r\n /_/  \r\n      \r\n      ";
             this.lbl_join.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_join.Click += new System.EventHandler(this.lbl_join_Click);
+            this.lbl_join.Click += new System.EventHandler(this.Lbl_join_Click);
             // 
             // label1
             // 
@@ -211,9 +211,9 @@
             this.lbl_create_lobby.Tag = "Create Lobby;NO";
             this.lbl_create_lobby.Text = resources.GetString("lbl_create_lobby.Text");
             this.lbl_create_lobby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_create_lobby.Click += new System.EventHandler(this.lbl_create_lobby_Click);
-            this.lbl_create_lobby.MouseEnter += new System.EventHandler(this.lbl_create_lobby_MouseEnter);
-            this.lbl_create_lobby.MouseLeave += new System.EventHandler(this.lbl_create_lobby_MouseLeave);
+            this.lbl_create_lobby.Click += new System.EventHandler(this.Lbl_create_lobby_Click);
+            this.lbl_create_lobby.MouseEnter += new System.EventHandler(this.Lbl_create_lobby_MouseEnter);
+            this.lbl_create_lobby.MouseLeave += new System.EventHandler(this.Lbl_create_lobby_MouseLeave);
             // 
             // lbl_lobby_title
             // 
@@ -232,7 +232,7 @@
             // 
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // GameSelectorScreen
             // 

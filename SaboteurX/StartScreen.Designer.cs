@@ -94,7 +94,7 @@
             this.lbl_settings.Tag = "Settings;NO";
             this.lbl_settings.Text = resources.GetString("lbl_settings.Text");
             this.lbl_settings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_settings.Click += new System.EventHandler(this.lbl_settings_Click);
+            this.lbl_settings.Click += new System.EventHandler(this.Lbl_settings_Click);
             this.lbl_settings.MouseEnter += new System.EventHandler(this.SelectLabelEvent);
             // 
             // label2
@@ -123,7 +123,7 @@
             this.lbl_play.Tag = "Play;NO";
             this.lbl_play.Text = resources.GetString("lbl_play.Text");
             this.lbl_play.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_play.Click += new System.EventHandler(this.lbl_play_Click_1);
+            this.lbl_play.Click += new System.EventHandler(this.Lbl_play_Click_1);
             this.lbl_play.MouseEnter += new System.EventHandler(this.SelectLabelEvent);
             // 
             // lbl_title_main_screen
@@ -169,7 +169,7 @@
             this.lbl_maximize.Tag = "off";
             this.lbl_maximize.Text = "□";
             this.lbl_maximize.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lbl_maximize.Click += new System.EventHandler(this.lbl_maximize_Click);
+            this.lbl_maximize.Click += new System.EventHandler(this.Lbl_maximize_Click);
             this.lbl_maximize.MouseEnter += new System.EventHandler(this.LabelZoomIn);
             this.lbl_maximize.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
@@ -185,7 +185,7 @@
             this.lbl_minimize.Tag = "off";
             this.lbl_minimize.Text = "____";
             this.lbl_minimize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lbl_minimize.Click += new System.EventHandler(this.lbl_minimize_Click);
+            this.lbl_minimize.Click += new System.EventHandler(this.Lbl_minimize_Click);
             this.lbl_minimize.MouseEnter += new System.EventHandler(this.LabelZoomIn);
             this.lbl_minimize.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
@@ -218,13 +218,13 @@
             this.card_moveForm.ShadowDepth = 20;
             this.card_moveForm.Size = new System.Drawing.Size(512, 51);
             this.card_moveForm.TabIndex = 3;
-            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.card_moveForm_MouseDown);
+            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
             // 
             // timer_animation
             // 
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // StartScreen
             // 

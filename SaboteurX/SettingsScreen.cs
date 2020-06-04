@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -17,8 +18,7 @@ namespace SaboteurX
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
-
-        PlayerInformation information = new PlayerInformation("", new bool[25, 25]);
+        PlayerInformation information = new PlayerInformation("", new bool[PlayerInformation.Dimension, PlayerInformation.Dimension]);
         Label selectedLabel;
         public SettingsScreen()
         {
@@ -37,16 +37,17 @@ namespace SaboteurX
 
         void UpdateAvatarImage()
         {
-            Bitmap bmp = information.GetPictureBitmap(600,600);
+            int imageSize = 600;
+            Bitmap bmp = information.GetPictureBitmap(imageSize, imageSize);
             Graphics g = Graphics.FromImage(bmp);
             Pen pn = new Pen(Color.Chartreuse,1);
-            for(int j = 0;j<15;j++)
+            for(int j = 0;j< PlayerInformation.Dimension; j++)
             {
-                g.DrawLine(pn, j * (600f / 15f), 0f, j * (600f / 15f), 600-1);
-                g.DrawLine(pn, 0f, j * (600f / 15f), 600 - 1, j * (600f / 15f));
+                g.DrawLine(pn, j * (imageSize / (float)PlayerInformation.Dimension), 0f, j * (imageSize / (float)PlayerInformation.Dimension), imageSize - 1);
+                g.DrawLine(pn, 0f, j * (imageSize / (float)PlayerInformation.Dimension), imageSize - 1, j * (imageSize / (float)PlayerInformation.Dimension));
             }
-            g.DrawLine(pn, 600-1, 0, 600-1, 600);
-            g.DrawLine(pn, 0, 600 - 1, 600 , 600-1);
+            g.DrawLine(pn, imageSize - 1, 0, imageSize - 1, imageSize);
+            g.DrawLine(pn, 0, imageSize - 1, imageSize, imageSize - 1);
 
             this.pbox_avatar.Image = bmp;
         }
@@ -102,12 +103,6 @@ namespace SaboteurX
             this.lbl_name_here.Text = this.lbl_name_here.Tag.ToString().Split(';')[0].ToAsciiArt();
         }
 
-        private void pbox_avatar_Click(object sender, EventArgs e)
-        {
-            information.picture[(int)(((MouseEventArgs)e).X*2 / (600f / 15f)), (int)(((MouseEventArgs)e).Y*2 / (600f / 15f))] 
-                = !information.picture[(int)(((MouseEventArgs)e).X*2 / (600f / 15f)), (int)(((MouseEventArgs)e).Y*2 / (600f / 15f))];
-            UpdateAvatarImage();
-        }
         private void SelectLabelEvent(object sender, EventArgs e)
         {
             this.selectedLabel.Text = this.selectedLabel.Tag.ToString().Split(';')[0].ToAsciiArt();
@@ -130,12 +125,12 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_save_MouseLeave(object sender, EventArgs e)
+        private void Lbl_save_MouseLeave(object sender, EventArgs e)
         {
             SelectLabelEvent(this.lbl_name_here, null);
         }
 
-        private void lbl_save_Click(object sender, EventArgs e)
+        private void Lbl_save_Click(object sender, EventArgs e)
         {
             var info = new PlayerInformation(txt_name.Text, information.picture);
 
@@ -146,6 +141,47 @@ namespace SaboteurX
                 File.WriteAllText("settings", info.ToCompressedString());
             }
             this.Show();
+        }
+        bool holdingDownLeft = false;
+        bool holdingDownRight = false;
+
+        private void pbox_avatar_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                holdingDownLeft = true;
+            else
+                holdingDownRight = true;
+        }
+        int imageSize = 600;
+
+        private void pbox_avatar_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (holdingDownLeft)
+                {
+                    information.picture[(int)(e.X * 2 / ((float)imageSize / (float)PlayerInformation.Dimension)), (int)(e.Y * 2 / ((float)imageSize / (float)PlayerInformation.Dimension))] = true;
+                    UpdateAvatarImage();
+                }
+                else if(holdingDownRight)
+                {
+                    information.picture[(int)(e.X * 2 / ((float)imageSize / (float)PlayerInformation.Dimension)), (int)(e.Y * 2 / ((float)imageSize / (float)PlayerInformation.Dimension))] = false;
+                    UpdateAvatarImage();
+                }
+            }
+            catch { }
+            
+        }
+
+        private void pbox_avatar_MouseUp(object sender, MouseEventArgs e)
+        {
+            holdingDownRight = false; holdingDownLeft = false;
+        }
+
+        private void pbox_avatar_DoubleClick(object sender, EventArgs e)
+        {
+            information.picture[(int)(((MouseEventArgs)e).X * 2 / ((float)imageSize / (float)PlayerInformation.Dimension)), (int)(((MouseEventArgs)e).Y * 2 / ((float)imageSize / (float)PlayerInformation.Dimension))] = true;
+            UpdateAvatarImage();
         }
     }
 }

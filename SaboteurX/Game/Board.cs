@@ -10,22 +10,27 @@ namespace SaboteurX.Game
 {
     public class Board
     {
-        public static int Width = 30, Height = 20;
-        public static int WidthCell = 50, HeightCell = 50;
-        public static int startX = 5, startY = 5;
-        private List<Point> ends = new List<Point>() { new Point(Width / 3 * 2, Height / 2), new Point(Width / 3 * 2, Height / 2 - Height / 4), new Point(Width / 3 * 2, Height / 2 + Height / 4) };
+        #region Variables
+        public static int Width = 40, Height = 20;
+        public static int WidthCell = 20, HeightCell = 20;
+        public static int startX = 5, startY = Height/2;
+        public static List<Point> ends;
         Card[,] board = new Card[Height, Width];
         int[] addX = new int[]{ 0, 1, 0, -1 };
         int[] addY = new int[]{ -1, 0, 1, 0 };
         public Card selectedCard = null;
+        #endregion
+
         public Bitmap image { get
             {
                 if(selectedCard!=null)
-                    Dfs(CardHelpers.Gate.Middle, startX, startY);
+                    CheckIfDone();
 
                 int realWidth = Width * WidthCell, realHeight = Height * HeightCell;
-                Bitmap tmp = new Bitmap(realWidth, realHeight);
+                Bitmap tmp = new Bitmap(realWidth, realHeight,System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                
                 Graphics g = Graphics.FromImage(tmp);
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 g.FillRectangle(new SolidBrush(Color.Red), 0, 0, realWidth, realHeight);
                 for(int i = 0;i<Height;i++)
                 {
@@ -46,6 +51,21 @@ namespace SaboteurX.Game
                 }
                 return tmp;
 
+            } }
+        public int diamonds { get{
+                CheckIfDone();
+                int dia = 0;
+                for(int i = 0;i<Height;i++)
+                {
+                    for (int j = 0; j < Width; j++)
+                    {
+                        if (board[i, j].special == CardHelpers.Special.Diamond && visited[(int)CardHelpers.Gate.Middle, i, j])
+                        {
+                            dia++;
+                        }
+                    }
+                }
+                return dia;
             } }
         public void ChangeAt(Card cell, int x, int y)
         {
@@ -70,14 +90,16 @@ namespace SaboteurX.Game
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Right,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Up,CardHelpers.Gate.Middle),
             }, CardHelpers.Special.None);
-            this.ends.ForEach((end) => {
+            ends.ForEach((end) => {
                 board[end.Y, end.X] = new Card(new List<Tuple<CardHelpers.Gate, CardHelpers.Gate>>() {
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Down,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Left,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Right,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Up,CardHelpers.Gate.Middle),
-            }, CardHelpers.Special.None);
-                board[end.Y, end.X].isHidden = true;
+            }, CardHelpers.Special.None)
+                {
+                    isHidden = true
+                };
             });
             
         }
@@ -91,7 +113,7 @@ namespace SaboteurX.Game
         private bool CheckEnd()
         {
             bool ok = false;
-            this.ends.ForEach((end)=>ok = ok?ok:board[end.Y,end.X].special==CardHelpers.Special.Portal&&visited[(int)CardHelpers.Gate.Middle,end.Y,end.X]);
+            ends.ForEach((end)=>ok = ok?ok:board[end.Y,end.X].special==CardHelpers.Special.Portal&&visited[(int)CardHelpers.Gate.Middle,end.Y,end.X]);
             return ok;
         }
         private void ResetVisited()
@@ -127,11 +149,8 @@ namespace SaboteurX.Game
         {
             if (board[y, x].isEmpty == false)
                 return false;
-            if (y == startY && x == startX)
-                return false;
-            bool ok = true;
-            ends.ForEach((end)=> { if (y == end.Y && x == end.X) ok = false; });
-            if (!ok)
+            bool isObj = isObjective(x,y);
+            if (isObj)
                 return false;
             if(checkDone)
                 CheckIfDone();
@@ -149,6 +168,19 @@ namespace SaboteurX.Game
                     hasOneConnection = true;
             }
             return hasOneConnection;
+        }
+        public bool isObjective(int x, int y)
+        {
+            bool isObj = false;
+            if (x == startX && y == startY)
+                isObj = true;
+            ends.ForEach((end) => {
+                if(end.X==x && end.Y==y)
+                {
+                    isObj = true;
+                }
+            });
+            return isObj;
         }
     }
 }

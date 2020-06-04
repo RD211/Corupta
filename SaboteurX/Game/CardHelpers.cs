@@ -22,7 +22,6 @@ namespace SaboteurX.Game
             None,
             Diamond,
             Portal,
-            Switch
         }
         public enum CardType
         {
@@ -34,42 +33,40 @@ namespace SaboteurX.Game
         {
             Build,
             NoBuild,
+            Switch,
         }
         #endregion
 
         static Random rnd = new Random(System.Environment.TickCount);
-        public static Card RandomCardGenerator(int cardnumber = 1)
+        public static Card RandomCardGenerator()
         {
             switch(rnd.Next(0,100))
             {
-                case int n when (n<=80):
+                case int n when (n<=70):
                     Card path = new Card(CardType.Path);
                     int connections = rnd.Next(1, 6);
                     for (int i = 0; i < connections; i++)
                     {
-                        Gate x = (Gate)rnd.Next(0, 4);
-                        Gate y = (Gate)rnd.Next(0, 4);
-                        if (x == y) continue;
+                        Gate x = (Gate)rnd.Next(0, 5);
+                        Gate y = (Gate)rnd.Next(0, 5);
+                        if (Math.Abs(x - y) == 2 && x != Gate.Middle && y != Gate.Middle) {
+                            path.connections.Add(new Tuple<Gate, Gate>(x, Gate.Middle));
+                            path.connections.Add(new Tuple<Gate, Gate>(y, Gate.Middle));
+                        }
                         path.connections.Add(new Tuple<Gate, Gate>(x, y));
                     }
-                    if (rnd.Next(0, 30) == 10)
-                        path.special = (Special)rnd.Next(0, 3);
+                    if (rnd.Next(0, 10) == 5)
+                        path.special = (Special)rnd.Next(0, 2);
                     else
                         path.special = Special.None;
                     path.isEmpty = false;
                     path.isHidden = false;
                     return path;
-                case int n when (n > 80 && n<90):
-                    Card power = new Card(CardType.Power);
-                    switch(rnd.Next(0,2))
+                case int n when (n > 70 && n<90):
+                    Card power = new Card(CardType.Power)
                     {
-                        case 0:
-                            power.power = PowerUp.Build;
-                            break;
-                        case 1:
-                            power.power = PowerUp.NoBuild;
-                            break;
-                    }
+                        power = (PowerUp)rnd.Next(0, 3)
+                    };
                     return power;
                 case int n when (n >= 90):
                     Card pathx = new Card(CardType.PathX);
@@ -86,6 +83,23 @@ namespace SaboteurX.Game
                     ok=true;
             });
             return ok;
+        }
+        public static int RandomRoleGenerator(ref int miner, ref int saboteur, ref int archeolog)
+        {
+            int sum = miner + saboteur + archeolog;
+            int random = rnd.Next(0, sum);
+            if (random < miner)
+            {
+                miner--;
+                return 0;
+            }
+            if (random < miner + saboteur)
+            {
+                saboteur--;
+                return 1;
+            }
+            archeolog--;
+            return 2;
         }
     }
 }

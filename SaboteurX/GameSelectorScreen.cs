@@ -46,12 +46,16 @@ namespace SaboteurX
             {
                 this.Hide();
                 var frm = new LobbyWaitingRoom(IsInGame,information);
-                frm.ShowDialog();
+                try
+                {
+                    frm.ShowDialog();
+                }
+                catch { }
                 this.Close();
             }
             else
             {
-                loadLobby();
+                LoadLobby();
             }
         }
         KeyValuePair<string, LobbyModel> FindIfInGame()
@@ -61,11 +65,13 @@ namespace SaboteurX
             lobby.Value.Players.ForEach((player) => { if (new PlayerInformation(player).name == information.name) response = lobby; }));
             return response;
         }
-        void loadLobby()
+        void LoadLobby()
         {
             this.bunifuCards1.Controls.OfType<LobbyItem>().ToList().ForEach((itemremove) => this.bunifuCards1.Controls.Remove(itemremove));
-            LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this);
-            item.Location = new Point(210, 200);
+            LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this)
+            {
+                Location = new Point(210, 200)
+            };
             this.bunifuCards1.Controls.Add(item);
         }
         public GameSelectorScreen(PlayerInformation information)
@@ -85,7 +91,7 @@ namespace SaboteurX
             
         }
 
-        private void card_moveForm_MouseDown(object sender, MouseEventArgs e)
+        private void Card_moveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -94,37 +100,37 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_close_Click(object sender, EventArgs e)
+        private void Lbl_close_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void lbl_maximize_Click(object sender, EventArgs e)
+        private void Lbl_maximize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private void lbl_minimize_Click(object sender, EventArgs e)
+        private void Lbl_minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void lbl_join_Click(object sender, EventArgs e)
+        private void Lbl_join_Click(object sender, EventArgs e)
         {
             if(lobbies.Count>lobbyNumber+1)
             {
                 lobbyNumber++;
             }
-            loadLobby();
+            LoadLobby();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void Label3_Click(object sender, EventArgs e)
         {
             if (0 <= lobbyNumber - 1)
             {
                 lobbyNumber--;
             }
-            loadLobby();
+            LoadLobby();
         }
         public LobbyModel FromInfoToLobby(PlayerInformation info)
         {
@@ -159,12 +165,12 @@ namespace SaboteurX
             this.Close();
 
         }
-        private void lbl_create_lobby_Click(object sender, EventArgs e)
+        private void Lbl_create_lobby_Click(object sender, EventArgs e)
         {
             MakeNewLobby();
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             if(selectedLabel!=null)
             {
@@ -181,14 +187,14 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_create_lobby_MouseLeave(object sender, EventArgs e)
+        private void Lbl_create_lobby_MouseLeave(object sender, EventArgs e)
         {
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
             selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt(); 
             selectedLabel = null;
         }
 
-        private void lbl_create_lobby_MouseEnter(object sender, EventArgs e)
+        private void Lbl_create_lobby_MouseEnter(object sender, EventArgs e)
         {
             selectedLabel = (Label)sender;
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";

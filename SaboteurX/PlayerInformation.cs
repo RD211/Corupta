@@ -9,8 +9,9 @@ namespace SaboteurX
 {
     public class PlayerInformation
     {
+        public static int Dimension = 20;
         public string name;
-        public bool[,] picture = new bool[15, 15];
+        public bool[,] picture = new bool[Dimension, Dimension];
         public PlayerInformation(string name, bool[,] picture)
         {
             this.name = name;
@@ -20,11 +21,11 @@ namespace SaboteurX
         {
             var saved = compressed.Split(';');
             this.name = saved[0];
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < Dimension; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < Dimension; j++)
                 {
-                    picture[i, j] = bool.Parse(saved[i * 15 + j + 1]);
+                    picture[i, j] = bool.Parse(saved[i * Dimension + j + 1]);
                 }
             }
         }
@@ -33,15 +34,14 @@ namespace SaboteurX
             Bitmap bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
             g.FillRectangle(new SolidBrush(Color.DarkGreen), 0, 0, width, height);
-            Pen pn = new Pen(Color.Chartreuse, 1);
             SolidBrush blackBrush = new SolidBrush(Color.Black);
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < Dimension; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < Dimension; j++)
                 {
                     if (picture[i, j])
                     {
-                        g.FillRectangle(blackBrush, i * (width / 15f), j * (height / 15f), width / 15f, height / 15f);
+                        g.FillRectangle(blackBrush, i * (width / (float)Dimension), j * (height / (float)Dimension), width / (float)Dimension, height / (float)Dimension);
                     }
                 }
             }
@@ -50,9 +50,9 @@ namespace SaboteurX
         public string ToCompressedString()
         {
             string settings = name;
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < Dimension; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < Dimension; j++)
                 {
                     settings += ";" + picture[i, j];
                 }

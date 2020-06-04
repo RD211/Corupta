@@ -36,6 +36,7 @@
             this.lbl_vertical_divider_1 = new System.Windows.Forms.Label();
             this.lbl_horizontal_divider_1 = new System.Windows.Forms.Label();
             this.lbl_name_here = new System.Windows.Forms.Label();
+            this.pbox_avatar = new System.Windows.Forms.PictureBox();
             this.lbl_horizontal_divider_2 = new System.Windows.Forms.Label();
             this.lbl_name_title = new System.Windows.Forms.Label();
             this.lbl_settings = new System.Windows.Forms.Label();
@@ -47,10 +48,9 @@
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
-            this.pbox_avatar = new System.Windows.Forms.PictureBox();
             this.card_settings.SuspendLayout();
-            this.bunifuCards2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_avatar)).BeginInit();
+            this.bunifuCards2.SuspendLayout();
             this.SuspendLayout();
             // 
             // card_settings
@@ -93,9 +93,9 @@
             this.lbl_save.Tag = "Save;NO";
             this.lbl_save.Text = resources.GetString("lbl_save.Text");
             this.lbl_save.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_save.Click += new System.EventHandler(this.lbl_save_Click);
+            this.lbl_save.Click += new System.EventHandler(this.Lbl_save_Click);
             this.lbl_save.MouseEnter += new System.EventHandler(this.SelectLabelEvent);
-            this.lbl_save.MouseLeave += new System.EventHandler(this.lbl_save_MouseLeave);
+            this.lbl_save.MouseLeave += new System.EventHandler(this.Lbl_save_MouseLeave);
             // 
             // lbl_avatar_title
             // 
@@ -150,6 +150,19 @@
             this.lbl_name_here.Tag = "Name;NO";
             this.lbl_name_here.Text = resources.GetString("lbl_name_here.Text");
             this.lbl_name_here.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbox_avatar
+            // 
+            this.pbox_avatar.Location = new System.Drawing.Point(550, 272);
+            this.pbox_avatar.Name = "pbox_avatar";
+            this.pbox_avatar.Size = new System.Drawing.Size(300, 300);
+            this.pbox_avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_avatar.TabIndex = 9;
+            this.pbox_avatar.TabStop = false;
+            this.pbox_avatar.DoubleClick += new System.EventHandler(this.pbox_avatar_DoubleClick);
+            this.pbox_avatar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseDown);
+            this.pbox_avatar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseMove);
+            this.pbox_avatar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseUp);
             // 
             // lbl_horizontal_divider_2
             // 
@@ -302,16 +315,6 @@
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
             // 
-            // pbox_avatar
-            // 
-            this.pbox_avatar.Location = new System.Drawing.Point(550, 272);
-            this.pbox_avatar.Name = "pbox_avatar";
-            this.pbox_avatar.Size = new System.Drawing.Size(300, 300);
-            this.pbox_avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_avatar.TabIndex = 9;
-            this.pbox_avatar.TabStop = false;
-            this.pbox_avatar.Click += new System.EventHandler(this.pbox_avatar_Click);
-            // 
             // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,8 +329,8 @@
             this.Text = "SettingsScreen";
             this.Load += new System.EventHandler(this.SettingsScreen_Load);
             this.card_settings.ResumeLayout(false);
-            this.bunifuCards2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_avatar)).EndInit();
+            this.bunifuCards2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

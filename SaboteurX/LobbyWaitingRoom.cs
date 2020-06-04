@@ -1,19 +1,15 @@
 ﻿using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
-using FireSharp.Response;
 using Newtonsoft.Json;
 using QuickType;
 using SaboteurX.Game;
+using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SaboteurX
@@ -29,11 +25,15 @@ namespace SaboteurX
         public static extern bool ReleaseCapture();
 
         string id;
-        LobbyModel lobby;
+        public LobbyModel lobby;
         PlayerInformation playerInfo;
+        LobbySettingsModel settingsModel = new LobbySettingsModel();
         bool isHost = false;
         bool updateInformation = true;
         Label selectedLabel;
+        public int miner = 3;
+        public int saboteur = 3;
+        public int archeolog = 2;
         public LobbyWaitingRoom(KeyValuePair<string,LobbyModel> lobby, PlayerInformation playerInfo)
         {
             
@@ -77,9 +77,19 @@ namespace SaboteurX
                 this.TransparencyKey = Color.LimeGreen;
                 lbl_quit.Text = "Quit".ToAsciiArt();
                 if (isHost)
+                {
+                    lbl_start.Show();
+                    lbl_settings.Show();
                     lbl_start.Text = "Start".ToAsciiArt();
+                    lbl_settings.Text = "Settings".ToAsciiArt();
+                }
                 else
+                {
+                    lbl_start.Hide();
+                    lbl_settings.Hide();
                     lbl_start.Text = "";
+                    lbl_settings.Text = "";
+                }
             }
 
         }
@@ -115,17 +125,24 @@ namespace SaboteurX
             };
             IFirebaseClient client = new FirebaseClient(config);
             lobby.Started = true;
-            lobby.remainingCards = 100;
             lobby.discardsLeft = 3;
+
+            lobby.height = settingsModel.height;
+            lobby.width = settingsModel.width;
+
+            lobby.remainingCards = settingsModel.remainingCards;
+            lobby.startingPoint = settingsModel.startingPoint;
+            lobby.diamondsNeeded = settingsModel.diamondsNeeded;
+
             this.lobby.Players.ForEach((player) => {
                 Random rnd = new Random();
-                lobby.roles.Add(rnd.Next(0, 2));
+                int newRole = CardHelpers.RandomRoleGenerator(ref miner,ref saboteur,ref archeolog);
+                lobby.roles.Add(newRole);
                 List<Card> paths = new List<Card>();
                 lobby.cards.Add(new List<Card>());
-
                 for(int i = 0;i<5;i++)
                 {
-                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator(i));
+                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator());
                 }
                 lobby.effects.Add(player.Split(';')[0], CardHelpers.PowerUp.Build);
             });
@@ -178,16 +195,6 @@ namespace SaboteurX
                 }
             }
         }
-        private void bunifuCards2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void bunifuCards1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void lbl_maximize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -217,32 +224,25 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_start_MouseEnter(object sender, EventArgs e)
+        private void Label_MouseEnter(object sender, EventArgs e)
         {
             selectedLabel = (Label)sender;
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
             selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
         }
-
-        private void lbl_start_MouseLeave(object sender, EventArgs e)
+        private void Label_MouseLeave(object sender, EventArgs e)
         {
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
             selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
             selectedLabel = null;
         }
 
-        private void lbl_quit_MouseEnter(object sender, EventArgs e)
+        private void lbl_settings_Click(object sender, EventArgs e)
         {
-            selectedLabel = (Label)sender;
-            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
-            selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
-        }
-
-        private void lbl_quit_MouseLeave(object sender, EventArgs e)
-        {
-            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
-            selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
-            selectedLabel = null;
+            LobbySettings dialog = new LobbySettings(ref settingsModel);
+            this.Hide();
+            dialog.ShowDialog();
+            this.Show();
         }
     }
 }

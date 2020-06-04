@@ -1,11 +1,8 @@
 ﻿namespace QuickType
 {
-    using System;
     using System.Collections.Generic;
-
-    using System.Globalization;
+    using System.Drawing;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using SaboteurX;
     using SaboteurX.Game;
     using static SaboteurX.Game.CardHelpers;
@@ -14,21 +11,16 @@
     {
         [JsonProperty("active")]
         public bool Active { get; set; }
-
         [JsonProperty("messages")]
         public List<string> Messages { get; set; }
-
         [JsonProperty("moves")]
         public List<MoveModel> Moves { get; set; }
-
         [JsonProperty("players")]
         public List<string> Players { get; set; }
-
         [JsonProperty("started")]
         public bool Started { get; set; }
         [JsonProperty("host")]
         public string Host { get; set; }
-
         [JsonProperty("cards")]
         public List<List<Card>> cards { get; set; }
         [JsonProperty("currentPlayer")]
@@ -43,6 +35,15 @@
         public int indexOfTarget { get; set; }
         [JsonProperty("discardsLeft")]
         public int discardsLeft { get; set; }
+        [JsonProperty("start")]
+        public Point startingPoint { get; set; }
+        [JsonProperty("width")]
+        public int width { get; set; }
+        [JsonProperty("height")]
+        public int height { get; set; }
+        [JsonProperty("diamondsNeeded")]
+        public int diamondsNeeded { get; set; }
+
         public LobbyModel()
         {
             this.Active = false;
@@ -52,8 +53,13 @@
             this.cards = new List<List<Card>>();
             this.roles = new List<int>();
             this.effects = new Dictionary<string, PowerUp>();
+            this.startingPoint = new Point(5,5);
+            width = 30;
+            height = 30;
             indexOfTarget = 0;
             discardsLeft = 0;
+            diamondsNeeded = 3;
+            remainingCards = 100;
         }
 
     }

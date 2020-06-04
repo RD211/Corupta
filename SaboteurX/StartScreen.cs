@@ -34,7 +34,7 @@ namespace SaboteurX
             lbl_settings.Text = lbl_settings.Tag.ToString().Split(';')[0].ToAsciiArt();
         }
 
-        private void card_moveForm_MouseDown(object sender, MouseEventArgs e)
+        private void Card_moveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -43,19 +43,19 @@ namespace SaboteurX
             }
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
-                var tag = selectedLabel.Tag.ToString().Split(';');
-                    if(tag[1]=="NO")
-                    {
-                        selectedLabel.Text = ("-" + tag[0] + "-").ToAsciiArt();
-                        selectedLabel.Tag = tag[0] + ";YES";
-                    }
-                    else
-                    {
-                        selectedLabel.Text = (tag[0]).ToAsciiArt();
-                        selectedLabel.Tag = tag[0] + ";NO";
-              }
+            var tag = selectedLabel.Tag.ToString().Split(';');
+            if (tag[1] == "NO")
+            {
+                selectedLabel.Text = ("-" + tag[0] + "-").ToAsciiArt();
+                selectedLabel.Tag = tag[0] + ";YES";
+            }
+            else
+            {
+                selectedLabel.Text = (tag[0]).ToAsciiArt();
+                selectedLabel.Tag = tag[0] + ";NO";
+            }
         }
 
         private void lbl_close_Click(object sender, EventArgs e)
@@ -71,12 +71,12 @@ namespace SaboteurX
             ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size + 1);
         }
 
-        private void lbl_maximize_Click(object sender, EventArgs e)
+        private void Lbl_maximize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private void lbl_minimize_Click(object sender, EventArgs e)
+        private void Lbl_minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
@@ -85,21 +85,21 @@ namespace SaboteurX
         {
             this.selectedLabel.Text = this.selectedLabel.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.selectedLabel = (Label)sender;
-            timer_animation_Tick(null, null);
+            Timer_animation_Tick(null, null);
         }
 
-        private void lbl_play_Click_1(object sender, EventArgs e)
+        private void Lbl_play_Click_1(object sender, EventArgs e)
         {
             if(File.Exists("settings"))
             {
-                PlayerInformation information = new PlayerInformation("",new bool[15,15]);
+                PlayerInformation information = new PlayerInformation("",new bool[PlayerInformation.Dimension, PlayerInformation.Dimension]);
                 var saved = File.ReadAllText("settings").Split(';');
                 information.name = saved[0];
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < PlayerInformation.Dimension; i++)
                 {
-                    for (int j = 0; j < 15; j++)
+                    for (int j = 0; j < PlayerInformation.Dimension; j++)
                     {
-                        information.picture[i, j] = bool.Parse(saved[i * 15 + j + 1]);
+                        information.picture[i, j] = bool.Parse(saved[i * PlayerInformation.Dimension + j + 1]);
                     }
                 }
                 var gameSelectorScreen = new GameSelectorScreen(information);
@@ -124,7 +124,7 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_settings_Click(object sender, EventArgs e)
+        private void Lbl_settings_Click(object sender, EventArgs e)
         {
             var frm = new SettingsScreen();
             this.Hide();

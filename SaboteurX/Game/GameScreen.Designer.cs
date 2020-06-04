@@ -35,6 +35,9 @@
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
+            this.lbl_cardsLeft = new System.Windows.Forms.Label();
+            this.lbl_discardsLeft = new System.Windows.Forms.Label();
+            this.lbl_endRound = new System.Windows.Forms.Label();
             this.lbl_player = new System.Windows.Forms.Label();
             this.lbl_role = new System.Windows.Forms.Label();
             this.pbox_avatar_8 = new System.Windows.Forms.PictureBox();
@@ -56,6 +59,7 @@
             this.txt_message = new System.Windows.Forms.TextBox();
             this.pbox_game = new System.Windows.Forms.PictureBox();
             this.timer_update = new System.Windows.Forms.Timer(this.components);
+            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_avatar_8)).BeginInit();
@@ -85,9 +89,9 @@
             this.card_moveForm.Name = "card_moveForm";
             this.card_moveForm.RightSahddow = true;
             this.card_moveForm.ShadowDepth = 20;
-            this.card_moveForm.Size = new System.Drawing.Size(512, 51);
+            this.card_moveForm.Size = new System.Drawing.Size(512, 63);
             this.card_moveForm.TabIndex = 6;
-            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.card_moveForm_MouseDown);
+            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
             // 
             // bunifuCards2
             // 
@@ -100,11 +104,11 @@
             this.bunifuCards2.Controls.Add(this.lbl_minimize);
             this.bunifuCards2.Controls.Add(this.lbl_close);
             this.bunifuCards2.LeftSahddow = false;
-            this.bunifuCards2.Location = new System.Drawing.Point(1183, 0);
+            this.bunifuCards2.Location = new System.Drawing.Point(798, 0);
             this.bunifuCards2.Name = "bunifuCards2";
             this.bunifuCards2.RightSahddow = true;
             this.bunifuCards2.ShadowDepth = 20;
-            this.bunifuCards2.Size = new System.Drawing.Size(191, 51);
+            this.bunifuCards2.Size = new System.Drawing.Size(191, 63);
             this.bunifuCards2.TabIndex = 7;
             // 
             // lbl_maximize
@@ -158,6 +162,9 @@
             this.bunifuCards1.BorderRadius = 5;
             this.bunifuCards1.BottomSahddow = true;
             this.bunifuCards1.color = System.Drawing.Color.DarkGreen;
+            this.bunifuCards1.Controls.Add(this.lbl_cardsLeft);
+            this.bunifuCards1.Controls.Add(this.lbl_discardsLeft);
+            this.bunifuCards1.Controls.Add(this.lbl_endRound);
             this.bunifuCards1.Controls.Add(this.lbl_player);
             this.bunifuCards1.Controls.Add(this.lbl_role);
             this.bunifuCards1.Controls.Add(this.pbox_avatar_8);
@@ -183,31 +190,71 @@
             this.bunifuCards1.Name = "bunifuCards1";
             this.bunifuCards1.RightSahddow = true;
             this.bunifuCards1.ShadowDepth = 20;
-            this.bunifuCards1.Size = new System.Drawing.Size(1374, 722);
+            this.bunifuCards1.Size = new System.Drawing.Size(989, 722);
             this.bunifuCards1.TabIndex = 8;
+            // 
+            // lbl_cardsLeft
+            // 
+            this.lbl_cardsLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_cardsLeft.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
+            this.lbl_cardsLeft.ForeColor = System.Drawing.Color.Black;
+            this.lbl_cardsLeft.Location = new System.Drawing.Point(3, 595);
+            this.lbl_cardsLeft.Name = "lbl_cardsLeft";
+            this.lbl_cardsLeft.Size = new System.Drawing.Size(215, 32);
+            this.lbl_cardsLeft.TabIndex = 25;
+            this.lbl_cardsLeft.Text = "Cards left";
+            this.lbl_cardsLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_discardsLeft
+            // 
+            this.lbl_discardsLeft.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
+            this.lbl_discardsLeft.ForeColor = System.Drawing.Color.Black;
+            this.lbl_discardsLeft.Location = new System.Drawing.Point(3, 89);
+            this.lbl_discardsLeft.Name = "lbl_discardsLeft";
+            this.lbl_discardsLeft.Size = new System.Drawing.Size(215, 33);
+            this.lbl_discardsLeft.TabIndex = 26;
+            this.lbl_discardsLeft.Text = "Discards left";
+            this.lbl_discardsLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_endRound
+            // 
+            this.lbl_endRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_endRound.Font = new System.Drawing.Font("Consolas", 25F, System.Drawing.FontStyle.Bold);
+            this.lbl_endRound.ForeColor = System.Drawing.Color.Black;
+            this.lbl_endRound.Location = new System.Drawing.Point(448, 633);
+            this.lbl_endRound.Name = "lbl_endRound";
+            this.lbl_endRound.Size = new System.Drawing.Size(236, 76);
+            this.lbl_endRound.TabIndex = 24;
+            this.lbl_endRound.Tag = "End round;NO";
+            this.lbl_endRound.Text = "End round";
+            this.lbl_endRound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_endRound.Click += new System.EventHandler(this.lbl_endRound_Click);
+            this.lbl_endRound.MouseEnter += new System.EventHandler(this.lbl_endRound_MouseEnter);
+            this.lbl_endRound.MouseLeave += new System.EventHandler(this.lbl_endRound_MouseLeave);
             // 
             // lbl_player
             // 
+            this.lbl_player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_player.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_player.Font = new System.Drawing.Font("Consolas", 6F, System.Drawing.FontStyle.Bold);
+            this.lbl_player.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
             this.lbl_player.ForeColor = System.Drawing.Color.Black;
-            this.lbl_player.Location = new System.Drawing.Point(688, 7);
+            this.lbl_player.Location = new System.Drawing.Point(455, 90);
             this.lbl_player.Name = "lbl_player";
-            this.lbl_player.Size = new System.Drawing.Size(381, 80);
+            this.lbl_player.Size = new System.Drawing.Size(229, 32);
             this.lbl_player.TabIndex = 23;
-            this.lbl_player.Text = "label1";
-            this.lbl_player.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lbl_player.Text = "Div\'s turn";
+            this.lbl_player.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_role
             // 
             this.lbl_role.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_role.Font = new System.Drawing.Font("Consolas", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_role.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
             this.lbl_role.ForeColor = System.Drawing.Color.Black;
-            this.lbl_role.Location = new System.Drawing.Point(621, 633);
+            this.lbl_role.Location = new System.Drawing.Point(455, 595);
             this.lbl_role.Name = "lbl_role";
-            this.lbl_role.Size = new System.Drawing.Size(448, 80);
+            this.lbl_role.Size = new System.Drawing.Size(229, 32);
             this.lbl_role.TabIndex = 22;
-            this.lbl_role.Text = "label1";
+            this.lbl_role.Text = "Saboteur";
             this.lbl_role.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbox_avatar_8
@@ -219,6 +266,8 @@
             this.pbox_avatar_8.TabStop = false;
             this.pbox_avatar_8.Tag = "7";
             this.pbox_avatar_8.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_8.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_8.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_7
             // 
@@ -229,6 +278,8 @@
             this.pbox_avatar_7.TabStop = false;
             this.pbox_avatar_7.Tag = "6";
             this.pbox_avatar_7.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_7.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_7.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_6
             // 
@@ -239,6 +290,8 @@
             this.pbox_avatar_6.TabStop = false;
             this.pbox_avatar_6.Tag = "5";
             this.pbox_avatar_6.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_6.MouseEnter += new System.EventHandler(this.cardMouseEnter);
+            this.pbox_avatar_6.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_5
             // 
@@ -249,6 +302,8 @@
             this.pbox_avatar_5.TabStop = false;
             this.pbox_avatar_5.Tag = "4";
             this.pbox_avatar_5.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_5.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_5.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_4
             // 
@@ -259,6 +314,8 @@
             this.pbox_avatar_4.TabStop = false;
             this.pbox_avatar_4.Tag = "3";
             this.pbox_avatar_4.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_4.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_4.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_3
             // 
@@ -269,6 +326,8 @@
             this.pbox_avatar_3.TabStop = false;
             this.pbox_avatar_3.Tag = "2";
             this.pbox_avatar_3.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_3.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_3.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_2
             // 
@@ -279,6 +338,8 @@
             this.pbox_avatar_2.TabStop = false;
             this.pbox_avatar_2.Tag = "1";
             this.pbox_avatar_2.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_2.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_2.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_1
             // 
@@ -289,6 +350,8 @@
             this.pbox_avatar_1.TabStop = false;
             this.pbox_avatar_1.Tag = "0";
             this.pbox_avatar_1.Click += new System.EventHandler(this.pbox_avatar_Click);
+            this.pbox_avatar_1.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
+            this.pbox_avatar_1.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_card_5
             // 
@@ -371,7 +434,7 @@
             this.lbl_chat_title.BackColor = System.Drawing.Color.Transparent;
             this.lbl_chat_title.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_chat_title.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_chat_title.Location = new System.Drawing.Point(1075, 4);
+            this.lbl_chat_title.Location = new System.Drawing.Point(690, 4);
             this.lbl_chat_title.Name = "lbl_chat_title";
             this.lbl_chat_title.Size = new System.Drawing.Size(284, 83);
             this.lbl_chat_title.TabIndex = 8;
@@ -387,8 +450,10 @@
             this.txt_chat_screen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_chat_screen.Font = new System.Drawing.Font("Consolas", 10.25F);
             this.txt_chat_screen.ForeColor = System.Drawing.Color.Lime;
-            this.txt_chat_screen.Location = new System.Drawing.Point(1075, 90);
+            this.txt_chat_screen.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txt_chat_screen.Location = new System.Drawing.Point(690, 90);
             this.txt_chat_screen.Name = "txt_chat_screen";
+            this.txt_chat_screen.ReadOnly = true;
             this.txt_chat_screen.Size = new System.Drawing.Size(293, 584);
             this.txt_chat_screen.TabIndex = 7;
             this.txt_chat_screen.Text = "asdasd";
@@ -399,14 +464,14 @@
             this.lbl_send_message.BackColor = System.Drawing.Color.Transparent;
             this.lbl_send_message.Font = new System.Drawing.Font("Consolas", 20.25F);
             this.lbl_send_message.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_send_message.Location = new System.Drawing.Point(1331, 677);
+            this.lbl_send_message.Location = new System.Drawing.Point(946, 677);
             this.lbl_send_message.Name = "lbl_send_message";
             this.lbl_send_message.Size = new System.Drawing.Size(40, 27);
             this.lbl_send_message.TabIndex = 6;
             this.lbl_send_message.Tag = "off";
             this.lbl_send_message.Text = ">";
             this.lbl_send_message.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lbl_send_message.Click += new System.EventHandler(this.lbl_send_message_Click);
+            this.lbl_send_message.Click += new System.EventHandler(this.Lbl_send_message_Click);
             // 
             // txt_message
             // 
@@ -415,13 +480,11 @@
             this.txt_message.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_message.Font = new System.Drawing.Font("Consolas", 12.25F);
             this.txt_message.ForeColor = System.Drawing.Color.Lime;
-            this.txt_message.Location = new System.Drawing.Point(1075, 682);
+            this.txt_message.Location = new System.Drawing.Point(690, 682);
             this.txt_message.Name = "txt_message";
             this.txt_message.Size = new System.Drawing.Size(256, 27);
             this.txt_message.TabIndex = 2;
-            this.txt_message.Text = "asdasd";
-            this.txt_message.TextChanged += new System.EventHandler(this.txt_message_TextChanged);
-            this.txt_message.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_message_KeyDown);
+            this.txt_message.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_message_KeyDown);
             // 
             // pbox_game
             // 
@@ -430,33 +493,40 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbox_game.Location = new System.Drawing.Point(3, 90);
             this.pbox_game.Name = "pbox_game";
-            this.pbox_game.Size = new System.Drawing.Size(1066, 537);
+            this.pbox_game.Size = new System.Drawing.Size(681, 537);
             this.pbox_game.TabIndex = 1;
             this.pbox_game.TabStop = false;
             this.pbox_game.Click += new System.EventHandler(this.pbox_game_Click);
-            this.pbox_game.Paint += new System.Windows.Forms.PaintEventHandler(this.pbox_game_Paint);
+            this.pbox_game.Paint += new System.Windows.Forms.PaintEventHandler(this.Pbox_game_Paint);
             this.pbox_game.DoubleClick += new System.EventHandler(this.pbox_game_Click);
-            this.pbox_game.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseDown);
+            this.pbox_game.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pbox_game_MouseDown);
             this.pbox_game.MouseLeave += new System.EventHandler(this.pbox_game_MouseLeave);
-            this.pbox_game.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseMove);
-            this.pbox_game.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbox_game_MouseUp);
+            this.pbox_game.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pbox_game_MouseMove);
+            this.pbox_game.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pbox_game_MouseUp);
             // 
             // timer_update
             // 
             this.timer_update.Enabled = true;
             this.timer_update.Interval = 2000;
-            this.timer_update.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer_update.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
+            // timer_animation
+            // 
+            this.timer_animation.Enabled = true;
+            this.timer_animation.Interval = 500;
+            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
             // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1371, 771);
+            this.ClientSize = new System.Drawing.Size(986, 771);
             this.Controls.Add(this.bunifuCards1);
             this.Controls.Add(this.bunifuCards2);
             this.Controls.Add(this.card_moveForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameScreen";
             this.Load += new System.EventHandler(this.GameScreen_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
@@ -510,5 +580,9 @@
         private System.Windows.Forms.PictureBox pbox_card_1;
         private System.Windows.Forms.Label lbl_role;
         private System.Windows.Forms.Label lbl_player;
+        private System.Windows.Forms.Label lbl_endRound;
+        private System.Windows.Forms.Label lbl_cardsLeft;
+        private System.Windows.Forms.Timer timer_animation;
+        private System.Windows.Forms.Label lbl_discardsLeft;
     }
 }
