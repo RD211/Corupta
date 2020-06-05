@@ -43,7 +43,6 @@
             this.txt_name = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.bunifuCards2 = new Bunifu.Framework.UI.BunifuCards();
-            this.lbl_maximize = new System.Windows.Forms.Label();
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
@@ -83,6 +82,7 @@
             // 
             // lbl_save
             // 
+            this.lbl_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_save.BackColor = System.Drawing.Color.Transparent;
             this.lbl_save.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_save.ForeColor = System.Drawing.Color.Chartreuse;
@@ -99,6 +99,7 @@
             // 
             // lbl_avatar_title
             // 
+            this.lbl_avatar_title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_avatar_title.BackColor = System.Drawing.Color.Transparent;
             this.lbl_avatar_title.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_avatar_title.ForeColor = System.Drawing.Color.Chartreuse;
@@ -112,6 +113,7 @@
             // 
             // lbl_vertical_divider_1
             // 
+            this.lbl_vertical_divider_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_vertical_divider_1.BackColor = System.Drawing.Color.Transparent;
             this.lbl_vertical_divider_1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_vertical_divider_1.ForeColor = System.Drawing.Color.Chartreuse;
@@ -126,6 +128,7 @@
             // 
             // lbl_horizontal_divider_1
             // 
+            this.lbl_horizontal_divider_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_horizontal_divider_1.BackColor = System.Drawing.Color.Transparent;
             this.lbl_horizontal_divider_1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_horizontal_divider_1.ForeColor = System.Drawing.Color.Chartreuse;
@@ -140,6 +143,7 @@
             // 
             // lbl_name_here
             // 
+            this.lbl_name_here.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_name_here.BackColor = System.Drawing.Color.Transparent;
             this.lbl_name_here.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_name_here.ForeColor = System.Drawing.Color.Chartreuse;
@@ -153,6 +157,7 @@
             // 
             // pbox_avatar
             // 
+            this.pbox_avatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pbox_avatar.Location = new System.Drawing.Point(550, 272);
             this.pbox_avatar.Name = "pbox_avatar";
             this.pbox_avatar.Size = new System.Drawing.Size(300, 300);
@@ -166,6 +171,7 @@
             // 
             // lbl_horizontal_divider_2
             // 
+            this.lbl_horizontal_divider_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_horizontal_divider_2.BackColor = System.Drawing.Color.Transparent;
             this.lbl_horizontal_divider_2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_horizontal_divider_2.ForeColor = System.Drawing.Color.Chartreuse;
@@ -180,6 +186,7 @@
             // 
             // lbl_name_title
             // 
+            this.lbl_name_title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_name_title.BackColor = System.Drawing.Color.Transparent;
             this.lbl_name_title.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_name_title.ForeColor = System.Drawing.Color.Chartreuse;
@@ -193,6 +200,7 @@
             // 
             // lbl_settings
             // 
+            this.lbl_settings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.lbl_settings.BackColor = System.Drawing.Color.Transparent;
             this.lbl_settings.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_settings.ForeColor = System.Drawing.Color.Chartreuse;
@@ -216,6 +224,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Chartreuse;
@@ -235,41 +244,24 @@
             this.bunifuCards2.BorderRadius = 5;
             this.bunifuCards2.BottomSahddow = true;
             this.bunifuCards2.color = System.Drawing.Color.DarkGreen;
-            this.bunifuCards2.Controls.Add(this.lbl_maximize);
             this.bunifuCards2.Controls.Add(this.lbl_minimize);
             this.bunifuCards2.Controls.Add(this.lbl_close);
             this.bunifuCards2.LeftSahddow = false;
-            this.bunifuCards2.Location = new System.Drawing.Point(763, -2);
+            this.bunifuCards2.Location = new System.Drawing.Point(836, -2);
             this.bunifuCards2.Name = "bunifuCards2";
             this.bunifuCards2.RightSahddow = true;
             this.bunifuCards2.ShadowDepth = 20;
-            this.bunifuCards2.Size = new System.Drawing.Size(188, 51);
+            this.bunifuCards2.Size = new System.Drawing.Size(115, 51);
             this.bunifuCards2.TabIndex = 5;
-            // 
-            // lbl_maximize
-            // 
-            this.lbl_maximize.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_maximize.Font = new System.Drawing.Font("Consolas", 31.25F);
-            this.lbl_maximize.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_maximize.Location = new System.Drawing.Point(67, 0);
-            this.lbl_maximize.Name = "lbl_maximize";
-            this.lbl_maximize.Size = new System.Drawing.Size(56, 42);
-            this.lbl_maximize.TabIndex = 6;
-            this.lbl_maximize.Tag = "off";
-            this.lbl_maximize.Text = "□";
-            this.lbl_maximize.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lbl_maximize.Click += new System.EventHandler(this.lbl_maximize_Click);
-            this.lbl_maximize.MouseEnter += new System.EventHandler(this.LabelZoomIn);
-            this.lbl_maximize.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
             // lbl_minimize
             // 
             this.lbl_minimize.BackColor = System.Drawing.Color.Transparent;
             this.lbl_minimize.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.lbl_minimize.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_minimize.Location = new System.Drawing.Point(5, 0);
+            this.lbl_minimize.Location = new System.Drawing.Point(3, 0);
             this.lbl_minimize.Name = "lbl_minimize";
-            this.lbl_minimize.Size = new System.Drawing.Size(56, 42);
+            this.lbl_minimize.Size = new System.Drawing.Size(58, 42);
             this.lbl_minimize.TabIndex = 5;
             this.lbl_minimize.Tag = "off";
             this.lbl_minimize.Text = "____";
@@ -283,7 +275,7 @@
             this.lbl_close.BackColor = System.Drawing.Color.Transparent;
             this.lbl_close.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.lbl_close.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_close.Location = new System.Drawing.Point(129, 0);
+            this.lbl_close.Location = new System.Drawing.Point(67, 0);
             this.lbl_close.Name = "lbl_close";
             this.lbl_close.Size = new System.Drawing.Size(56, 42);
             this.lbl_close.TabIndex = 4;
@@ -324,6 +316,7 @@
             this.Controls.Add(this.bunifuCards2);
             this.Controls.Add(this.card_moveForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SettingsScreen";
@@ -345,7 +338,6 @@
         private Bunifu.Framework.UI.BunifuCards card_settings;
         private System.Windows.Forms.Label lbl_settings;
         private Bunifu.Framework.UI.BunifuCards bunifuCards2;
-        private System.Windows.Forms.Label lbl_maximize;
         private System.Windows.Forms.Label lbl_minimize;
         private System.Windows.Forms.Label lbl_close;
         private Bunifu.Framework.UI.BunifuCards card_moveForm;

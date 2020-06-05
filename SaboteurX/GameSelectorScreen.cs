@@ -64,6 +64,7 @@ namespace SaboteurX
                     frm.ShowDialog();
                 }
                 catch { }
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
@@ -90,10 +91,8 @@ namespace SaboteurX
             try
             {
                 this.bunifuCards1.Controls.OfType<LobbyItem>().ToList().ForEach((itemremove) => this.bunifuCards1.Controls.Remove(itemremove));
-                LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this)
-                {
-                    Location = new Point(210, 200)
-                };
+                LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this);
+                item.Location = new Point(this.Width / 2 - item.Width / 2+10, this.Height / 2 - item.Height / 2-40);
                 this.bunifuCards1.Controls.Add(item);
             }
             catch { }
@@ -120,12 +119,14 @@ namespace SaboteurX
 
         private void Lbl_close_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void Lbl_maximize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+            LoadLobby();
         }
 
         private void Lbl_minimize_Click(object sender, EventArgs e)
@@ -198,13 +199,18 @@ namespace SaboteurX
             temporaryList.ForEach((kvp) => lobbies.Add(kvp));
             var lobby = FindIfInGame();
             var waitingRoom = new LobbyWaitingRoom(lobby,information);
-            waitingRoom.ShowDialog();
+            if(waitingRoom.ShowDialog()== DialogResult.OK)
+            {
+                DialogResult = DialogResult.OK;
+            }
             this.Close();
 
         }
         private void Lbl_create_lobby_Click(object sender, EventArgs e)
         {
+            lbl_create_lobby.Enabled = false;
             MakeNewLobby();
+            lbl_create_lobby.Enabled = true;
         }
 
         private void Timer_animation_Tick(object sender, EventArgs e)

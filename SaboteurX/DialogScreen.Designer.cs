@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogScreen));
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
-            this.lbl_question = new System.Windows.Forms.Label();
-            this.lbl_right = new System.Windows.Forms.Label();
             this.lbl_left = new System.Windows.Forms.Label();
+            this.lbl_right = new System.Windows.Forms.Label();
+            this.lbl_question = new System.Windows.Forms.Label();
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.bunifuCards1.SuspendLayout();
             this.SuspendLayout();
@@ -55,18 +55,20 @@
             this.bunifuCards1.Size = new System.Drawing.Size(655, 333);
             this.bunifuCards1.TabIndex = 8;
             // 
-            // lbl_question
+            // lbl_left
             // 
-            this.lbl_question.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_question.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_question.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_question.Location = new System.Drawing.Point(0, 58);
-            this.lbl_question.Name = "lbl_question";
-            this.lbl_question.Size = new System.Drawing.Size(652, 111);
-            this.lbl_question.TabIndex = 7;
-            this.lbl_question.Tag = "Question;NO";
-            this.lbl_question.Text = resources.GetString("lbl_question.Text");
-            this.lbl_question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_left.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_left.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_left.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_left.Location = new System.Drawing.Point(0, 212);
+            this.lbl_left.Name = "lbl_left";
+            this.lbl_left.Size = new System.Drawing.Size(310, 111);
+            this.lbl_left.TabIndex = 9;
+            this.lbl_left.Tag = "Yes;NO";
+            this.lbl_left.Text = resources.GetString("lbl_left.Text");
+            this.lbl_left.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_left.Click += new System.EventHandler(this.lbl_left_Click);
+            this.lbl_left.MouseEnter += new System.EventHandler(this.lbl_left_MouseEnter);
             // 
             // lbl_right
             // 
@@ -83,20 +85,18 @@
             this.lbl_right.Click += new System.EventHandler(this.lbl_right_Click);
             this.lbl_right.MouseEnter += new System.EventHandler(this.lbl_right_MouseEnter);
             // 
-            // lbl_left
+            // lbl_question
             // 
-            this.lbl_left.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_left.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_left.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_left.Location = new System.Drawing.Point(0, 212);
-            this.lbl_left.Name = "lbl_left";
-            this.lbl_left.Size = new System.Drawing.Size(310, 111);
-            this.lbl_left.TabIndex = 9;
-            this.lbl_left.Tag = "Yes;NO";
-            this.lbl_left.Text = resources.GetString("lbl_left.Text");
-            this.lbl_left.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_left.Click += new System.EventHandler(this.lbl_left_Click);
-            this.lbl_left.MouseEnter += new System.EventHandler(this.lbl_left_MouseEnter);
+            this.lbl_question.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_question.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_question.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_question.Location = new System.Drawing.Point(0, 58);
+            this.lbl_question.Name = "lbl_question";
+            this.lbl_question.Size = new System.Drawing.Size(652, 111);
+            this.lbl_question.TabIndex = 7;
+            this.lbl_question.Tag = "Question;NO";
+            this.lbl_question.Text = resources.GetString("lbl_question.Text");
+            this.lbl_question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer_animation
             // 
@@ -111,9 +111,10 @@
             this.ClientSize = new System.Drawing.Size(654, 332);
             this.Controls.Add(this.bunifuCards1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DialogScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DialogScreen";
+            this.Text = "Information";
             this.bunifuCards1.ResumeLayout(false);
             this.ResumeLayout(false);
 

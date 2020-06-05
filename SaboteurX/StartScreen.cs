@@ -104,8 +104,8 @@ namespace SaboteurX
                 }
                 var gameSelectorScreen = new GameSelectorScreen(information);
                 this.Hide();
-                gameSelectorScreen.ShowDialog();
-                this.Show();
+                if(gameSelectorScreen.ShowDialog()==DialogResult.OK)
+                    this.Show();
             }
             else
             {

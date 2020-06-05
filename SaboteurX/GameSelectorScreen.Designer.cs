@@ -147,9 +147,11 @@
             // 
             // lbl_left
             // 
+            this.lbl_left.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_left.Font = new System.Drawing.Font("Consolas", 18.25F);
             this.lbl_left.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_left.Location = new System.Drawing.Point(3, 141);
+            this.lbl_left.MaximumSize = new System.Drawing.Size(185, 367);
             this.lbl_left.Name = "lbl_left";
             this.lbl_left.Size = new System.Drawing.Size(185, 367);
             this.lbl_left.TabIndex = 13;
@@ -160,6 +162,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Chartreuse;
@@ -174,9 +177,11 @@
             // 
             // lbl_right
             // 
+            this.lbl_right.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_right.Font = new System.Drawing.Font("Consolas", 18.25F);
             this.lbl_right.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_right.Location = new System.Drawing.Point(895, 141);
+            this.lbl_right.MaximumSize = new System.Drawing.Size(185, 367);
             this.lbl_right.Name = "lbl_right";
             this.lbl_right.Size = new System.Drawing.Size(185, 367);
             this.lbl_right.TabIndex = 10;
@@ -187,6 +192,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Chartreuse;
@@ -201,6 +207,7 @@
             // 
             // lbl_create_lobby
             // 
+            this.lbl_create_lobby.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_create_lobby.BackColor = System.Drawing.Color.Transparent;
             this.lbl_create_lobby.Font = new System.Drawing.Font("Consolas", 9.25F);
             this.lbl_create_lobby.ForeColor = System.Drawing.Color.Chartreuse;
@@ -217,6 +224,7 @@
             // 
             // lbl_lobby_title
             // 
+            this.lbl_lobby_title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_lobby_title.BackColor = System.Drawing.Color.Transparent;
             this.lbl_lobby_title.Font = new System.Drawing.Font("Consolas", 10.25F);
             this.lbl_lobby_title.ForeColor = System.Drawing.Color.Chartreuse;
@@ -243,9 +251,10 @@
             this.Controls.Add(this.bunifuCards2);
             this.Controls.Add(this.card_moveForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GameSelectorScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GameSelectorScreen";
+            this.Text = "Game selection";
             this.Load += new System.EventHandler(this.GameSelectorScreen_Load);
             this.bunifuCards2.ResumeLayout(false);
             this.bunifuCards1.ResumeLayout(false);

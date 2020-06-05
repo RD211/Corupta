@@ -99,11 +99,14 @@ namespace SaboteurX
                 this.selectedLabel.Tag = $"{this.selectedLabel.Tag.ToString().Split(';')[0]};NO";
                 selectedLabel = null;
             }
+
         }
 
         private void lbl_join_ClickAsync(object sender, EventArgs e)
         {
+            lbl_join.Enabled = false;
             JoinLobby();
+            lbl_join.Enabled = true;
         }
         private async void JoinLobby()
         {
@@ -117,6 +120,7 @@ namespace SaboteurX
             var waitingRoom = new LobbyWaitingRoom(lobbyData, fatherForm.information);
             this.fatherForm.Hide();
             waitingRoom.ShowDialog();
+            this.fatherForm.DialogResult = DialogResult.OK;
             this.fatherForm.Close();
         }
 

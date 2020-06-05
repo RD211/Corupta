@@ -109,12 +109,15 @@ namespace SaboteurX
 
         private void lbl_close_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void lbl_start_Click(object sender, EventArgs e)
         {
+            lbl_start.Enabled = false;
             StartGame();
+            lbl_start.Enabled = true;
         }
 
         private async void StartGame()

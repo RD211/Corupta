@@ -119,6 +119,7 @@ namespace SaboteurX
                             dialogMiner = new DialogScreen("Yay", "Yay", "You like won");
                         }
                         dialogMiner.ShowDialog();
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                         break;
                     case 1:
@@ -132,6 +133,7 @@ namespace SaboteurX
                             dialogSaboteur = new DialogScreen("Yay", "Yay", "You like won");
                         }
                         dialogSaboteur.ShowDialog();
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                         break;
                     case 2:
@@ -145,6 +147,7 @@ namespace SaboteurX
                             dialogArheolog = new DialogScreen("fuck", "fuck", "You like lost");
                         }
                         dialogArheolog.ShowDialog();
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                         break;
                 }
@@ -159,12 +162,14 @@ namespace SaboteurX
                     {
                         DialogScreen dialog = new DialogScreen("fuck", "fuck", "You like lost");
                         dialog.ShowDialog();
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
                     {
                         DialogScreen dialog = new DialogScreen("Yay", "Yay", "You like won");
                         dialog.ShowDialog();
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                 }
@@ -274,6 +279,7 @@ namespace SaboteurX
         #region Close max and min buttons
         private void lbl_close_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
