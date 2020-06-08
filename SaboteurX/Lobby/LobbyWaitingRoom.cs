@@ -52,8 +52,12 @@ namespace SaboteurX
                 GameScreen game = new GameScreen(id,lobby,playerInfo);
                 this.Hide();
                 updateInformation = false;
-                game.ShowDialog();
-                this.Close();
+                if(game.ShowDialog()==DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+
             }
             else
             {
@@ -109,72 +113,89 @@ namespace SaboteurX
 
         private void lbl_close_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void lbl_start_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             lbl_start.Enabled = false;
             StartGame();
-            lbl_start.Enabled = true;
         }
 
         private async void StartGame()
         {
-            IFirebaseConfig config = new FirebaseConfig
+            try
             {
-                BasePath = "https://corupta-ddd6d.firebaseio.com/"
-            };
-            IFirebaseClient client = new FirebaseClient(config);
-            lobby.Started = true;
-            lobby.discardsLeft = 3;
-
-            lobby.height = settingsModel.height;
-            lobby.width = settingsModel.width;
-
-            lobby.remainingCards = settingsModel.remainingCards;
-            lobby.startingPoint = settingsModel.startingPoint;
-            lobby.diamondsNeeded = settingsModel.diamondsNeeded;
-
-            this.lobby.Players.ForEach((player) => {
-                Random rnd = new Random();
-                int newRole = CardHelpers.RandomRoleGenerator(ref miner,ref saboteur,ref archeolog);
-                lobby.roles.Add(newRole);
-                List<Card> paths = new List<Card>();
-                lobby.cards.Add(new List<Card>());
-                for(int i = 0;i<5;i++)
+                IFirebaseConfig config = new FirebaseConfig
                 {
-                    lobby.cards.Last().Add(CardHelpers.RandomCardGenerator());
-                }
-                lobby.effects.Add(player.Split(';')[0], CardHelpers.PowerUp.Build);
-            });
-            await client.UpdateAsync($"lobbies/{id}", lobby);
+                    BasePath = "https://corupta-ddd6d.firebaseio.com/"
+                };
+                IFirebaseClient client = new FirebaseClient(config);
+                lobby.Started = true;
+                lobby.discardsLeft = 3;
+
+                lobby.height = settingsModel.Height;
+                lobby.width = settingsModel.Width;
+
+                lobby.remainingCards = settingsModel.RemainingCards;
+                lobby.startingPoint = settingsModel.StartingPoint;
+                lobby.diamondsNeeded = settingsModel.DiamondsNeeded;
+
+                this.lobby.Players.ForEach((player) =>
+                {
+                    Random rnd = new Random();
+                    int newRole = CardHelpers.RandomRoleGenerator(ref miner, ref saboteur, ref archeolog);
+                    lobby.roles.Add(newRole);
+                    List<Card> paths = new List<Card>();
+                    lobby.cards.Add(new List<Card>());
+                    for (int i = 0; i < 5; i++)
+                    {
+                        lobby.cards.Last().Add(CardHelpers.RandomCardGenerator());
+                    }
+                    lobby.effects.Add(player.Split(';')[0], CardHelpers.PowerUp.Build);
+                });
+                await client.UpdateAsync($"lobbies/{id}", lobby);
+            }
+            catch
+            {
+                lbl_start.Enabled = true;
+            }
         }
         private void lbl_quit_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
+            lbl_quit.Enabled = false;
             QuitLobby();
         }
         private async void QuitLobby()
         {
-            IFirebaseConfig config = new FirebaseConfig
+            try
             {
-                BasePath = "https://corupta-ddd6d.firebaseio.com/"
-            };
-            IFirebaseClient client = new FirebaseClient(config);
-            if (isHost)
-            {
-                lobby.Active = false;
-                lobby.Players.Clear();
+                IFirebaseConfig config = new FirebaseConfig
+                {
+                    BasePath = "https://corupta-ddd6d.firebaseio.com/"
+                };
+                IFirebaseClient client = new FirebaseClient(config);
+                if (isHost)
+                {
+                    lobby.Active = false;
+                    lobby.Players.Clear();
+                }
+                else
+                {
+                    lobby.Players.Remove(playerInfo.ToCompressedString());
+                }
+                await client.UpdateAsync($"lobbies/{id}", lobby);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            else
+            catch
             {
-                lobby.Players.Remove(playerInfo.ToCompressedString());
+                lbl_quit.Enabled = false;
             }
-            this.Hide();
-            await client.UpdateAsync($"lobbies/{id}", lobby);
-
-            this.Close();
         }
 
         private void timer_update_Tick(object sender, EventArgs e)
@@ -198,14 +219,10 @@ namespace SaboteurX
                 }
             }
         }
-        private void lbl_maximize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-
-        }
 
         private void lbl_minimize_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.WindowState = FormWindowState.Minimized;
 
         }
@@ -242,6 +259,7 @@ namespace SaboteurX
 
         private void lbl_settings_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             LobbySettings dialog = new LobbySettings(ref settingsModel);
             this.Hide();
             dialog.ShowDialog();

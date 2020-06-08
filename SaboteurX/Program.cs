@@ -16,6 +16,8 @@ namespace SaboteurX
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            MusicPlayerHelper.InitAllPlayers();
+            MusicPlayerHelper.PlayThemeSong();
             Application.Run(new StartScreen());
         }
     }

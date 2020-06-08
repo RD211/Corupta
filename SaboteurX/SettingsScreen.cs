@@ -11,15 +11,19 @@ namespace SaboteurX
 {
     public partial class SettingsScreen : Form
     {
+        #region Hacks
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
+        #endregion
+
         PlayerInformation information = new PlayerInformation("", new bool[PlayerInformation.Dimension, PlayerInformation.Dimension]);
         Label selectedLabel;
+        Bitmap bmp;
         public SettingsScreen()
         {
             InitializeComponent();
@@ -37,8 +41,8 @@ namespace SaboteurX
 
         void UpdateAvatarImage()
         {
-            int imageSize = 600;
-            Bitmap bmp = information.GetPictureBitmap(imageSize, imageSize);
+            int imageSize = 500;
+            bmp = information.GetPictureBitmap(imageSize,imageSize);
             Graphics g = Graphics.FromImage(bmp);
             Pen pn = new Pen(Color.Chartreuse,1);
             for(int j = 0;j< PlayerInformation.Dimension; j++)
@@ -82,10 +86,12 @@ namespace SaboteurX
         }
         private void lbl_minimize_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.WindowState = FormWindowState.Minimized;
         }
         private void lbl_close_Click_1(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -132,6 +138,7 @@ namespace SaboteurX
 
         private void Lbl_save_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             var info = new PlayerInformation(txt_name.Text, information.picture);
 
             var frm = new DialogScreen("Yes", "No", "Are you sure");
@@ -182,6 +189,11 @@ namespace SaboteurX
         {
             information.picture[(int)(((MouseEventArgs)e).X * 2 / ((float)imageSize / (float)PlayerInformation.Dimension)), (int)(((MouseEventArgs)e).Y * 2 / ((float)imageSize / (float)PlayerInformation.Dimension))] = true;
             UpdateAvatarImage();
+        }
+
+        private void pbox_avatar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -24,6 +24,9 @@ namespace SaboteurX.Game
         public bool isEmpty = false;
         [JsonProperty("hidden")]
         public bool isHidden = false;
+
+        [JsonProperty("newest")]
+        public bool isNew = false;
         #endregion
 
         PointF FromGateToPointF(Gate gate)
@@ -61,7 +64,10 @@ namespace SaboteurX.Game
                         }
                         else
                         {
-                            g.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
+                            var brsh = new SolidBrush(Color.Black);
+                            if (isNew)
+                                brsh.Color = Color.FromArgb(40,40,40);
+                            g.FillRectangle(brsh, 0, 0, Width, Height);
                             g.DrawRectangle(new Pen(Color.FromArgb(100, Color.LimeGreen), 3), 1, 1, Width - 1, Height - 1);
                             connections.ForEach((con) =>
                             {

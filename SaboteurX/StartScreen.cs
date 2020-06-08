@@ -90,7 +90,8 @@ namespace SaboteurX
 
         private void Lbl_play_Click_1(object sender, EventArgs e)
         {
-            if(File.Exists("settings"))
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
+            if (File.Exists("settings"))
             {
                 PlayerInformation information = new PlayerInformation("",new bool[PlayerInformation.Dimension, PlayerInformation.Dimension]);
                 var saved = File.ReadAllText("settings").Split(';');
@@ -126,6 +127,8 @@ namespace SaboteurX
 
         private void Lbl_settings_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
+
             var frm = new SettingsScreen();
             this.Hide();
             if (frm.ShowDialog() == DialogResult.OK)

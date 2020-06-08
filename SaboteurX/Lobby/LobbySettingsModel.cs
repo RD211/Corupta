@@ -1,38 +1,33 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaboteurX
 {
     public partial class LobbySettingsModel
     {
         [JsonProperty("start")]
-        public Point startingPoint { get; set; }
+        public Point StartingPoint { get; set; }
         [JsonProperty("width")]
-        public int width { get; set; }
+        public int Width { get; set; }
         [JsonProperty("height")]
-        public int height { get; set; }
+        public int Height { get; set; }
         [JsonProperty("diamondsNeeded")]
-        public int diamondsNeeded { get; set; }
+        public int DiamondsNeeded { get; set; }
         [JsonProperty("remainingCards")]
-        public int remainingCards { get; set; }
-        public int miner { get; set; }
-        public int saboteur { get; set; }
-        public int archeolog { get; set; }
+        public int RemainingCards { get; set; }
+        public int Miner { get; set; }
+        public int Saboteur { get; set; }
+        public int Archeolog { get; set; }
         public LobbySettingsModel()
         {
-            startingPoint = new Point(5, 10);
-            width = 30;
-            height = 20;
-            diamondsNeeded = 3;
-            remainingCards = 100;
-            miner = 3;
-            saboteur = 3;
-            archeolog = 2;
+            StartingPoint = new Point(5, 10);
+            Width = 30;
+            Height = 20;
+            DiamondsNeeded = 3;
+            RemainingCards = 100;
+            Miner = 3;
+            Saboteur = 3;
+            Archeolog = 2;
         }
     }
 }

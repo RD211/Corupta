@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LobbySettings));
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
             this.num_diamonds = new System.Windows.Forms.NumericUpDown();
@@ -59,6 +60,7 @@
             this.lbl_startingPosition = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lbl_settings = new System.Windows.Forms.Label();
+            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.bunifuCards1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_diamonds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_archeolog)).BeginInit();
@@ -179,7 +181,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Chartreuse;
-            this.label15.Location = new System.Drawing.Point(3, 601);
+            this.label15.Location = new System.Drawing.Point(3, 615);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(479, 33);
             this.label15.TabIndex = 57;
@@ -201,6 +203,8 @@
             this.lbl_save.Text = "Save";
             this.lbl_save.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_save.Click += new System.EventHandler(this.lbl_save_Click);
+            this.lbl_save.MouseEnter += new System.EventHandler(this.lbl_save_MouseEnter);
+            this.lbl_save.MouseLeave += new System.EventHandler(this.lbl_save_MouseLeave);
             // 
             // label14
             // 
@@ -581,13 +585,19 @@
             this.lbl_settings.BackColor = System.Drawing.Color.Transparent;
             this.lbl_settings.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_settings.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_settings.Location = new System.Drawing.Point(18, 0);
+            this.lbl_settings.Location = new System.Drawing.Point(18, 7);
             this.lbl_settings.Name = "lbl_settings";
-            this.lbl_settings.Size = new System.Drawing.Size(451, 111);
+            this.lbl_settings.Size = new System.Drawing.Size(451, 104);
             this.lbl_settings.TabIndex = 29;
             this.lbl_settings.Tag = "Settings;NO";
             this.lbl_settings.Text = "settings";
             this.lbl_settings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer_animation
+            // 
+            this.timer_animation.Enabled = true;
+            this.timer_animation.Interval = 500;
+            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
             // 
             // LobbySettings
             // 
@@ -647,5 +657,6 @@
         private System.Windows.Forms.NumericUpDown num_diamonds;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Timer timer_animation;
     }
 }

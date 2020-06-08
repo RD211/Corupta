@@ -14,6 +14,7 @@ namespace SaboteurX
     public partial class LobbySettings : Form
     {
         public LobbySettingsModel settings;
+        Label selectedLabel = null;
         public LobbySettings()
         {
             InitializeComponent();
@@ -29,31 +30,31 @@ namespace SaboteurX
             lbl_settings.Text = "Settings".ToAsciiArt();
             lbl_save.Text = "Save".ToAsciiArt();
 
-            this.num_archeolog.Value = settings.archeolog;
-            this.num_miner.Value = settings.miner;
-            this.num_saboteur.Value = settings.saboteur;
+            this.num_archeolog.Value = settings.Archeolog;
+            this.num_miner.Value = settings.Miner;
+            this.num_saboteur.Value = settings.Saboteur;
 
-            this.num_height.Value = settings.height;
-            this.num_width.Value = settings.width;
+            this.num_height.Value = settings.Height;
+            this.num_width.Value = settings.Width;
 
-            this.num_start_x.Value = settings.startingPoint.X;
-            this.num_start_y.Value = settings.startingPoint.Y;
-            this.num_total.Value = settings.remainingCards;
-            this.num_diamonds.Value = settings.diamondsNeeded;
+            this.num_start_x.Value = settings.StartingPoint.X;
+            this.num_start_y.Value = settings.StartingPoint.Y;
+            this.num_total.Value = settings.RemainingCards;
+            this.num_diamonds.Value = settings.DiamondsNeeded;
         }
 
         private void lbl_save_Click(object sender, EventArgs e)
         {
-            this.settings.width = (int)num_width.Value;
-            this.settings.height = (int)num_height.Value;
+            this.settings.Width = (int)num_width.Value;
+            this.settings.Height = (int)num_height.Value;
 
-            this.settings.startingPoint = new Point((int)num_start_x.Value, (int)num_start_y.Value);
-            this.settings.remainingCards = (int)num_total.Value;
-            this.settings.diamondsNeeded = (int)num_diamonds.Value;
+            this.settings.StartingPoint = new Point((int)num_start_x.Value, (int)num_start_y.Value);
+            this.settings.RemainingCards = (int)num_total.Value;
+            this.settings.DiamondsNeeded = (int)num_diamonds.Value;
 
-            this.settings.miner = (int)num_miner.Value;
-            this.settings.saboteur = (int)num_saboteur.Value;
-            this.settings.archeolog = (int)num_archeolog.Value;
+            this.settings.Miner = (int)num_miner.Value;
+            this.settings.Saboteur = (int)num_saboteur.Value;
+            this.settings.Archeolog = (int)num_archeolog.Value;
             this.Close();
         }
 
@@ -65,6 +66,37 @@ namespace SaboteurX
         private void num_height_ValueChanged(object sender, EventArgs e)
         {
             num_start_y.Maximum = num_height.Value;
+        }
+
+        private void timer_animation_Tick(object sender, EventArgs e)
+        {
+            if (selectedLabel != null)
+            {
+                if (selectedLabel.Tag.ToString().Split(';')[1] == "NO")
+                {
+                    selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+                    selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
+                }
+                else
+                {
+                    selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+                    selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
+                }
+            }
+        }
+
+        private void lbl_save_MouseEnter(object sender, EventArgs e)
+        {
+            selectedLabel = (Label)sender;
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
+            selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
+        }
+
+        private void lbl_save_MouseLeave(object sender, EventArgs e)
+        {
+            selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
+            selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();
+            selectedLabel = null;
         }
     }
 }

@@ -147,9 +147,9 @@
             this.lbl_name_here.BackColor = System.Drawing.Color.Transparent;
             this.lbl_name_here.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_name_here.ForeColor = System.Drawing.Color.Chartreuse;
-            this.lbl_name_here.Location = new System.Drawing.Point(69, 363);
+            this.lbl_name_here.Location = new System.Drawing.Point(52, 363);
             this.lbl_name_here.Name = "lbl_name_here";
-            this.lbl_name_here.Size = new System.Drawing.Size(370, 117);
+            this.lbl_name_here.Size = new System.Drawing.Size(407, 117);
             this.lbl_name_here.TabIndex = 11;
             this.lbl_name_here.Tag = "Name;NO";
             this.lbl_name_here.Text = resources.GetString("lbl_name_here.Text");
@@ -164,6 +164,7 @@
             this.pbox_avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_avatar.TabIndex = 9;
             this.pbox_avatar.TabStop = false;
+            this.pbox_avatar.Click += new System.EventHandler(this.pbox_avatar_Click);
             this.pbox_avatar.DoubleClick += new System.EventHandler(this.pbox_avatar_DoubleClick);
             this.pbox_avatar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseDown);
             this.pbox_avatar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseMove);
@@ -214,6 +215,7 @@
             // 
             // txt_name
             // 
+            this.txt_name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.txt_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.txt_name.Location = new System.Drawing.Point(71, 363);
             this.txt_name.Name = "txt_name";

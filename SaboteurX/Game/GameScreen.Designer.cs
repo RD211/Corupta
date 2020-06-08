@@ -124,7 +124,7 @@
             this.lbl_maximize.Tag = "off";
             this.lbl_maximize.Text = "□";
             this.lbl_maximize.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lbl_maximize.Click += new System.EventHandler(this.lbl_maximize_Click);
+            this.lbl_maximize.Click += new System.EventHandler(this.Lbl_maximize_Click);
             // 
             // lbl_minimize
             // 
@@ -138,7 +138,7 @@
             this.lbl_minimize.Tag = "off";
             this.lbl_minimize.Text = "____";
             this.lbl_minimize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lbl_minimize.Click += new System.EventHandler(this.lbl_minimize_Click);
+            this.lbl_minimize.Click += new System.EventHandler(this.Lbl_minimize_Click);
             // 
             // lbl_close
             // 
@@ -152,7 +152,7 @@
             this.lbl_close.Tag = "off";
             this.lbl_close.Text = "\\/\r\n/\\";
             this.lbl_close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_close.Click += new System.EventHandler(this.lbl_close_Click);
+            this.lbl_close.Click += new System.EventHandler(this.Lbl_close_Click);
             // 
             // bunifuCards1
             // 
@@ -229,7 +229,7 @@
             this.lbl_endRound.Tag = "End round;NO";
             this.lbl_endRound.Text = "End round";
             this.lbl_endRound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_endRound.Click += new System.EventHandler(this.lbl_endRound_Click);
+            this.lbl_endRound.Click += new System.EventHandler(this.Lbl_endRound_Click);
             this.lbl_endRound.MouseEnter += new System.EventHandler(this.lbl_endRound_MouseEnter);
             this.lbl_endRound.MouseLeave += new System.EventHandler(this.lbl_endRound_MouseLeave);
             // 
@@ -444,7 +444,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_chat_screen.BackColor = System.Drawing.SystemColors.WindowText;
             this.txt_chat_screen.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_chat_screen.Font = new System.Drawing.Font("Consolas", 10.25F);
+            this.txt_chat_screen.Font = new System.Drawing.Font("Consolas", 12.25F);
             this.txt_chat_screen.ForeColor = System.Drawing.Color.Lime;
             this.txt_chat_screen.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txt_chat_screen.Location = new System.Drawing.Point(690, 90);
@@ -453,6 +453,7 @@
             this.txt_chat_screen.Size = new System.Drawing.Size(293, 584);
             this.txt_chat_screen.TabIndex = 7;
             this.txt_chat_screen.Text = "asdasd";
+            this.txt_chat_screen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_message_KeyDown);
             // 
             // lbl_send_message
             // 

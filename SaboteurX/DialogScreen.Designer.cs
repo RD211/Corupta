@@ -67,7 +67,7 @@
             this.lbl_left.Tag = "Yes;NO";
             this.lbl_left.Text = resources.GetString("lbl_left.Text");
             this.lbl_left.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_left.Click += new System.EventHandler(this.lbl_left_Click);
+            this.lbl_left.Click += new System.EventHandler(this.Lbl_left_Click);
             this.lbl_left.MouseEnter += new System.EventHandler(this.lbl_left_MouseEnter);
             // 
             // lbl_right

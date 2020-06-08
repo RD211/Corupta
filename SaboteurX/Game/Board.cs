@@ -19,6 +19,7 @@ namespace SaboteurX.Game
         int[] addX = new int[]{ 0, 1, 0, -1 };
         int[] addY = new int[]{ -1, 0, 1, 0 };
         public Card selectedCard = null;
+        private Card lastCardAdded = null;
         #endregion
 
         public Bitmap image { get
@@ -45,7 +46,15 @@ namespace SaboteurX.Game
                         }
                         else
                         {
+                            if(lastCardAdded==board[i,j])
+                            {
+                                board[i, j].isNew = true;
+                            }
                             g.DrawImage(board[i, j].image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                            if (lastCardAdded == board[i, j])
+                            {
+                                board[i, j].isNew = false;
+                            }
                         }
                     }
                 }
@@ -70,27 +79,29 @@ namespace SaboteurX.Game
         public void ChangeAt(Card cell, int x, int y)
         {
             board[y, x] = cell;
+            lastCardAdded = cell;
         }
         public void SetEndPoint(int index)
         {
             this.board[ends[index].Y, ends[index].X].special = CardHelpers.Special.Portal;
         }
-        public Board()
+        public void ResetBoard()
         {
-            for(int i = 0;i<Height;i++)
+            for (int i = 0; i < Height; i++)
             {
-                for(int j = 0;j<Width;j++)
+                for (int j = 0; j < Width; j++)
                 {
                     board[i, j] = new Card();
                 }
             }
-            board[startY, startX] = new Card(new List<Tuple<CardHelpers.Gate, CardHelpers.Gate>>() { 
+            board[startY, startX] = new Card(new List<Tuple<CardHelpers.Gate, CardHelpers.Gate>>() {
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Down,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Left,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Right,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Up,CardHelpers.Gate.Middle),
             }, CardHelpers.Special.None);
-            ends.ForEach((end) => {
+            ends.ForEach((end) =>
+            {
                 board[end.Y, end.X] = new Card(new List<Tuple<CardHelpers.Gate, CardHelpers.Gate>>() {
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Down,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Left,CardHelpers.Gate.Middle),
@@ -101,7 +112,10 @@ namespace SaboteurX.Game
                     isHidden = true
                 };
             });
-            
+        }
+        public Board()
+        {
+            ResetBoard();
         }
         bool[,,] visited = new bool[5,Height, Width];
         public bool CheckIfDone()

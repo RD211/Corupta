@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaboteurX.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,16 +13,17 @@ namespace SaboteurX
 {
     public partial class DialogScreen : Form
     {
-        string leftAnswer, rightAnswer, question;
         Label selectedLabel;
-        private void lbl_left_Click(object sender, EventArgs e)
+        private void Lbl_left_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.DialogResult = DialogResult.Yes;
             this.Close();
         }
 
         private void lbl_right_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.DialogResult = DialogResult.No;
             this.Close();
         }
@@ -59,9 +61,6 @@ namespace SaboteurX
         {
             InitializeComponent();
             selectedLabel = lbl_left;
-            this.leftAnswer = leftAnswer;
-            this.rightAnswer = rightAnswer;
-            this.question = question;
             this.lbl_left.Tag = $"{leftAnswer};{this.lbl_left.Tag.ToString().Split(';')[1]}";
             this.lbl_right.Tag = $"{rightAnswer};{this.lbl_right.Tag.ToString().Split(';')[1]}";
             this.lbl_question.Tag = $"{question};{this.lbl_question.Tag.ToString().Split(';')[1]}";

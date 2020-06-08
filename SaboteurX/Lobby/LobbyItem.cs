@@ -20,6 +20,7 @@ namespace SaboteurX
         KeyValuePair<string, LobbyModel> lobbyData = new KeyValuePair<string, LobbyModel>();
         Label selectedLabel;
         GameSelectorScreen fatherForm;
+        bool loading = false;
         public LobbyItem(KeyValuePair<string, LobbyModel> lobby, GameSelectorScreen father)
         {
             InitializeComponent();
@@ -104,12 +105,15 @@ namespace SaboteurX
 
         private void lbl_join_ClickAsync(object sender, EventArgs e)
         {
-            lbl_join.Enabled = false;
-            JoinLobby();
-            lbl_join.Enabled = true;
+            if (!loading)
+            {
+                MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
+                JoinLobby();
+            }
         }
         private async void JoinLobby()
         {
+            loading = true;
             IFirebaseConfig config = new FirebaseConfig
             {
                 BasePath = "https://corupta-ddd6d.firebaseio.com/"
@@ -119,9 +123,12 @@ namespace SaboteurX
             await client.UpdateAsync($"lobbies/{lobbyData.Key}", lobbyData.Value);
             var waitingRoom = new LobbyWaitingRoom(lobbyData, fatherForm.information);
             this.fatherForm.Hide();
-            waitingRoom.ShowDialog();
-            this.fatherForm.DialogResult = DialogResult.OK;
-            this.fatherForm.Close();
+            if (waitingRoom.ShowDialog() == DialogResult.OK)
+            {
+                this.fatherForm.DialogResult = DialogResult.OK;
+                this.fatherForm.Close();
+            }
+            loading = false;
         }
 
 

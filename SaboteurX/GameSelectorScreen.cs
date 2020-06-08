@@ -3,6 +3,7 @@ using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using QuickType;
+using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,24 +120,28 @@ namespace SaboteurX
 
         private void Lbl_close_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void Lbl_maximize_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.WindowState = FormWindowState.Maximized;
             LoadLobby();
         }
 
         private void Lbl_minimize_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.WindowState = FormWindowState.Minimized;
         }
 
         private void Lbl_right_Click(object sender, EventArgs e)
         {
-            if(lobbies.Count>lobbyNumber+1)
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
+            if (lobbies.Count>lobbyNumber+1)
             {
                 lobbyNumber++;
             }
@@ -145,6 +150,7 @@ namespace SaboteurX
 
         private void Lbl_left_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             if (0 <= lobbyNumber - 1)
             {
                 lobbyNumber--;
@@ -185,32 +191,39 @@ namespace SaboteurX
         }
         async void MakeNewLobby()
         {
-            IFirebaseConfig config = new FirebaseConfig
+            try
             {
-                BasePath = "https://corupta-ddd6d.firebaseio.com/"
-            };
-            IFirebaseClient client = new FirebaseClient(config);
-            var model = FromInfoToLobby(information);
-            PushResponse response = await client.PushAsync("lobbies", model);
-            this.Hide();
-            FirebaseResponse response2 = await client.GetAsync("lobbies");
-            var temporaryList = response2.ResultAs<Dictionary<string, LobbyModel>>().ToList();
-            lobbies = new List<KeyValuePair<string, LobbyModel>>();
-            temporaryList.ForEach((kvp) => lobbies.Add(kvp));
-            var lobby = FindIfInGame();
-            var waitingRoom = new LobbyWaitingRoom(lobby,information);
-            if(waitingRoom.ShowDialog()== DialogResult.OK)
-            {
-                DialogResult = DialogResult.OK;
+                IFirebaseConfig config = new FirebaseConfig
+                {
+                    BasePath = "https://corupta-ddd6d.firebaseio.com/"
+                };
+                IFirebaseClient client = new FirebaseClient(config);
+                var model = FromInfoToLobby(information);
+                PushResponse response = await client.PushAsync("lobbies", model);
+                FirebaseResponse response2 = await client.GetAsync("lobbies");
+                var temporaryList = response2.ResultAs<Dictionary<string, LobbyModel>>().ToList();
+                lobbies = new List<KeyValuePair<string, LobbyModel>>();
+                temporaryList.ForEach((kvp) => lobbies.Add(kvp));
+                var lobby = FindIfInGame();
+                var waitingRoom = new LobbyWaitingRoom(lobby, information);
+                this.Hide();
+                if (waitingRoom.ShowDialog() == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
+                }
+                this.Close();
             }
-            this.Close();
+            catch
+            {
+                lbl_create_lobby.Enabled = true;
+            }
 
         }
         private void Lbl_create_lobby_Click(object sender, EventArgs e)
         {
+            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             lbl_create_lobby.Enabled = false;
             MakeNewLobby();
-            lbl_create_lobby.Enabled = true;
         }
 
         private void Timer_animation_Tick(object sender, EventArgs e)

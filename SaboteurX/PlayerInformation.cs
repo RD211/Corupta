@@ -12,6 +12,7 @@ namespace SaboteurX
         public static int Dimension = 20;
         public string name;
         public bool[,] picture = new bool[Dimension, Dimension];
+        private Bitmap bmp;
         public PlayerInformation(string name, bool[,] picture)
         {
             this.name = name;
@@ -31,7 +32,7 @@ namespace SaboteurX
         }
         public Bitmap GetPictureBitmap(int width, int height)
         {
-            Bitmap bmp = new Bitmap(width, height);
+            bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
             g.FillRectangle(new SolidBrush(Color.DarkGreen), 0, 0, width, height);
             SolidBrush blackBrush = new SolidBrush(Color.Black);
@@ -45,6 +46,7 @@ namespace SaboteurX
                     }
                 }
             }
+            GC.Collect();
             return bmp;
         }
         public string ToCompressedString()

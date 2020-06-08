@@ -42,8 +42,10 @@
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.card_mainScreen.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
+            this.card_moveForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // card_mainScreen
@@ -135,7 +137,7 @@
             this.lbl_title_main_screen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_title_main_screen.BackColor = System.Drawing.Color.Transparent;
             this.lbl_title_main_screen.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_title_main_screen.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_title_main_screen.ForeColor = System.Drawing.Color.LawnGreen;
             this.lbl_title_main_screen.Location = new System.Drawing.Point(3, 65);
             this.lbl_title_main_screen.Name = "lbl_title_main_screen";
             this.lbl_title_main_screen.Size = new System.Drawing.Size(879, 160);
@@ -216,6 +218,7 @@
             this.card_moveForm.BorderRadius = 5;
             this.card_moveForm.BottomSahddow = true;
             this.card_moveForm.color = System.Drawing.Color.DarkGreen;
+            this.card_moveForm.Controls.Add(this.musicControlButtons1);
             this.card_moveForm.LeftSahddow = false;
             this.card_moveForm.Location = new System.Drawing.Point(0, 0);
             this.card_moveForm.Name = "card_moveForm";
@@ -230,6 +233,14 @@
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
+            // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 1;
             // 
             // StartScreen
             // 
@@ -249,6 +260,7 @@
             this.Load += new System.EventHandler(this.StartScreen_Load);
             this.card_mainScreen.ResumeLayout(false);
             this.bunifuCards2.ResumeLayout(false);
+            this.card_moveForm.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,6 +278,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_play;
         private System.Windows.Forms.Label label1;
+        private MusicControlButtons musicControlButtons1;
     }
 }
 
