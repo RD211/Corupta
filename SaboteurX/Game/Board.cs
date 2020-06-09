@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SaboteurX.Game
 {
@@ -15,16 +11,16 @@ namespace SaboteurX.Game
         public static int WidthCell = 20, HeightCell = 20;
         public static int startX = 5, startY = Height/2;
         public static List<Point> ends;
-        Card[,] board = new Card[Height, Width];
-        int[] addX = new int[]{ 0, 1, 0, -1 };
-        int[] addY = new int[]{ -1, 0, 1, 0 };
-        public Card selectedCard = null;
+        readonly Card[,] board = new Card[Height, Width];
+        readonly int[] addX = new int[]{ 0, 1, 0, -1 };
+        readonly int[] addY = new int[]{ -1, 0, 1, 0 };
+        public Card SelectedCard { get; set; } = null;
         private Card lastCardAdded = null;
         #endregion
 
-        public Bitmap image { get
+        public Bitmap Image { get
             {
-                if(selectedCard!=null)
+                if (SelectedCard != null)
                     CheckIfDone();
 
                 int realWidth = Width * WidthCell, realHeight = Height * HeightCell;
@@ -37,7 +33,7 @@ namespace SaboteurX.Game
                 {
                     for(int j  = 0;j<Width;j++)
                     {
-                        if (selectedCard != null && IsCompatible(selectedCard, j, i, false))
+                        if (SelectedCard != null && IsCompatible(SelectedCard, j, i, false))
                         {
                             Bitmap bmp = new Bitmap(WidthCell, HeightCell);
                             Graphics g2 = Graphics.FromImage(bmp);
@@ -48,34 +44,32 @@ namespace SaboteurX.Game
                         {
                             if(lastCardAdded==board[i,j])
                             {
-                                board[i, j].isNew = true;
+                                board[i, j].SetToNew();
                             }
-                            g.DrawImage(board[i, j].image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                            g.DrawImage(board[i, j].Image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
                             if (lastCardAdded == board[i, j])
                             {
-                                board[i, j].isNew = false;
+                                board[i, j].SetToOld();
                             }
                         }
                     }
                 }
+
                 return tmp;
 
             } }
-        public int diamonds { get{
+        public int Diamonds { get{
                 CheckIfDone();
                 int dia = 0;
                 for(int i = 0;i<Height;i++)
-                {
                     for (int j = 0; j < Width; j++)
-                    {
-                        if (board[i, j].special == CardHelpers.Special.Diamond && visited[(int)CardHelpers.Gate.Middle, i, j])
-                        {
+                        if (board[i, j].special == CardHelpers.Special.Diamond 
+                            && visited[(int)CardHelpers.Gate.Middle, i, j])
                             dia++;
-                        }
-                    }
-                }
                 return dia;
             } }
+
+
         public void ChangeAt(Card cell, int x, int y)
         {
             board[y, x] = cell;
@@ -163,7 +157,7 @@ namespace SaboteurX.Game
         {
             if (board[y, x].isEmpty == false)
                 return false;
-            bool isObj = isObjective(x,y);
+            bool isObj = IsObjective(x,y);
             if (isObj)
                 return false;
             if(checkDone)
@@ -183,7 +177,7 @@ namespace SaboteurX.Game
             }
             return hasOneConnection;
         }
-        public bool isObjective(int x, int y)
+        public bool IsObjective(int x, int y)
         {
             bool isObj = false;
             if (x == startX && y == startY)

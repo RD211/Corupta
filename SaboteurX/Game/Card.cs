@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
-using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using static SaboteurX.Game.CardHelpers;
 
 namespace SaboteurX.Game 
@@ -26,9 +24,20 @@ namespace SaboteurX.Game
         public bool isHidden = false;
 
         [JsonProperty("newest")]
-        public bool isNew = false;
+        private bool isNew = false;
+        private Bitmap cachedImage;
+        private bool isCacheValid = false;
         #endregion
-
+        public void SetToNew()
+        {
+            isNew = true;
+            isCacheValid = false;
+        }
+        public void SetToOld()
+        {
+            isNew = false;
+            isCacheValid = false;
+        }
         PointF FromGateToPointF(Gate gate)
         {
             var result = new PointF(0, 0);
@@ -52,7 +61,9 @@ namespace SaboteurX.Game
             }
             return result;
         }
-        public Bitmap image { get {
+        public Bitmap Image { get {
+                if (isCacheValid)
+                    return cachedImage;
                 Bitmap tmp = new Bitmap(Width, Height);
                 Graphics g = Graphics.FromImage(tmp);
                 switch (type)
@@ -129,6 +140,8 @@ namespace SaboteurX.Game
                         g.DrawLine(redPen, 0, Width, 0, Height);
                         break;
                 }
+                cachedImage = tmp;
+                isCacheValid = true;
                 return tmp;
 
             } }
@@ -165,8 +178,9 @@ namespace SaboteurX.Game
                 if (right != Gate.Middle)
                     right = (Gate)(((int)right + 1) % 4);
                 connections[i] = new Tuple<Gate, Gate>(left,right);
-
+                
             }
+            isCacheValid = false;
         }
 
         public object Clone()

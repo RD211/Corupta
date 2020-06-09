@@ -247,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="crystal.ico" />
+    <None Include="Resources\Menu_Navigate_03.wav" />
     <None Include="Resources\build %28online-audio-converter.com%29%281%29.wav" />
     <None Include="Resources\Craft_00.wav" />
     <None Include="Resources\97125__gunnbladez__live-wonk-synth-02.wav" />

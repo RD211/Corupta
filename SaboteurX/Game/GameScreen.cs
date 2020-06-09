@@ -39,13 +39,13 @@ namespace SaboteurX
 
         #region Variables
         LobbyModel game;
-        string id;
-        PlayerInformation me;
+        readonly string id;
+        readonly PlayerInformation me;
         Image gameImage;
-        Board board;
-        int myId;
+        readonly Board board;
+        readonly int myId;
         int selectedCard = -1;
-        int[] rotations = new int[5] { 0, 0, 0, 0, 0 };
+        readonly int[] rotations = new int[5] { 0, 0, 0, 0, 0 };
         bool updating = false;
         bool loading = false;
         #endregion
@@ -80,7 +80,7 @@ namespace SaboteurX
             this.TransparencyKey = Color.LimeGreen;
             this.BackColor = Color.LimeGreen;
             LoadLobby();
-            gameImage = board.image;
+            gameImage = board.Image;
 
         }
         #endregion
@@ -99,7 +99,7 @@ namespace SaboteurX
             ProcessRoles();
             ProcessInformation();
             board.SetEndPoint(game.indexOfTarget);
-            gameImage = board.image;
+            gameImage = board.Image;
             pbox_game.Invalidate();
 
             bool finished = false;
@@ -119,7 +119,6 @@ namespace SaboteurX
                         {
                             dialogMiner = new DialogScreen("Yay", "Yay", "You like won");
                         }
-                        //this.Hide();
                         if (dialogMiner.ShowDialog()!=DialogResult.Cancel)
                         {
                             this.DialogResult = DialogResult.OK;
@@ -136,7 +135,6 @@ namespace SaboteurX
                         {
                             dialogSaboteur = new DialogScreen("Yay", "Yay", "You like won");
                         }
-                        //this.Hide();
                         if (dialogSaboteur.ShowDialog() != DialogResult.Cancel)
                         {
                             this.DialogResult = DialogResult.OK;
@@ -145,7 +143,7 @@ namespace SaboteurX
                         break;
                     case 2:
                         DialogScreen dialogArheolog;
-                        if (board.diamonds >= game.diamondsNeeded)
+                        if (board.Diamonds >= game.diamondsNeeded)
                         {
                             dialogArheolog = new DialogScreen("Yay", "Yay", $"You like Won");
                         }
@@ -153,7 +151,6 @@ namespace SaboteurX
                         {
                             dialogArheolog = new DialogScreen("fuck", "fuck", "You like lost");
                         }
-                        //this.Hide();
                         if (dialogArheolog.ShowDialog() != DialogResult.Cancel)
                         {
                             this.DialogResult = DialogResult.OK;
@@ -177,7 +174,6 @@ namespace SaboteurX
 
         private void ProcessInformation()
         {
-
             lbl_player.Text = (game.Players[game.currentPlayer].Split(';')[0] + "'s turn");
             if(game.currentPlayer == myId)
             {
@@ -227,19 +223,7 @@ namespace SaboteurX
 
             for (int i = 0; i < 5; i++)
             {
-                Bitmap temp = game.cards[myId][i].image;
-                switch (rotations[i])
-                {
-                    case 1:
-                        temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                        break;
-                    case 2:
-                        temp.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                        break;
-                    case 3:
-                        temp.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                        break;
-                }
+                Bitmap temp = game.cards[myId][i].Image;
                 pictureCards[i].Image = temp;
             }
             if(game.currentPlayer==myId)
@@ -314,9 +298,28 @@ namespace SaboteurX
                 {
                     MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.yourTurnMusicPlayer);
                 }
+                if(game.Moves.Count!=ngame.Moves.Count)
+                {
+                    var move = ngame.Moves.Last().card;
+                    switch(move.type)
+                    {
+                        case CardHelpers.CardType.Path:
+                            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.buildMusicPlayer);
+
+                            break;
+                        case CardHelpers.CardType.PathX:
+                            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.destroyRoadMusicPlayer);
+
+                            break;
+                        case CardHelpers.CardType.Power:
+                            MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.powerupMusicPlayer);
+
+                            break;
+                    }
+                }
                 game = ngame;
                 LoadLobby();
-                gameImage = board.image;
+                gameImage = board.Image;
                 pbox_game.Update();
             }
         }
@@ -434,7 +437,7 @@ namespace SaboteurX
                     {
                         MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.buildMusicPlayer);
                         board.ChangeAt(this.game.cards[myId][selectedCard], x, y);
-                        gameImage = board.image;
+                        gameImage = board.Image;
                         pbox_game.Invalidate();
                         game.Moves.Add(new MoveModel(this.game.cards[myId][selectedCard], $"1;{x};{y}"));
                         game.Messages.Add($"{me.name} Added path at x:{x}, y:{y}.");
@@ -444,11 +447,11 @@ namespace SaboteurX
                 }
                 else if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.PathX)
                 {
-                    if (board.isObjective(x, y) == false)
+                    if (board.IsObjective(x, y) == false)
                     {
                         MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.destroyRoadMusicPlayer);
                         board.ChangeAt(new Card(), x, y);
-                        gameImage = board.image;
+                        gameImage = board.Image;
                         pbox_game.Invalidate();
                         game.Moves.Add(new MoveModel(new Card(), $"1;{x};{y}"));
                         game.Messages.Add($"{me.name} Removed path at x:{x}, y:{y}.");
@@ -457,6 +460,10 @@ namespace SaboteurX
                     }
                 }
 
+            }
+            else if(selectedCard!=-1)
+            {
+                MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationNoMusicPlayer);
             }
             this.pbox_game.Enabled = true;
         }
@@ -491,19 +498,8 @@ namespace SaboteurX
             if (((MouseEventArgs)e).Button == MouseButtons.Right)
             {
                 rotations[selectedCard]= (rotations[selectedCard]+1)% 4;
-                Bitmap temp = game.cards[myId][selectedCard].image;
-                switch (rotations[selectedCard])
-                {
-                    case 1:
-                        temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                        break;
-                    case 2:
-                        temp.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                        break;
-                    case 3:
-                        temp.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                        break;
-                }
+                Bitmap temp = game.cards[myId][selectedCard].Image;
+                temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 pbox.Image = temp;
                 pbox.Invalidate();
                 pbox.Update();
@@ -511,14 +507,17 @@ namespace SaboteurX
             Card card = (Card)game.cards[myId][selectedCard].Clone();
             for (int i = 0; i < rotations[selectedCard]; i++) card.Rotate();
 
-            board.selectedCard = card;
-            gameImage = board.image;
+            board.SelectedCard = card;
+            gameImage = board.Image;
             pbox_game.Invalidate();
         }
 
-        private void pbox_avatar_Click(object sender, EventArgs e)
+        private void Pbox_avatar_Click(object sender, EventArgs e)
         {
-            if(game.currentPlayer == myId && game.discardsLeft==3&& selectedCard != -1 && this.game.cards[myId][selectedCard].type == CardHelpers.CardType.Power)
+            if(game.currentPlayer == myId 
+                && game.discardsLeft==3
+                && selectedCard != -1 
+                && game.cards[myId][selectedCard].type == CardHelpers.CardType.Power)
             {
                 MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.powerupMusicPlayer);
                 int idPlayer = int.Parse(((PictureBox)sender).Tag.ToString());
@@ -539,11 +538,15 @@ namespace SaboteurX
                 ProcessAvatars();
                 UpdateLobby();
             }
+            else if(selectedCard!=-1)
+            {
+                MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationNoMusicPlayer);
+            }
         }
         private void UpdateCardsAfterUse(bool changeRound = true)
         {
-            board.selectedCard = null;
-            gameImage = board.image;
+            board.SelectedCard = null;
+            gameImage = board.Image;
             if (changeRound)
             {
                 game.discardsLeft = 3;
@@ -590,7 +593,7 @@ namespace SaboteurX
             coordinateLabel.BringToFront();
         }
 
-        private void pbox_game_MouseLeave(object sender, EventArgs e)
+        private void Pbox_game_MouseLeave(object sender, EventArgs e)
         {
             this.bunifuCards1.Controls.Remove(coordinateLabel);
             coordinateLabel = null;
@@ -600,10 +603,10 @@ namespace SaboteurX
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
-            if (game.currentPlayer == myId 
-                && e.KeyData == Keys.Delete 
-                && selectedCard != -1 
-                && !loading 
+            if (game.currentPlayer == myId
+                && e.KeyData == Keys.Delete
+                && selectedCard != -1
+                && !loading
                 && !updating)
             {
                 game.discardsLeft--;
@@ -619,6 +622,10 @@ namespace SaboteurX
                 ProcessInformation();
                 UpdateLobby();
             }
+            else if(selectedCard!=-1)
+            {
+                MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationNoMusicPlayer);
+            }
         }
 
         private void Lbl_endRound_Click(object sender, EventArgs e)
@@ -632,7 +639,7 @@ namespace SaboteurX
             }
         }
         Label nameHelperLabel = null;
-        private void avatar_MouseEnter(object sender, EventArgs e)
+        private void Avatar_MouseEnter(object sender, EventArgs e)
         {
             int playerId = int.Parse(((PictureBox)sender).Tag.ToString());
             if (playerId >= game.Players.Count)
@@ -651,7 +658,7 @@ namespace SaboteurX
             nameHelperLabel.BringToFront();
         }
 
-        private void avatar_MouseLeave(object sender, EventArgs e)
+        private void Avatar_MouseLeave(object sender, EventArgs e)
         {
             this.bunifuCards1.Controls.Remove(nameHelperLabel);
             nameHelperLabel = null;
@@ -663,13 +670,13 @@ namespace SaboteurX
             this.lbl_endRound.Text = "-End round-";
         }
 
-        private void lbl_endRound_MouseLeave(object sender, EventArgs e)
+        private void Lbl_endRound_MouseLeave(object sender, EventArgs e)
         {
             this.selectedLabel = null;
             this.lbl_endRound.Text = "End round";
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             if (selectedLabel != null)
             {

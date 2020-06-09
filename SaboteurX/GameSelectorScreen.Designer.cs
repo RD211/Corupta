@@ -43,7 +43,9 @@
             this.lbl_create_lobby = new System.Windows.Forms.Label();
             this.lbl_lobby_title = new System.Windows.Forms.Label();
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.bunifuCards2.SuspendLayout();
+            this.card_moveForm.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,6 +115,7 @@
             this.card_moveForm.BorderRadius = 5;
             this.card_moveForm.BottomSahddow = true;
             this.card_moveForm.color = System.Drawing.Color.DarkGreen;
+            this.card_moveForm.Controls.Add(this.musicControlButtons1);
             this.card_moveForm.LeftSahddow = false;
             this.card_moveForm.Location = new System.Drawing.Point(0, 0);
             this.card_moveForm.Name = "card_moveForm";
@@ -242,6 +245,14 @@
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 1;
+            // 
             // GameSelectorScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +268,7 @@
             this.Text = "Game selection";
             this.Load += new System.EventHandler(this.GameSelectorScreen_Load);
             this.bunifuCards2.ResumeLayout(false);
+            this.card_moveForm.ResumeLayout(false);
             this.bunifuCards1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -277,5 +289,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_right;
         private System.Windows.Forms.Timer timer_animation;
+        private MusicControlButtons musicControlButtons1;
     }
 }

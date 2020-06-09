@@ -109,6 +109,15 @@ namespace SaboteurX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream NavigationNoAudio {
+            get {
+                return ResourceManager.GetStream("NavigationNoAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream PowerUpAudio {
             get {
                 return ResourceManager.GetStream("PowerUpAudio", resourceCulture);

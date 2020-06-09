@@ -42,7 +42,7 @@
             this.lbl_music.TabIndex = 0;
             this.lbl_music.Text = "♫";
             this.lbl_music.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_music.Click += new System.EventHandler(this.lbl_music_Click);
+            this.lbl_music.Click += new System.EventHandler(this.Lbl_music_Click);
             // 
             // lbl_sound
             // 
@@ -55,7 +55,7 @@
             this.lbl_sound.Tag = "🔇;🔊";
             this.lbl_sound.Text = "🔊";
             this.lbl_sound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_sound.Click += new System.EventHandler(this.lbl_sound_Click);
+            this.lbl_sound.Click += new System.EventHandler(this.Lbl_sound_Click);
             // 
             // MusicControlButtons
             // 

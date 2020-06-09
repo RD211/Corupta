@@ -47,9 +47,11 @@
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.card_settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_avatar)).BeginInit();
             this.bunifuCards2.SuspendLayout();
+            this.card_moveForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // card_settings
@@ -294,6 +296,7 @@
             this.card_moveForm.BorderRadius = 5;
             this.card_moveForm.BottomSahddow = true;
             this.card_moveForm.color = System.Drawing.Color.DarkGreen;
+            this.card_moveForm.Controls.Add(this.musicControlButtons1);
             this.card_moveForm.LeftSahddow = false;
             this.card_moveForm.Location = new System.Drawing.Point(0, -2);
             this.card_moveForm.Name = "card_moveForm";
@@ -308,6 +311,14 @@
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 1;
             // 
             // SettingsScreen
             // 
@@ -326,6 +337,7 @@
             this.card_settings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_avatar)).EndInit();
             this.bunifuCards2.ResumeLayout(false);
+            this.card_moveForm.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -354,5 +366,6 @@
         private System.Windows.Forms.Label lbl_avatar_title;
         private System.Windows.Forms.Label lbl_save;
         private System.Windows.Forms.Label label2;
+        private MusicControlButtons musicControlButtons1;
     }
 }

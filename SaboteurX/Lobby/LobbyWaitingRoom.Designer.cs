@@ -59,6 +59,8 @@
             this.pbox_player_0 = new System.Windows.Forms.PictureBox();
             this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
+            this.card_moveForm.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_player_7)).BeginInit();
@@ -77,6 +79,7 @@
             this.card_moveForm.BorderRadius = 5;
             this.card_moveForm.BottomSahddow = true;
             this.card_moveForm.color = System.Drawing.Color.DarkGreen;
+            this.card_moveForm.Controls.Add(this.musicControlButtons1);
             this.card_moveForm.LeftSahddow = false;
             this.card_moveForm.Location = new System.Drawing.Point(0, 0);
             this.card_moveForm.Name = "card_moveForm";
@@ -472,6 +475,14 @@
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
             // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 1;
+            // 
             // LobbyWaitingRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,6 +497,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LobbyWaitingRoom";
             this.Load += new System.EventHandler(this.LobbyWaitingRoom_Load);
+            this.card_moveForm.ResumeLayout(false);
             this.bunifuCards2.ResumeLayout(false);
             this.bunifuCards1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_player_7)).EndInit();
@@ -531,5 +543,6 @@
         private System.Windows.Forms.Timer timer_animation;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_settings;
+        private MusicControlButtons musicControlButtons1;
     }
 }
