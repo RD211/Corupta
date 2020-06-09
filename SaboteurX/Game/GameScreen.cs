@@ -413,7 +413,7 @@ namespace SaboteurX
         #endregion
 
 
-        private void pbox_game_Click(object sender, EventArgs e)
+        private void Pbox_game_Click(object sender, EventArgs e)
         {
             this.pbox_game.Enabled = false;
             float px = ((MouseEventArgs)e).X;
@@ -432,7 +432,7 @@ namespace SaboteurX
                     if (game.effects[me.name] == CardHelpers.PowerUp.Build
                     && board.IsCompatible(this.game.cards[myId][selectedCard], x, y))
                     {
-                        MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
+                        MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.buildMusicPlayer);
                         board.ChangeAt(this.game.cards[myId][selectedCard], x, y);
                         gameImage = board.image;
                         pbox_game.Invalidate();
@@ -461,7 +461,7 @@ namespace SaboteurX
             this.pbox_game.Enabled = true;
         }
 
-        private void cardMouseEnter(object sender, EventArgs e)
+        private void CardMouseEnter(object sender, EventArgs e)
         {
             var pbox = ((PictureBox)sender);
             pbox.Size = new Size(90,90);
@@ -469,14 +469,14 @@ namespace SaboteurX
 
         }
 
-        private void cardMouseLeave(object sender, EventArgs e)
+        private void CardMouseLeave(object sender, EventArgs e)
         {
             var pbox = ((PictureBox)sender);
             pbox.Size = new Size(80, 80);
             pbox.Location = new Point(pbox.Location.X + 5, pbox.Location.Y + 5);
         }
 
-        private void card_Click(object sender, EventArgs e)
+        private void Card_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             var pictureCards = new PictureBox[] { pbox_card_1, pbox_card_2, pbox_card_3, pbox_card_4, pbox_card_5 };
@@ -603,7 +603,8 @@ namespace SaboteurX
             if (game.currentPlayer == myId 
                 && e.KeyData == Keys.Delete 
                 && selectedCard != -1 
-                && !loading && !updating)
+                && !loading 
+                && !updating)
             {
                 game.discardsLeft--;
                 game.Messages.Add($"{me.name} discarded one of their cards.");
@@ -656,7 +657,7 @@ namespace SaboteurX
             nameHelperLabel = null;
         }
         Label selectedLabel = null;
-        private void lbl_endRound_MouseEnter(object sender, EventArgs e)
+        private void Lbl_endRound_MouseEnter(object sender, EventArgs e)
         {
             this.selectedLabel = lbl_endRound;
             this.lbl_endRound.Text = "-End round-";

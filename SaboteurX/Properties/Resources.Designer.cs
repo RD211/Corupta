@@ -61,6 +61,15 @@ namespace SaboteurX.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BuildAudio {
+            get {
+                return ResourceManager.GetStream("BuildAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon crystal {
@@ -73,18 +82,18 @@ namespace SaboteurX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream destroyRoad {
+        internal static System.IO.UnmanagedMemoryStream DestroyRoadAudio {
             get {
-                return ResourceManager.GetStream("destroyRoad", resourceCulture);
+                return ResourceManager.GetStream("DestroyRoadAudio", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream endGame {
+        internal static System.IO.UnmanagedMemoryStream EndGameAudio {
             get {
-                return ResourceManager.GetStream("endGame", resourceCulture);
+                return ResourceManager.GetStream("EndGameAudio", resourceCulture);
             }
         }
         
@@ -100,9 +109,9 @@ namespace SaboteurX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream powerUp {
+        internal static System.IO.UnmanagedMemoryStream PowerUpAudio {
             get {
-                return ResourceManager.GetStream("powerUp", resourceCulture);
+                return ResourceManager.GetStream("PowerUpAudio", resourceCulture);
             }
         }
         

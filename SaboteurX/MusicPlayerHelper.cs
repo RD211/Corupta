@@ -2,8 +2,10 @@
 using SaboteurX.Properties;
 using System;
 using System.IO;
+
 namespace SaboteurX
 {
+    #region Music Helpers
     public static class MusicPlayerHelper
     {
         #region Audio settings
@@ -20,19 +22,45 @@ namespace SaboteurX
         public static WaveOut buildMusicPlayer = new WaveOut();
         #endregion
 
+        #region Wave streams
+        private static WaveStream streamMusic = FromResourceToWaveStream(Resources.ThemeSong);
+        private static WaveStream streamYourTurnAudio = FromResourceToWaveStream(Resources.YourTurnAudio);
+        private static WaveStream streamNavigationAudio = FromResourceToWaveStream(Resources.NavigationAudio);
+        private static WaveStream streamDestroyRoadAudio = FromResourceToWaveStream(Resources.DestroyRoadAudio);
+        private static WaveStream streamPowerUpAudio = FromResourceToWaveStream(Resources.PowerUpAudio);
+        private static WaveStream streamBuildAudio = FromResourceToWaveStream(Resources.BuildAudio);
+        #endregion
+
+        #region Initializers
         public static void InitAllPlayers()
         {
-            themeMusicPlayer.Init(FromResourceToWaveStream(Resources.ThemeSong));
+            InitMusic();
             InitAudioPlayers();
+            ResetAudioTimelines();
         }
         static void InitAudioPlayers()
         {
-            yourTurnMusicPlayer.Init(FromResourceToWaveStream(Resources.YourTurnAudio));
-            navigationMusicPlayer.Init(FromResourceToWaveStream(Resources.NavigationAudio));
-            destroyRoadMusicPlayer.Init(FromResourceToWaveStream(Resources.destroyRoad));
-            powerupMusicPlayer.Init(FromResourceToWaveStream(Resources.powerUp));
-            buildMusicPlayer.Init(FromResourceToWaveStream(Resources.NavigationAudio));
+            yourTurnMusicPlayer.Init(streamYourTurnAudio);
+            navigationMusicPlayer.Init(streamNavigationAudio);
+            destroyRoadMusicPlayer.Init(streamDestroyRoadAudio);
+            powerupMusicPlayer.Init(streamPowerUpAudio);
+            buildMusicPlayer.Init(streamBuildAudio);
         }
+        static void InitMusic()
+        {
+            themeMusicPlayer.Init(streamMusic);
+        }
+        static void ResetAudioTimelines()
+        {
+            streamBuildAudio.CurrentTime = TimeSpan.Zero;
+            streamDestroyRoadAudio.CurrentTime = TimeSpan.Zero;
+            streamMusic.CurrentTime = TimeSpan.Zero;
+            streamNavigationAudio.CurrentTime = TimeSpan.Zero;
+            streamPowerUpAudio.CurrentTime = TimeSpan.Zero;
+            streamYourTurnAudio.CurrentTime = TimeSpan.Zero;
+        }
+        #endregion
+
         #region Theme song
         public static void PlayThemeSong()
         {
@@ -52,8 +80,8 @@ namespace SaboteurX
         }
         private static void Output_PlaybackStopped_ThemeSong(object sender, StoppedEventArgs e)
         {
-            if(isMusicOn)
-                PlayThemeSong();
+            ResetAudioTimelines();
+            try { themeMusicPlayer.Play(); } catch { }
         }
         public static void PauseThemeSong()
         {
@@ -64,15 +92,17 @@ namespace SaboteurX
         }
         #endregion
 
+        #region All audios
         public static void PlayYourAudio(ref WaveOut wave)
         {
             if(isSoundOn)
             {
-                try { InitAudioPlayers(); } catch { }
+                ResetAudioTimelines();
                 wave.Play();
                 GC.Collect();
             }
         }
+        #endregion
 
         #region Helpers
         private static WaveStream FromResourceToWaveStream(UnmanagedMemoryStream resourceAudio)
@@ -134,4 +164,5 @@ namespace SaboteurX
         }
         #endregion
     }
+    #endregion
 }

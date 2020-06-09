@@ -230,7 +230,7 @@
             this.lbl_endRound.Text = "End round";
             this.lbl_endRound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_endRound.Click += new System.EventHandler(this.Lbl_endRound_Click);
-            this.lbl_endRound.MouseEnter += new System.EventHandler(this.lbl_endRound_MouseEnter);
+            this.lbl_endRound.MouseEnter += new System.EventHandler(this.Lbl_endRound_MouseEnter);
             this.lbl_endRound.MouseLeave += new System.EventHandler(this.lbl_endRound_MouseLeave);
             // 
             // lbl_player
@@ -291,7 +291,7 @@
             this.pbox_avatar_6.TabStop = false;
             this.pbox_avatar_6.Tag = "5";
             this.pbox_avatar_6.Click += new System.EventHandler(this.pbox_avatar_Click);
-            this.pbox_avatar_6.MouseEnter += new System.EventHandler(this.cardMouseEnter);
+            this.pbox_avatar_6.MouseEnter += new System.EventHandler(this.CardMouseEnter);
             this.pbox_avatar_6.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
             // 
             // pbox_avatar_5
@@ -364,9 +364,9 @@
             this.pbox_card_5.TabIndex = 13;
             this.pbox_card_5.TabStop = false;
             this.pbox_card_5.Tag = "4";
-            this.pbox_card_5.Click += new System.EventHandler(this.card_Click);
-            this.pbox_card_5.MouseEnter += new System.EventHandler(this.cardMouseEnter);
-            this.pbox_card_5.MouseLeave += new System.EventHandler(this.cardMouseLeave);
+            this.pbox_card_5.Click += new System.EventHandler(this.Card_Click);
+            this.pbox_card_5.MouseEnter += new System.EventHandler(this.CardMouseEnter);
+            this.pbox_card_5.MouseLeave += new System.EventHandler(this.CardMouseLeave);
             // 
             // pbox_card_4
             // 
@@ -378,9 +378,9 @@
             this.pbox_card_4.TabIndex = 12;
             this.pbox_card_4.TabStop = false;
             this.pbox_card_4.Tag = "3";
-            this.pbox_card_4.Click += new System.EventHandler(this.card_Click);
-            this.pbox_card_4.MouseEnter += new System.EventHandler(this.cardMouseEnter);
-            this.pbox_card_4.MouseLeave += new System.EventHandler(this.cardMouseLeave);
+            this.pbox_card_4.Click += new System.EventHandler(this.Card_Click);
+            this.pbox_card_4.MouseEnter += new System.EventHandler(this.CardMouseEnter);
+            this.pbox_card_4.MouseLeave += new System.EventHandler(this.CardMouseLeave);
             // 
             // pbox_card_3
             // 
@@ -392,9 +392,9 @@
             this.pbox_card_3.TabIndex = 11;
             this.pbox_card_3.TabStop = false;
             this.pbox_card_3.Tag = "2";
-            this.pbox_card_3.Click += new System.EventHandler(this.card_Click);
-            this.pbox_card_3.MouseEnter += new System.EventHandler(this.cardMouseEnter);
-            this.pbox_card_3.MouseLeave += new System.EventHandler(this.cardMouseLeave);
+            this.pbox_card_3.Click += new System.EventHandler(this.Card_Click);
+            this.pbox_card_3.MouseEnter += new System.EventHandler(this.CardMouseEnter);
+            this.pbox_card_3.MouseLeave += new System.EventHandler(this.CardMouseLeave);
             // 
             // pbox_card_2
             // 
@@ -406,9 +406,9 @@
             this.pbox_card_2.TabIndex = 10;
             this.pbox_card_2.TabStop = false;
             this.pbox_card_2.Tag = "1";
-            this.pbox_card_2.Click += new System.EventHandler(this.card_Click);
-            this.pbox_card_2.MouseEnter += new System.EventHandler(this.cardMouseEnter);
-            this.pbox_card_2.MouseLeave += new System.EventHandler(this.cardMouseLeave);
+            this.pbox_card_2.Click += new System.EventHandler(this.Card_Click);
+            this.pbox_card_2.MouseEnter += new System.EventHandler(this.CardMouseEnter);
+            this.pbox_card_2.MouseLeave += new System.EventHandler(this.CardMouseLeave);
             // 
             // pbox_card_1
             // 
@@ -420,9 +420,9 @@
             this.pbox_card_1.TabIndex = 9;
             this.pbox_card_1.TabStop = false;
             this.pbox_card_1.Tag = "0";
-            this.pbox_card_1.Click += new System.EventHandler(this.card_Click);
-            this.pbox_card_1.MouseEnter += new System.EventHandler(this.cardMouseEnter);
-            this.pbox_card_1.MouseLeave += new System.EventHandler(this.cardMouseLeave);
+            this.pbox_card_1.Click += new System.EventHandler(this.Card_Click);
+            this.pbox_card_1.MouseEnter += new System.EventHandler(this.CardMouseEnter);
+            this.pbox_card_1.MouseLeave += new System.EventHandler(this.CardMouseLeave);
             // 
             // lbl_chat_title
             // 
@@ -493,9 +493,9 @@
             this.pbox_game.Size = new System.Drawing.Size(681, 537);
             this.pbox_game.TabIndex = 1;
             this.pbox_game.TabStop = false;
-            this.pbox_game.Click += new System.EventHandler(this.pbox_game_Click);
+            this.pbox_game.Click += new System.EventHandler(this.Pbox_game_Click);
             this.pbox_game.Paint += new System.Windows.Forms.PaintEventHandler(this.Pbox_game_Paint);
-            this.pbox_game.DoubleClick += new System.EventHandler(this.pbox_game_Click);
+            this.pbox_game.DoubleClick += new System.EventHandler(this.Pbox_game_Click);
             this.pbox_game.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pbox_game_MouseDown);
             this.pbox_game.MouseLeave += new System.EventHandler(this.pbox_game_MouseLeave);
             this.pbox_game.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pbox_game_MouseMove);
