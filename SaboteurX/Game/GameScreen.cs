@@ -348,6 +348,7 @@ namespace SaboteurX
         private void Timer1_Tick(object sender, EventArgs e)
         {
             UpdateData();
+            txt_message.Focus();
         }
         #endregion
 
@@ -769,5 +770,14 @@ namespace SaboteurX
                 }
             }
         }
+        private void LabelZoomOut(object sender, EventArgs e)
+        {
+            ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size - 1);
+        }
+        private void LabelZoomIn(object sender, EventArgs e)
+        {
+            ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size + 1);
+        }
+
     }
 }

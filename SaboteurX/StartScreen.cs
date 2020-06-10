@@ -58,7 +58,7 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_close_Click(object sender, EventArgs e)
+        private void Lbl_close_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

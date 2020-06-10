@@ -265,5 +265,15 @@ namespace SaboteurX
             dialog.ShowDialog();
             this.Show();
         }
+        private void LabelZoomOut(object sender, EventArgs e)
+        {
+            ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size - 1);
+        }
+        private void LabelZoomIn(object sender, EventArgs e)
+        {
+            ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size + 1);
+        }
     }
+
+
 }

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LobbyWaitingRoom));
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.bunifuCards2 = new Bunifu.Framework.UI.BunifuCards();
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.pbox_player_0 = new System.Windows.Forms.PictureBox();
             this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
-            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.card_moveForm.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
@@ -88,6 +88,14 @@
             this.card_moveForm.Size = new System.Drawing.Size(512, 51);
             this.card_moveForm.TabIndex = 5;
             this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.card_moveForm_MouseDown);
+            // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 1;
             // 
             // bunifuCards2
             // 
@@ -119,6 +127,8 @@
             this.lbl_minimize.Text = "____";
             this.lbl_minimize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lbl_minimize.Click += new System.EventHandler(this.lbl_minimize_Click);
+            this.lbl_minimize.MouseEnter += new System.EventHandler(this.LabelZoomIn);
+            this.lbl_minimize.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
             // lbl_close
             // 
@@ -133,6 +143,8 @@
             this.lbl_close.Text = "\\/\r\n/\\";
             this.lbl_close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_close.Click += new System.EventHandler(this.lbl_close_Click);
+            this.lbl_close.MouseEnter += new System.EventHandler(this.LabelZoomIn);
+            this.lbl_close.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
             // bunifuCards1
             // 
@@ -474,14 +486,6 @@
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
-            // 
-            // musicControlButtons1
-            // 
-            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
-            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
-            this.musicControlButtons1.Name = "musicControlButtons1";
-            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
-            this.musicControlButtons1.TabIndex = 1;
             // 
             // LobbyWaitingRoom
             // 

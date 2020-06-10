@@ -256,5 +256,14 @@ namespace SaboteurX
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
             selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
         }
+        private void LabelZoomOut(object sender, EventArgs e)
+        {
+            ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size - 1);
+        }
+        private void LabelZoomIn(object sender, EventArgs e)
+        {
+            ((Label)sender).Font = new Font(((Label)sender).Font.Name, ((Label)sender).Font.Size + 1);
+        }
     }
+
 }

@@ -208,7 +208,7 @@
             this.lbl_close.Tag = "off";
             this.lbl_close.Text = "\\/\r\n/\\";
             this.lbl_close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_close.Click += new System.EventHandler(this.lbl_close_Click);
+            this.lbl_close.Click += new System.EventHandler(this.Lbl_close_Click);
             this.lbl_close.MouseEnter += new System.EventHandler(this.LabelZoomIn);
             this.lbl_close.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 

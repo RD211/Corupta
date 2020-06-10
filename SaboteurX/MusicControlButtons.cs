@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SaboteurX
@@ -61,5 +62,6 @@ namespace SaboteurX
                 lbl_music.Text = "♫";
             }
         }
+
     }
 }
