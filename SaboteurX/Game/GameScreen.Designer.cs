@@ -209,6 +209,7 @@
             // 
             // diamondsCounter1
             // 
+            this.diamondsCounter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.diamondsCounter1.BackColor = System.Drawing.Color.DarkGreen;
             this.diamondsCounter1.Location = new System.Drawing.Point(572, 122);
             this.diamondsCounter1.Name = "diamondsCounter1";
