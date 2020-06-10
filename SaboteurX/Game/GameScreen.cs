@@ -4,6 +4,7 @@ using FireSharp.Interfaces;
 using Newtonsoft.Json;
 using QuickType;
 using SaboteurX.Game;
+using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -95,6 +96,7 @@ namespace SaboteurX
             ProcessAvatars();
             ProcessCards();
             ProcessRoles();
+            ProcessDiamonds();
             ProcessInformation();
             board.SetEndPoint(game.indexOfTarget);
             gameImage = board.Image;
@@ -274,6 +276,12 @@ namespace SaboteurX
                 }
                 pictureBoxes[i].Image = playerBmp;
             }
+        }
+        private void ProcessDiamonds()
+        {
+            var diamonds = board.Diamonds;
+            diamondsCounter1.SetCurrent(diamonds);
+            diamondsCounter1.SetNeeded(game.diamondsNeeded);
         }
         #endregion
 
@@ -459,13 +467,42 @@ namespace SaboteurX
                         UpdateLobby();
                     }
                     else
+                    {
                         game.cards[myId][selectedCard] = savedCard;
+                        MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationNoMusicPlayer);
+                    }
                 }
                 else if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.PathX
                     && board.IsObjective(x, y) == false)
                 {
 
                     MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.destroyRoadMusicPlayer);
+                    PictureBox pbox = new PictureBox
+                    {
+                        Size = new Size(64, 64)
+                    };
+                    pbox.BackColor = Color.Black;
+                    Bitmap bmp = new Bitmap(Resources.Explosion);
+                    pbox.Image = bmp;
+                    this.bunifuCards1.Controls.Add(pbox);
+                    pbox.BringToFront();
+                    var location = new Point(bunifuCards1.PointToClient(MousePosition).X-32, bunifuCards1.PointToClient(MousePosition).Y - 32);
+                    pbox.Location = location;
+                    pbox.Location.Offset(-32, -32);
+
+                    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer
+                    {
+                        Enabled = true,
+                        Interval = 500
+                    };
+                    timer.Start();
+                    timer.Tick += (_, __) => {
+                        this.bunifuCards1.Controls.Remove(pbox);
+                        pbox.Dispose();
+                        bmp.Dispose();
+                        timer.Enabled = false;
+                        timer.Stop();
+                    };
                     board.ChangeAt(new Card(), x, y);
                     gameImage = board.Image;
                     pbox_game.Invalidate();

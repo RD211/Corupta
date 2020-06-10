@@ -121,6 +121,12 @@
     </Compile>
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\CardHelpers.cs" />
+    <Compile Include="Game\DiamondsCounter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Game\DiamondsCounter.Designer.cs">
+      <DependentUpon>DiamondsCounter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Game\GameInterfacer.cs" />
     <Compile Include="Game\GameScreen.cs">
       <SubType>Form</SubType>
@@ -187,6 +193,9 @@
     <EmbeddedResource Include="DialogScreen.resx">
       <DependentUpon>DialogScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Game\DiamondsCounter.resx">
+      <DependentUpon>DiamondsCounter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Game\GameScreen.resx">
       <DependentUpon>GameScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -247,6 +256,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="crystal.ico" />
+    <None Include="Resources\explosion.png" />
+    <None Include="Resources\chest.png" />
+    <None Include="Resources\317748__jalastram__sfx-explosion-03.wav" />
+    <None Include="Resources\diamond%282%29.png" />
+    <None Include="Resources\bomb.png" />
+    <None Include="Resources\diamond%281%29.png" />
     <None Include="Resources\tools-and-utensils.png" />
     <None Include="Resources\swap.png" />
     <None Include="Resources\204_full_8bit-adventure_0155_preview.wav" />

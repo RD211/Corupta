@@ -31,11 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameScreen));
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.bunifuCards2 = new Bunifu.Framework.UI.BunifuCards();
             this.lbl_maximize = new System.Windows.Forms.Label();
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
+            this.diamondsCounter1 = new SaboteurX.Game.DiamondsCounter();
             this.lbl_cardsLeft = new System.Windows.Forms.Label();
             this.lbl_discardsLeft = new System.Windows.Forms.Label();
             this.lbl_endRound = new System.Windows.Forms.Label();
@@ -61,7 +63,6 @@
             this.pbox_game = new System.Windows.Forms.PictureBox();
             this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
-            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.card_moveForm.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
@@ -96,6 +97,14 @@
             this.card_moveForm.Size = new System.Drawing.Size(512, 63);
             this.card_moveForm.TabIndex = 6;
             this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
+            // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 27;
             // 
             // bunifuCards2
             // 
@@ -166,6 +175,7 @@
             this.bunifuCards1.BorderRadius = 5;
             this.bunifuCards1.BottomSahddow = true;
             this.bunifuCards1.color = System.Drawing.Color.DarkGreen;
+            this.bunifuCards1.Controls.Add(this.diamondsCounter1);
             this.bunifuCards1.Controls.Add(this.lbl_cardsLeft);
             this.bunifuCards1.Controls.Add(this.lbl_discardsLeft);
             this.bunifuCards1.Controls.Add(this.lbl_endRound);
@@ -196,6 +206,14 @@
             this.bunifuCards1.ShadowDepth = 20;
             this.bunifuCards1.Size = new System.Drawing.Size(989, 722);
             this.bunifuCards1.TabIndex = 8;
+            // 
+            // diamondsCounter1
+            // 
+            this.diamondsCounter1.BackColor = System.Drawing.Color.DarkGreen;
+            this.diamondsCounter1.Location = new System.Drawing.Point(572, 122);
+            this.diamondsCounter1.Name = "diamondsCounter1";
+            this.diamondsCounter1.Size = new System.Drawing.Size(112, 42);
+            this.diamondsCounter1.TabIndex = 27;
             // 
             // lbl_cardsLeft
             // 
@@ -516,14 +534,6 @@
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
-            // musicControlButtons1
-            // 
-            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
-            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
-            this.musicControlButtons1.Name = "musicControlButtons1";
-            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
-            this.musicControlButtons1.TabIndex = 27;
-            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -595,5 +605,6 @@
         private System.Windows.Forms.Timer timer_animation;
         private System.Windows.Forms.Label lbl_discardsLeft;
         private MusicControlButtons musicControlButtons1;
+        private Game.DiamondsCounter diamondsCounter1;
     }
 }

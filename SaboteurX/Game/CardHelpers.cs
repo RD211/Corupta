@@ -21,7 +21,7 @@ namespace SaboteurX.Game
         {
             None,
             Diamond,
-            Portal,
+            Chest,
         }
         public enum CardType
         {

@@ -110,10 +110,10 @@ namespace SaboteurX.Game
                             switch (special)
                             {
                                 case Special.Diamond:
-                                    g.FillPolygon(new SolidBrush(Color.Blue),new PointF[] {new PointF(Width/10*3,Height/10*6), new PointF(Width/10*4,Height/2), new PointF(Width/10*6,Height/2), new PointF(Width/10*7,Height/10*6), new PointF(Width/2, Height/10*8), new PointF(Width / 10 * 3, Height / 10 * 6) });
+                                    g.DrawImage(Resources.Diamond, Width/4, Height/4, Width/2, Height/2);
                                     break;
-                                case Special.Portal:
-                                    g.FillEllipse(new SolidBrush(Color.Gold), Width / 2 - 10, Height / 2 - 10, 20, 20);
+                                case Special.Chest:
+                                    g.DrawImage(Resources.Chest, Width / 4, Height / 4, Width / 2, Height / 2);
                                     break;
                             }
                         }
@@ -136,10 +136,7 @@ namespace SaboteurX.Game
                         }
                         break;
                     case CardType.PathX:
-                        //TODO: ADD ICON FOR BREAK ROAD LIKE POWERS
-                        Pen redPen = new Pen(Color.Red, 10);
-                        g.DrawLine(redPen, 0, 0, Width, Height);
-                        g.DrawLine(redPen, 0, Width, 0, Height);
+                        g.DrawImage(Resources.Bomb, 0, 0, Width, Height);
                         break;
 
                 }

@@ -81,7 +81,7 @@ namespace SaboteurX.Game
         }
         public void SetEndPoint(int index)
         {
-            this.board[ends[index].Y, ends[index].X].special = CardHelpers.Special.Portal;
+            this.board[ends[index].Y, ends[index].X].special = CardHelpers.Special.Chest;
         }
         public void ResetBoard()
         {
@@ -125,7 +125,7 @@ namespace SaboteurX.Game
         private bool CheckEnd()
         {
             bool ok = false;
-            ends.ForEach((end)=>ok = ok?ok:board[end.Y,end.X].special==CardHelpers.Special.Portal&&visited[(int)CardHelpers.Gate.Middle,end.Y,end.X]);
+            ends.ForEach((end)=>ok = ok?ok:board[end.Y,end.X].special==CardHelpers.Special.Chest&&visited[(int)CardHelpers.Gate.Middle,end.Y,end.X]);
             return ok;
         }
         private void ResetVisited()
