@@ -413,11 +413,6 @@
             this.num_height.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.num_height.InterceptArrowKeys = false;
             this.num_height.Location = new System.Drawing.Point(349, 151);
-            this.num_height.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             this.num_height.Name = "num_height";
             this.num_height.ReadOnly = true;
             this.num_height.Size = new System.Drawing.Size(120, 29);
@@ -448,11 +443,6 @@
             this.num_width.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.num_width.InterceptArrowKeys = false;
             this.num_width.Location = new System.Drawing.Point(349, 116);
-            this.num_width.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             this.num_width.Name = "num_width";
             this.num_width.ReadOnly = true;
             this.num_width.Size = new System.Drawing.Size(120, 29);
