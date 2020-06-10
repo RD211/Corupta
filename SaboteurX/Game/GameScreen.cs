@@ -1,7 +1,6 @@
 ﻿using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
-using Microsoft.VisualBasic.Devices;
 using Newtonsoft.Json;
 using QuickType;
 using SaboteurX.Game;
@@ -76,12 +75,11 @@ namespace SaboteurX
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            this.lbl_chat_title.Text = "Chat".ToAsciiArt();
-            this.TransparencyKey = Color.LimeGreen;
-            this.BackColor = Color.LimeGreen;
+            lbl_chat_title.Text = "Chat".ToAsciiArt();
+            TransparencyKey = Color.LimeGreen;
+            BackColor = Color.LimeGreen;
             LoadLobby();
             gameImage = board.Image;
-
         }
         #endregion
 
@@ -199,12 +197,19 @@ namespace SaboteurX
                 {
                     this.game.effects[move.destination.Split(';')[1]] = move.card.power;
                 }
+                else if(move.destination.Split(';')[0]=="3")
+                {
+                    if(int.Parse(move.destination.Split(';')[3])==myId)
+                    {
+                        board.SetVisible(int.Parse(move.destination.Split(';')[1]), int.Parse(move.destination.Split(';')[2]));
+                    }
+                }
             }); 
             board.SetEndPoint(game.indexOfTarget);
         }
         private void ProcessRoles()
         {
-            List<string> rolesToStrings = new List<string>() { "Miner", "Saboteur", "Arheologist" };
+            List<string> rolesToStrings = new List<string>() { "Miner", "Saboteur", "Archaeologist" };
             List<Color> rolesToColor = new List<Color>() { Color.Chartreuse, Color.IndianRed, Color.Blue };
             this.lbl_role.ForeColor = rolesToColor[game.roles[myId]];
             this.lbl_role.Text = rolesToStrings[game.roles[myId]];
@@ -224,6 +229,18 @@ namespace SaboteurX
             for (int i = 0; i < 5; i++)
             {
                 Bitmap temp = game.cards[myId][i].Image;
+                switch (rotations[i])
+                {
+                    case 1:
+                        temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                    case 2:
+                        temp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+                    case 3:
+                        temp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+                }
                 pictureCards[i].Image = temp;
             }
             if(game.currentPlayer==myId)
@@ -305,15 +322,12 @@ namespace SaboteurX
                     {
                         case CardHelpers.CardType.Path:
                             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.buildMusicPlayer);
-
                             break;
                         case CardHelpers.CardType.PathX:
                             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.destroyRoadMusicPlayer);
-
                             break;
                         case CardHelpers.CardType.Power:
                             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.powerupMusicPlayer);
-
                             break;
                     }
                 }
@@ -328,7 +342,6 @@ namespace SaboteurX
             UpdateData();
         }
         #endregion
-
 
         private void Lbl_send_message_Click(object sender, EventArgs e)
         {
@@ -427,8 +440,9 @@ namespace SaboteurX
                 && game.discardsLeft==3
                 && selectedCard != -1)
             {
-                if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.Path)
+                if (game.cards[myId][selectedCard].type == CardHelpers.CardType.Path)
                 {
+                    Card savedCard = (Card)game.cards[myId][selectedCard].Clone();
                     for (int i = 0; i < rotations[selectedCard]; i++)
                         game.cards[myId][selectedCard].Rotate();
 
@@ -444,22 +458,38 @@ namespace SaboteurX
                         UpdateCardsAfterUse();
                         UpdateLobby();
                     }
+                    else
+                        game.cards[myId][selectedCard] = savedCard;
                 }
-                else if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.PathX)
+                else if (this.game.cards[myId][selectedCard].type == CardHelpers.CardType.PathX
+                    && board.IsObjective(x, y) == false)
                 {
-                    if (board.IsObjective(x, y) == false)
-                    {
-                        MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.destroyRoadMusicPlayer);
-                        board.ChangeAt(new Card(), x, y);
-                        gameImage = board.Image;
-                        pbox_game.Invalidate();
-                        game.Moves.Add(new MoveModel(new Card(), $"1;{x};{y}"));
-                        game.Messages.Add($"{me.name} Removed path at x:{x}, y:{y}.");
-                        UpdateCardsAfterUse();
-                        UpdateLobby();
-                    }
-                }
 
+                    MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.destroyRoadMusicPlayer);
+                    board.ChangeAt(new Card(), x, y);
+                    gameImage = board.Image;
+                    pbox_game.Invalidate();
+                    game.Moves.Add(new MoveModel(new Card(), $"1;{x};{y}"));
+                    game.Messages.Add($"{me.name} Removed path at x:{x}, y:{y}.");
+                    UpdateCardsAfterUse();
+                    UpdateLobby();
+
+                }
+                else if (game.cards[myId][selectedCard].type == CardHelpers.CardType.Power
+                    && game.cards[myId][selectedCard].power == CardHelpers.PowerUp.Map
+                    && board.IsObjective(x, y)
+                    && (new Point(x, y) != game.startingPoint))
+                {
+
+                    MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.powerupMusicPlayer);
+                    game.Moves.Add(new MoveModel(game.cards[myId][selectedCard], $"3;{x};{y};{myId}"));
+                    board.SetVisible(x, y);
+                    game.Messages.Add($"{me.name} Peeked at x:{x}, y:{y}");
+                    gameImage = board.Image;
+                    pbox_game.Invalidate();
+                    UpdateCardsAfterUse();
+                    UpdateLobby();
+                }
             }
             else if(selectedCard!=-1)
             {
@@ -473,7 +503,6 @@ namespace SaboteurX
             var pbox = ((PictureBox)sender);
             pbox.Size = new Size(90,90);
             pbox.Location = new Point(pbox.Location.X - 5, pbox.Location.Y - 5);
-
         }
 
         private void CardMouseLeave(object sender, EventArgs e)
@@ -499,7 +528,18 @@ namespace SaboteurX
             {
                 rotations[selectedCard]= (rotations[selectedCard]+1)% 4;
                 Bitmap temp = game.cards[myId][selectedCard].Image;
-                temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                switch(rotations[selectedCard])
+                {
+                    case 1:
+                        temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                    case 2:
+                        temp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+                    case 3:
+                        temp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+                }
                 pbox.Image = temp;
                 pbox.Invalidate();
                 pbox.Update();

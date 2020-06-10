@@ -27,17 +27,18 @@ namespace SaboteurX.Game
         {
             Power,
             Path,
-            PathX
+            PathX,
         }
         public enum PowerUp
         {
             Build,
             NoBuild,
             Switch,
+            Map
         }
         #endregion
 
-        static Random rnd = new Random(System.Environment.TickCount);
+        static readonly Random rnd = new Random(System.Environment.TickCount);
         public static Card RandomCardGenerator()
         {
             switch(rnd.Next(0,100))
@@ -65,7 +66,7 @@ namespace SaboteurX.Game
                 case int n when (n > 70 && n<90):
                     Card power = new Card(CardType.Power)
                     {
-                        power = (PowerUp)rnd.Next(0, 3)
+                        power = (PowerUp)rnd.Next(0, 4)
                     };
                     return power;
                 case int n when (n >= 90):

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,18 +26,16 @@ namespace SaboteurX.Game
 
         [JsonProperty("newest")]
         private bool isNew = false;
-        private Bitmap cachedImage;
-        private bool isCacheValid = false;
+        //private Bitmap cachedImage;
+        //private bool isCacheValid = false;
         #endregion
         public void SetToNew()
         {
             isNew = true;
-            isCacheValid = false;
         }
         public void SetToOld()
         {
             isNew = false;
-            isCacheValid = false;
         }
         PointF FromGateToPointF(Gate gate)
         {
@@ -62,8 +61,6 @@ namespace SaboteurX.Game
             return result;
         }
         public Bitmap Image { get {
-                if (isCacheValid)
-                    return cachedImage;
                 Bitmap tmp = new Bitmap(Width, Height);
                 Graphics g = Graphics.FromImage(tmp);
                 switch (type)
@@ -124,24 +121,28 @@ namespace SaboteurX.Game
                     case CardType.Power:
                         switch (power) {
                             case PowerUp.Build:
-                                g.FillRectangle(new SolidBrush(Color.Green), Width / 2 - 20, Height / 2 - 20, 40, 40);
+                                g.DrawImage(Resources.Pick, 0, 0, tmp.Width, tmp.Height);
                                 break;
                             case PowerUp.NoBuild:
-                                g.FillRectangle(new SolidBrush(Color.Red), Width / 2 - 20, Height / 2 - 20, 40, 40);
+                                g.DrawImage(Resources.Pick, 0, 0, tmp.Width, tmp.Height);
+                                g.DrawLine(new Pen(Color.Red, 10), 10, 10, tmp.Width - 10, tmp.Height - 10);
                                 break;
                             case PowerUp.Switch:
-                                g.FillRectangle(new SolidBrush(Color.Orange), Width / 2 - 20, Height / 2 - 20, 40, 40);
+                                g.DrawImage(Resources.Swap, 0, 0, tmp.Width, tmp.Height);
+                                break;
+                            case PowerUp.Map:
+                                g.DrawImage(Resources.Map, 0, 0,tmp.Width,tmp.Height);
                                 break;
                         }
                         break;
                     case CardType.PathX:
+                        //TODO: ADD ICON FOR BREAK ROAD LIKE POWERS
                         Pen redPen = new Pen(Color.Red, 10);
                         g.DrawLine(redPen, 0, 0, Width, Height);
                         g.DrawLine(redPen, 0, Width, 0, Height);
                         break;
+
                 }
-                cachedImage = tmp;
-                isCacheValid = true;
                 return tmp;
 
             } }
@@ -180,7 +181,6 @@ namespace SaboteurX.Game
                 connections[i] = new Tuple<Gate, Gate>(left,right);
                 
             }
-            isCacheValid = false;
         }
 
         public object Clone()

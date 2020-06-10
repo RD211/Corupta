@@ -136,7 +136,7 @@ namespace SaboteurX
                 IFirebaseClient client = new FirebaseClient(config);
                 lobby.Started = true;
                 lobby.discardsLeft = 3;
-
+                lobby.indexOfTarget = (new Random()).Next(0, 3);
                 lobby.height = settingsModel.Height;
                 lobby.width = settingsModel.Width;
 

@@ -75,6 +75,10 @@ namespace SaboteurX.Game
             board[y, x] = cell;
             lastCardAdded = cell;
         }
+        public void SetVisible(int x, int y)
+        {
+            board[y, x].isHidden = false;
+        }
         public void SetEndPoint(int index)
         {
             this.board[ends[index].Y, ends[index].X].special = CardHelpers.Special.Portal;
@@ -145,10 +149,13 @@ namespace SaboteurX.Game
                 {
                     int nx = x + addX[(int)gate];
                     int ny = y + addY[(int)gate];
-                    CardHelpers.Gate correspondingGate = (CardHelpers.Gate)(((int)gate + 2) % 4);
-                    if (CardHelpers.ContainsGate(board[ny,nx],correspondingGate))
+                    if (!(nx >= Width || ny >= Height || nx < 0 || ny < 0))
                     {
-                        Dfs(correspondingGate, nx, ny);
+                        CardHelpers.Gate correspondingGate = (CardHelpers.Gate)(((int)gate + 2) % 4);
+                        if (CardHelpers.ContainsGate(board[ny, nx], correspondingGate))
+                        {
+                            Dfs(correspondingGate, nx, ny);
+                        }
                     }
                 }
             }

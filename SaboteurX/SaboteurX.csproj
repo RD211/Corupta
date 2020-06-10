@@ -247,6 +247,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="crystal.ico" />
+    <None Include="Resources\tools-and-utensils.png" />
+    <None Include="Resources\swap.png" />
+    <None Include="Resources\204_full_8bit-adventure_0155_preview.wav" />
+    <None Include="Resources\treasure-map.png" />
     <None Include="Resources\Menu_Navigate_03.wav" />
     <None Include="Resources\build %28online-audio-converter.com%29%281%29.wav" />
     <None Include="Resources\Craft_00.wav" />
