@@ -115,6 +115,7 @@
             this.Name = "DialogScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Information";
+            this.Load += new System.EventHandler(this.DialogScreen_Load);
             this.bunifuCards1.ResumeLayout(false);
             this.ResumeLayout(false);
 

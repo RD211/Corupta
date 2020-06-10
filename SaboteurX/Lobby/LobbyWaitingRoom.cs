@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WinFormAnimation;
 
 namespace SaboteurX
 {
@@ -98,7 +99,8 @@ namespace SaboteurX
         }
         private void LobbyWaitingRoom_Load(object sender, EventArgs e)
         {
-
+            this.Opacity = 0;
+            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
         }
 
         private void card_moveForm_MouseDown(object sender, MouseEventArgs e)

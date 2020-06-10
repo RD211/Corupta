@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormAnimation;
 
 namespace SaboteurX
 {
@@ -77,6 +78,8 @@ namespace SaboteurX
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0;
+            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
             lbl_chat_title.Text = "Chat".ToAsciiArt();
             TransparencyKey = Color.LimeGreen;
             BackColor = Color.LimeGreen;

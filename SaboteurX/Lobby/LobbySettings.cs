@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormAnimation;
 
 namespace SaboteurX
 {
@@ -27,6 +28,8 @@ namespace SaboteurX
 
         private void LobbySettings_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0;
+            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
             lbl_settings.Text = "Settings".ToAsciiArt();
             lbl_save.Text = "Save".ToAsciiArt();
 

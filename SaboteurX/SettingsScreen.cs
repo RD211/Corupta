@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WinFormAnimation;
 
 namespace SaboteurX
 {
@@ -55,6 +56,8 @@ namespace SaboteurX
         }
         private void SettingsScreen_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0;
+            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
             lbl_settings.Text = lbl_settings.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.lbl_name_here.Text = this.lbl_name_here.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.lbl_settings.Text = this.lbl_settings.Tag.ToString().Split(';')[0].ToAsciiArt();

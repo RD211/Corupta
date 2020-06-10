@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WinFormAnimation;
 
 namespace SaboteurX
 {
@@ -30,6 +31,10 @@ namespace SaboteurX
 
         private void StartScreen_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0;
+            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
+
+
             lbl_play.Text = lbl_play.Tag.ToString().Split(';')[0].ToAsciiArt();
             lbl_settings.Text = lbl_settings.Tag.ToString().Split(';')[0].ToAsciiArt();
         }
@@ -45,6 +50,7 @@ namespace SaboteurX
 
         private void Timer_animation_Tick(object sender, EventArgs e)
         {
+
             var tag = selectedLabel.Tag.ToString().Split(';');
             if (tag[1] == "NO")
             {

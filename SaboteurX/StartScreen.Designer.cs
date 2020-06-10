@@ -41,8 +41,8 @@
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
-            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
+            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.card_mainScreen.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
             this.card_moveForm.SuspendLayout();
@@ -82,7 +82,7 @@
             this.label1.TabIndex = 7;
             this.label1.Tag = "off";
             this.label1.Text = "---------------------------------------------------------------------------------" +
-    "----------------------------------------------------------";
+    "------------------------------------------------------------";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_settings
@@ -113,7 +113,7 @@
             this.label2.TabIndex = 5;
             this.label2.Tag = "off";
             this.label2.Text = "---------------------------------------------------------------------------------" +
-    "----------------------------------------------------------";
+    "------------------------------------------------------------";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_play
@@ -228,12 +228,6 @@
             this.card_moveForm.TabIndex = 3;
             this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
             // 
-            // timer_animation
-            // 
-            this.timer_animation.Enabled = true;
-            this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
-            // 
             // musicControlButtons1
             // 
             this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
@@ -241,6 +235,12 @@
             this.musicControlButtons1.Name = "musicControlButtons1";
             this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
             this.musicControlButtons1.TabIndex = 1;
+            // 
+            // timer_animation
+            // 
+            this.timer_animation.Enabled = true;
+            this.timer_animation.Interval = 500;
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // StartScreen
             // 

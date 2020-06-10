@@ -69,7 +69,7 @@
             this.lbl_join.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_join.Click += new System.EventHandler(this.lbl_join_ClickAsync);
             this.lbl_join.MouseEnter += new System.EventHandler(this.lbl_join_MouseEnter);
-            this.lbl_join.MouseLeave += new System.EventHandler(this.lbl_join_MouseLeave);
+            this.lbl_join.MouseLeave += new System.EventHandler(this.Lbl_join_MouseLeave);
             // 
             // pbox_player_0
             // 
@@ -81,8 +81,8 @@
             this.pbox_player_0.TabIndex = 8;
             this.pbox_player_0.TabStop = false;
             this.pbox_player_0.Tag = "0";
-            this.pbox_player_0.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_0.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_0.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_0.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_7
             // 
@@ -94,8 +94,8 @@
             this.pbox_player_7.TabIndex = 7;
             this.pbox_player_7.TabStop = false;
             this.pbox_player_7.Tag = "7";
-            this.pbox_player_7.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_7.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_7.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_7.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_6
             // 
@@ -107,8 +107,8 @@
             this.pbox_player_6.TabIndex = 6;
             this.pbox_player_6.TabStop = false;
             this.pbox_player_6.Tag = "6";
-            this.pbox_player_6.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_6.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_6.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_6.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_5
             // 
@@ -120,8 +120,8 @@
             this.pbox_player_5.TabIndex = 5;
             this.pbox_player_5.TabStop = false;
             this.pbox_player_5.Tag = "5";
-            this.pbox_player_5.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_5.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_5.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_5.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_4
             // 
@@ -133,8 +133,8 @@
             this.pbox_player_4.TabIndex = 3;
             this.pbox_player_4.TabStop = false;
             this.pbox_player_4.Tag = "4";
-            this.pbox_player_4.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_4.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_4.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_4.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_3
             // 
@@ -146,8 +146,8 @@
             this.pbox_player_3.TabIndex = 2;
             this.pbox_player_3.TabStop = false;
             this.pbox_player_3.Tag = "3";
-            this.pbox_player_3.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_3.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_3.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_3.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_2
             // 
@@ -159,8 +159,8 @@
             this.pbox_player_2.TabIndex = 1;
             this.pbox_player_2.TabStop = false;
             this.pbox_player_2.Tag = "2";
-            this.pbox_player_2.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_2.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_2.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_2.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // pbox_player_1
             // 
@@ -172,14 +172,14 @@
             this.pbox_player_1.TabIndex = 0;
             this.pbox_player_1.TabStop = false;
             this.pbox_player_1.Tag = "1";
-            this.pbox_player_1.MouseEnter += new System.EventHandler(this.avatar_MouseEnter);
-            this.pbox_player_1.MouseLeave += new System.EventHandler(this.avatar_MouseLeave);
+            this.pbox_player_1.MouseEnter += new System.EventHandler(this.Avatar_MouseEnter);
+            this.pbox_player_1.MouseLeave += new System.EventHandler(this.Avatar_MouseLeave);
             // 
             // timer_animation
             // 
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // lbl_horizontal_divider_2
             // 

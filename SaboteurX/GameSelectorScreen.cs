@@ -3,17 +3,14 @@ using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using QuickType;
-using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using WinFormAnimation;
 
 namespace SaboteurX
 {
@@ -91,10 +88,11 @@ namespace SaboteurX
         {
             try
             {
-                this.bunifuCards1.Controls.OfType<LobbyItem>().ToList().ForEach((itemremove) => this.bunifuCards1.Controls.Remove(itemremove));
+                this.bunifuCards1.Controls.OfType<LobbyItem>().ToList().ForEach((x) => { this.bunifuCards1.Controls.Remove(x); }) ;
+
                 LobbyItem item = new LobbyItem(lobbies[lobbyNumber], this);
-                item.Location = new Point(this.Width / 2 - item.Width / 2+10, this.Height / 2 - item.Height / 2-40);
                 this.bunifuCards1.Controls.Add(item);
+                item.Location = new Point(this.Width / 2 - item.Width / 2 + 10, this.Height / 2 - item.Height / 2 - 40);
             }
             catch { }
             CheckLabelsViz();
@@ -113,7 +111,8 @@ namespace SaboteurX
 
         private void GameSelectorScreen_Load(object sender, EventArgs e)
         {
-            
+            this.Opacity = 0;
+            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
         }
 
 
@@ -150,6 +149,7 @@ namespace SaboteurX
 
         private void Lbl_left_Click(object sender, EventArgs e)
         {
+
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             if (0 <= lobbyNumber - 1)
             {

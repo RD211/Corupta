@@ -71,10 +71,10 @@ namespace SaboteurX
         private void lbl_join_MouseEnter(object sender, EventArgs e)
         {
             this.selectedLabel = (Label)sender;
-            timer_animation_Tick(null, null);
+            Timer_animation_Tick(null, null);
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             if (selectedLabel != null)
             {
@@ -92,7 +92,7 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_join_MouseLeave(object sender, EventArgs e)
+        private void Lbl_join_MouseLeave(object sender, EventArgs e)
         {
             if (selectedLabel != null)
             {
@@ -133,7 +133,7 @@ namespace SaboteurX
 
 
         Label nameHelperLabel = null;
-        private void avatar_MouseEnter(object sender, EventArgs e)
+        private void Avatar_MouseEnter(object sender, EventArgs e)
         {
             int playerId = int.Parse(((PictureBox)sender).Tag.ToString());
             if (playerId >= lobbyData.Value.Players.Count)
@@ -152,7 +152,7 @@ namespace SaboteurX
             nameHelperLabel.BringToFront();
         }
 
-        private void avatar_MouseLeave(object sender, EventArgs e)
+        private void Avatar_MouseLeave(object sender, EventArgs e)
         {
             this.Controls.Remove(nameHelperLabel);
             nameHelperLabel = null;
