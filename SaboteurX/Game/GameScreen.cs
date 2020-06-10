@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SaboteurX
@@ -230,7 +231,9 @@ namespace SaboteurX
 
             for (int i = 0; i < 5; i++)
             {
+                game.cards[myId][i].UnvalidateCache();
                 Bitmap temp = game.cards[myId][i].Image;
+
                 switch (rotations[i])
                 {
                     case 1:
@@ -371,7 +374,12 @@ namespace SaboteurX
             };
             IFirebaseClient client = new FirebaseClient(config);
             updating = true;
-            await client.UpdateAsync($"lobbies/{id}", game);
+            retrySending:
+            try
+            {
+                await client.UpdateAsync($"lobbies/{id}", game);
+            }
+            catch { System.Threading.Thread.Sleep(10); goto retrySending; }
             updating = false;
             LoadLobby();
         }
@@ -555,7 +563,7 @@ namespace SaboteurX
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             var pictureCards = new PictureBox[] { pbox_card_1, pbox_card_2, pbox_card_3, pbox_card_4, pbox_card_5 };
             var pbox = ((PictureBox)sender);
-            if (selectedCard!=-1)
+            if (selectedCard != -1)
             {
                 pictureCards[selectedCard].BorderStyle = BorderStyle.None;
             }
@@ -564,9 +572,11 @@ namespace SaboteurX
 
             if (((MouseEventArgs)e).Button == MouseButtons.Right)
             {
-                rotations[selectedCard]= (rotations[selectedCard]+1)% 4;
+                rotations[selectedCard] = (rotations[selectedCard] + 1) % 4;
+                game.cards[myId][selectedCard].UnvalidateCache();
                 Bitmap temp = game.cards[myId][selectedCard].Image;
-                switch(rotations[selectedCard])
+                
+                switch (rotations[selectedCard])
                 {
                     case 1:
                         temp.RotateFlip(RotateFlipType.Rotate90FlipNone);
@@ -584,7 +594,6 @@ namespace SaboteurX
             }
             Card card = (Card)game.cards[myId][selectedCard].Clone();
             for (int i = 0; i < rotations[selectedCard]; i++) card.Rotate();
-
             board.SelectedCard = card;
             gameImage = board.Image;
             pbox_game.Invalidate();

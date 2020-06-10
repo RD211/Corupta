@@ -4,7 +4,6 @@ using FireSharp.Interfaces;
 using Newtonsoft.Json;
 using QuickType;
 using SaboteurX.Game;
-using SaboteurX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,9 +23,9 @@ namespace SaboteurX
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        string id;
+        readonly string id;
         public LobbyModel lobby;
-        PlayerInformation playerInfo;
+        readonly PlayerInformation playerInfo;
         LobbySettingsModel settingsModel = new LobbySettingsModel();
         bool isHost = false;
         bool updateInformation = true;

@@ -10,7 +10,7 @@ namespace SaboteurX.Game
     public class Card : ICloneable
     {
         #region Variables
-        public static int Width = 100, Height = 100;
+        public static int Width = 90, Height = 90;
         [JsonProperty("type")]
         public CardType type;
         [JsonProperty("power")]
@@ -26,16 +26,22 @@ namespace SaboteurX.Game
 
         [JsonProperty("newest")]
         private bool isNew = false;
-        //private Bitmap cachedImage;
-        //private bool isCacheValid = false;
+        private Bitmap cachedImage;
+        private bool isCacheValid = false;
         #endregion
         public void SetToNew()
         {
             isNew = true;
+            isCacheValid = false;
         }
         public void SetToOld()
         {
             isNew = false;
+            isCacheValid = false;
+        }
+        public void UnvalidateCache()
+        {
+            isCacheValid = false;
         }
         PointF FromGateToPointF(Gate gate)
         {
@@ -61,8 +67,10 @@ namespace SaboteurX.Game
             return result;
         }
         public Bitmap Image { get {
-                Bitmap tmp = new Bitmap(Width, Height);
-                Graphics g = Graphics.FromImage(tmp);
+                if (cachedImage == null) cachedImage = new Bitmap(Width, Height);
+                if (isCacheValid) return cachedImage;
+                Graphics g = Graphics.FromImage(cachedImage);
+                g.Clear(Color.Black);
                 switch (type)
                 {
                     case CardType.Path:
@@ -121,17 +129,17 @@ namespace SaboteurX.Game
                     case CardType.Power:
                         switch (power) {
                             case PowerUp.Build:
-                                g.DrawImage(Resources.Pick, 0, 0, tmp.Width, tmp.Height);
+                                g.DrawImage(Resources.Pick, 0, 0, cachedImage.Width, cachedImage.Height);
                                 break;
                             case PowerUp.NoBuild:
-                                g.DrawImage(Resources.Pick, 0, 0, tmp.Width, tmp.Height);
-                                g.DrawLine(new Pen(Color.Red, 10), 10, 10, tmp.Width - 10, tmp.Height - 10);
+                                g.DrawImage(Resources.Pick, 0, 0, cachedImage.Width, cachedImage.Height);
+                                g.DrawLine(new Pen(Color.Red, 10), 10, 10, cachedImage.Width - 10, cachedImage.Height - 10);
                                 break;
                             case PowerUp.Switch:
-                                g.DrawImage(Resources.Swap, 0, 0, tmp.Width, tmp.Height);
+                                g.DrawImage(Resources.Swap, 0, 0, cachedImage.Width, cachedImage.Height);
                                 break;
                             case PowerUp.Map:
-                                g.DrawImage(Resources.Map, 0, 0,tmp.Width,tmp.Height);
+                                g.DrawImage(Resources.Map, 0, 0, cachedImage.Width, cachedImage.Height);
                                 break;
                         }
                         break;
@@ -140,7 +148,9 @@ namespace SaboteurX.Game
                         break;
 
                 }
-                return tmp;
+                g.Dispose();
+                isCacheValid = true;
+                return cachedImage;
 
             } }
 
@@ -152,7 +162,7 @@ namespace SaboteurX.Game
             this.special = special;
             isEmpty = false;
             type = CardType.Path;
-
+            isCacheValid = false;
         }
         public Card(CardType type)
         {
@@ -178,6 +188,7 @@ namespace SaboteurX.Game
                 connections[i] = new Tuple<Gate, Gate>(left,right);
                 
             }
+            isCacheValid = false;
         }
 
         public object Clone()
@@ -191,6 +202,7 @@ namespace SaboteurX.Game
                 special = special,
                 type = type
             };
+            isCacheValid = false;
             return clone;
         }
     }

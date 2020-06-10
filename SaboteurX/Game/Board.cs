@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Net.PeerToPeer.Collaboration;
+using System.Threading.Tasks;
 
 namespace SaboteurX.Game
 {
@@ -16,11 +19,12 @@ namespace SaboteurX.Game
         readonly int[] addY = new int[]{ -1, 0, 1, 0 };
         public Card SelectedCard { get; set; } = null;
         private Card lastCardAdded = null;
+        private bool changed = false;
         #endregion
 
         public Bitmap Image { get
             {
-                if (SelectedCard != null)
+                if (SelectedCard != null && changed)
                     CheckIfDone();
 
                 int realWidth = Width * WidthCell, realHeight = Height * HeightCell;
@@ -28,7 +32,6 @@ namespace SaboteurX.Game
                 
                 Graphics g = Graphics.FromImage(tmp);
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g.FillRectangle(new SolidBrush(Color.Red), 0, 0, realWidth, realHeight);
                 for(int i = 0;i<Height;i++)
                 {
                     for(int j  = 0;j<Width;j++)
@@ -38,7 +41,14 @@ namespace SaboteurX.Game
                             Bitmap bmp = new Bitmap(WidthCell, HeightCell);
                             Graphics g2 = Graphics.FromImage(bmp);
                             g2.Clear(Color.Purple);
-                            g.DrawImage(bmp, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                            tryAgain:
+                            try
+                            {
+                                g.DrawImage(bmp, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                            }
+                            catch { System.Threading.Thread.Sleep(1);goto tryAgain; }
+                            bmp.Dispose();
+                            g2.Dispose();
                         }
                         else
                         {
@@ -46,7 +56,12 @@ namespace SaboteurX.Game
                             {
                                 board[i, j].SetToNew();
                             }
-                            g.DrawImage(board[i, j].Image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                            retry:
+                            try
+                            {
+                                g.DrawImage(board[i, j].Image, j * WidthCell, i * HeightCell, WidthCell, HeightCell);
+                            }
+                            catch { System.Threading.Thread.Sleep(1); goto retry; }
                             if (lastCardAdded == board[i, j])
                             {
                                 board[i, j].SetToOld();
@@ -54,26 +69,27 @@ namespace SaboteurX.Game
                         }
                     }
                 }
-
+                changed = false;
+                g.Dispose();
+                GC.Collect();
                 return tmp;
 
             } }
-        public int Diamonds { get{
-                CheckIfDone();
-                int dia = 0;
-                for(int i = 0;i<Height;i++)
-                    for (int j = 0; j < Width; j++)
-                        if (board[i, j].special == CardHelpers.Special.Diamond 
-                            && visited[(int)CardHelpers.Gate.Middle, i, j])
-                            dia++;
-                return dia;
-            } }
+        public int Diamonds
+        {
+            get
+            {
+                ResetVisited();
+                return Dfs(CardHelpers.Gate.Middle, startX, startY);
+            }
+        }
 
 
         public void ChangeAt(Card cell, int x, int y)
         {
             board[y, x] = cell;
             lastCardAdded = cell;
+            changed = true;
         }
         public void SetVisible(int x, int y)
         {
@@ -85,13 +101,12 @@ namespace SaboteurX.Game
         }
         public void ResetBoard()
         {
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width; j++)
+            Parallel.ForEach(Enumerable.Range(0, Height), (i) => {
+                Parallel.ForEach(Enumerable.Range(0, Width), (j) =>
                 {
                     board[i, j] = new Card();
-                }
-            }
+                });
+            });
             board[startY, startX] = new Card(new List<Tuple<CardHelpers.Gate, CardHelpers.Gate>>() {
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Down,CardHelpers.Gate.Middle),
             new Tuple<CardHelpers.Gate, CardHelpers.Gate>(CardHelpers.Gate.Left,CardHelpers.Gate.Middle),
@@ -132,18 +147,23 @@ namespace SaboteurX.Game
         {
             visited = new bool[5, Height, Width];
         }
-        private void Dfs(CardHelpers.Gate gate,int x, int y)
+        private int Dfs(CardHelpers.Gate gate,int x, int y)
         {
-            board[y, x].isHidden = false;
-            if (!visited[(int)gate, y, x])
+            int diamonds = 0;
+
+            if (!visited[(int)gate, y, x]) {
+            if(gate==CardHelpers.Gate.Middle && board[y,x].special==CardHelpers.Special.Diamond)
             {
+                diamonds++;
+            }
+            board[y, x].isHidden = false;
                 visited[(int)gate, y, x] = true;
                 board[y, x].connections.ForEach((con) =>
                 {
                     if (con.Item1 == gate)
-                        Dfs(con.Item2, x, y);
+                        diamonds+=Dfs(con.Item2, x, y);
                     if (con.Item2 == gate)
-                        Dfs(con.Item1, x, y);
+                        diamonds+=Dfs(con.Item1, x, y);
                 });
                 if(gate!=CardHelpers.Gate.Middle)
                 {
@@ -154,11 +174,12 @@ namespace SaboteurX.Game
                         CardHelpers.Gate correspondingGate = (CardHelpers.Gate)(((int)gate + 2) % 4);
                         if (CardHelpers.ContainsGate(board[ny, nx], correspondingGate))
                         {
-                            Dfs(correspondingGate, nx, ny);
+                            diamonds+=Dfs(correspondingGate, nx, ny);
                         }
                     }
                 }
             }
+            return diamonds;
         }
         public bool IsCompatible(Card cell, int x, int y,bool checkDone = true)
         {
