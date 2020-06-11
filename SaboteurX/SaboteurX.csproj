@@ -57,6 +57,9 @@
     <ApplicationIcon>crystal.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autoupdater.NET.Official.1.6.0\lib\net40\AutoUpdater.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\Downloads\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
@@ -144,6 +147,7 @@
       <DependentUpon>GameSelectorScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Game\Card.cs" />
+    <Compile Include="GlobalSettings.cs" />
     <Compile Include="Lobby\LobbyItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,6 +199,7 @@
     </Compile>
     <EmbeddedResource Include="DialogScreen.resx">
       <DependentUpon>DialogScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Game\DiamondsCounter.resx">
       <DependentUpon>DiamondsCounter.cs</DependentUpon>
@@ -204,6 +209,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameSelectorScreen.resx">
       <DependentUpon>GameSelectorScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Lobby\LobbyItem.resx">
       <DependentUpon>LobbyItem.cs</DependentUpon>

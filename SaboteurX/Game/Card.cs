@@ -70,7 +70,7 @@ namespace SaboteurX.Game
                 if (cachedImage == null) cachedImage = new Bitmap(Width, Height);
                 if (isCacheValid) return cachedImage;
                 Graphics g = Graphics.FromImage(cachedImage);
-                g.Clear(Color.Black);
+                g.Clear(GlobalSettings.boardColor);
                 switch (type)
                 {
                     case CardType.Path:
@@ -80,11 +80,11 @@ namespace SaboteurX.Game
                         }
                         else
                         {
-                            var brsh = new SolidBrush(Color.Black);
+                            var brsh = new SolidBrush(GlobalSettings.boardColor);
                             if (isNew)
                                 brsh.Color = Color.FromArgb(40,40,40);
                             g.FillRectangle(brsh, 0, 0, Width, Height);
-                            g.DrawRectangle(new Pen(Color.FromArgb(100, Color.LimeGreen), 3), 1, 1, Width - 1, Height - 1);
+                            g.DrawRectangle(new Pen(Color.FromArgb(100, GlobalSettings.secondaryColor), 3), 1, 1, Width - 1, Height - 1);
                             connections.ForEach((con) =>
                             {
                                 var left = con.Item1;
@@ -93,7 +93,7 @@ namespace SaboteurX.Game
                                 PointF start = FromGateToPointF(left);
                                 PointF end = FromGateToPointF(right);
 
-                                Pen pn = new Pen(Color.DarkGreen, 20);
+                                Pen pn = new Pen(GlobalSettings.pathColor, 20);
                                 if (left == right)
                                 {
                                     switch(left)

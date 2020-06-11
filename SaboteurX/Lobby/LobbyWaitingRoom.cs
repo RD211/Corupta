@@ -65,6 +65,7 @@ namespace SaboteurX
                 { lbl_name_0, lbl_name_1, lbl_name_2, lbl_name_3, lbl_name_4, lbl_name_5, lbl_name_6, lbl_name_7 };
                 var pbox_players = new List<PictureBox>()
                 { pbox_player_0, pbox_player_1, pbox_player_2, pbox_player_3, pbox_player_4, pbox_player_5, pbox_player_6, pbox_player_7 };
+                pbox_players.ForEach((pbox) => pbox.Hide());
                 for (int i = 0; i < lbl_players.Count; i++)
                 {
                     lbl_players[i].Tag = "Empty;NO";
@@ -76,9 +77,9 @@ namespace SaboteurX
                     lbl_players[i].Tag = $"{player.name};NO";
                     lbl_players[i].Text = player.name.ToAsciiArt();
                     pbox_players[i].Image = player.GetPictureBitmap(pbox_players[i].Width,pbox_players[i].Height);
+                    pbox_players[i].Show();
                 }
-                this.BackColor = Color.LimeGreen;
-                this.TransparencyKey = Color.LimeGreen;
+
                 lbl_quit.Text = "Quit".ToAsciiArt();
                 if (isHost)
                 {
@@ -99,11 +100,14 @@ namespace SaboteurX
         }
         private void LobbyWaitingRoom_Load(object sender, EventArgs e)
         {
+            this.ChangeFormColor();
             this.Opacity = 0;
             new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
+            this.BackColor = Color.LimeGreen;
+            this.TransparencyKey = Color.LimeGreen;
         }
 
-        private void card_moveForm_MouseDown(object sender, MouseEventArgs e)
+        private void Card_moveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -112,14 +116,14 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_close_Click(object sender, EventArgs e)
+        private void Lbl_close_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void lbl_start_Click(object sender, EventArgs e)
+        private void Lbl_start_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             lbl_start.Enabled = false;
@@ -165,7 +169,7 @@ namespace SaboteurX
                 lbl_start.Enabled = true;
             }
         }
-        private void lbl_quit_Click(object sender, EventArgs e)
+        private void Lbl_quit_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             lbl_quit.Enabled = false;
@@ -199,7 +203,7 @@ namespace SaboteurX
             }
         }
 
-        private void timer_update_Tick(object sender, EventArgs e)
+        private void Timer_update_Tick(object sender, EventArgs e)
         {
             UpdateData();
         }
@@ -221,14 +225,14 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_minimize_Click(object sender, EventArgs e)
+        private void Lbl_minimize_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.WindowState = FormWindowState.Minimized;
 
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             if (selectedLabel != null)
             {
@@ -258,7 +262,7 @@ namespace SaboteurX
             selectedLabel = null;
         }
 
-        private void lbl_settings_Click(object sender, EventArgs e)
+        private void Lbl_settings_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             LobbySettings dialog = new LobbySettings(ref settingsModel);

@@ -137,7 +137,7 @@
             this.lbl_title_main_screen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_title_main_screen.BackColor = System.Drawing.Color.Transparent;
             this.lbl_title_main_screen.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_title_main_screen.ForeColor = System.Drawing.Color.LawnGreen;
+            this.lbl_title_main_screen.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_title_main_screen.Location = new System.Drawing.Point(3, 65);
             this.lbl_title_main_screen.Name = "lbl_title_main_screen";
             this.lbl_title_main_screen.Size = new System.Drawing.Size(879, 160);

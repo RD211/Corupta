@@ -34,8 +34,8 @@ namespace SaboteurX
         {
             bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
-            g.FillRectangle(new SolidBrush(Color.DarkGreen), 0, 0, width, height);
-            SolidBrush blackBrush = new SolidBrush(Color.Black);
+            g.FillRectangle(new SolidBrush(GlobalSettings.mainColor), 0, 0, width, height);
+            SolidBrush blackBrush = new SolidBrush(GlobalSettings.secondaryColor);
             for (int i = 0; i < Dimension; i++)
             {
                 for (int j = 0; j < Dimension; j++)

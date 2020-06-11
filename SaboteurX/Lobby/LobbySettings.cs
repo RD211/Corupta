@@ -28,6 +28,7 @@ namespace SaboteurX
 
         private void LobbySettings_Load(object sender, EventArgs e)
         {
+            this.ChangeFormColor();
             this.Opacity = 0;
             new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
             lbl_settings.Text = "Settings".ToAsciiArt();
@@ -46,7 +47,7 @@ namespace SaboteurX
             this.num_diamonds.Value = settings.DiamondsNeeded;
         }
 
-        private void lbl_save_Click(object sender, EventArgs e)
+        private void Lbl_save_Click(object sender, EventArgs e)
         {
             this.settings.Width = (int)num_width.Value;
             this.settings.Height = (int)num_height.Value;
@@ -61,17 +62,17 @@ namespace SaboteurX
             this.Close();
         }
 
-        private void num_width_ValueChanged(object sender, EventArgs e)
+        private void Num_width_ValueChanged(object sender, EventArgs e)
         {
             num_start_x.Maximum = num_width.Value;
         }
 
-        private void num_height_ValueChanged(object sender, EventArgs e)
+        private void Num_height_ValueChanged(object sender, EventArgs e)
         {
             num_start_y.Maximum = num_height.Value;
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             if (selectedLabel != null)
             {
@@ -88,14 +89,14 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_save_MouseEnter(object sender, EventArgs e)
+        private void Lbl_save_MouseEnter(object sender, EventArgs e)
         {
             selectedLabel = (Label)sender;
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";YES";
             selectedLabel.Text = ("-" + selectedLabel.Tag.ToString().Split(';')[0] + "-").ToAsciiArt();
         }
 
-        private void lbl_save_MouseLeave(object sender, EventArgs e)
+        private void Lbl_save_MouseLeave(object sender, EventArgs e)
         {
             selectedLabel.Tag = selectedLabel.Tag.ToString().Split(';')[0] + ";NO";
             selectedLabel.Text = (selectedLabel.Tag.ToString().Split(';')[0]).ToAsciiArt();

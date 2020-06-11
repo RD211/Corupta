@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoUpdaterDotNET;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -31,9 +32,19 @@ namespace SaboteurX
 
         private void StartScreen_Load(object sender, EventArgs e)
         {
+            this.ChangeFormColor();
+            AutoUpdater.Mandatory = true;
+            AutoUpdater.UpdateMode = Mode.ForcedDownload;
+            var currentDirectory = new DirectoryInfo(Environment.CurrentDirectory);
+            if (currentDirectory.Parent != null)
+            {
+                AutoUpdater.InstallationPath = currentDirectory.Parent.FullName;
+                AutoUpdater.DownloadPath = currentDirectory.Parent.FullName;
+            }
+            AutoUpdater.Start("https://firebasestorage.googleapis.com/v0/b/corupta-ddd6d.appspot.com/o/updateInfo.xml?alt=media&token=d782499f-82a4-484c-880d-afc5c19b379c");
+
             this.Opacity = 0;
             new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
-
 
             lbl_play.Text = lbl_play.Tag.ToString().Split(';')[0].ToAsciiArt();
             lbl_settings.Text = lbl_settings.Tag.ToString().Split(';')[0].ToAsciiArt();

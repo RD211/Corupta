@@ -165,6 +165,7 @@
             // lbl_left
             // 
             this.lbl_left.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lbl_left.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_left.Font = new System.Drawing.Font("Consolas", 18.25F);
             this.lbl_left.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_left.Location = new System.Drawing.Point(3, 141);
@@ -195,6 +196,7 @@
             // lbl_right
             // 
             this.lbl_right.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lbl_right.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_right.Font = new System.Drawing.Font("Consolas", 18.25F);
             this.lbl_right.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_right.Location = new System.Drawing.Point(895, 141);

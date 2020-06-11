@@ -46,8 +46,8 @@
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
-            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
+            this.timer_animation = new System.Windows.Forms.Timer(this.components);
             this.card_settings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_avatar)).BeginInit();
             this.bunifuCards2.SuspendLayout();
@@ -166,11 +166,10 @@
             this.pbox_avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_avatar.TabIndex = 9;
             this.pbox_avatar.TabStop = false;
-            this.pbox_avatar.Click += new System.EventHandler(this.pbox_avatar_Click);
-            this.pbox_avatar.DoubleClick += new System.EventHandler(this.pbox_avatar_DoubleClick);
-            this.pbox_avatar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseDown);
-            this.pbox_avatar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseMove);
-            this.pbox_avatar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbox_avatar_MouseUp);
+            this.pbox_avatar.DoubleClick += new System.EventHandler(this.Pbox_avatar_DoubleClick);
+            this.pbox_avatar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pbox_avatar_MouseDown);
+            this.pbox_avatar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Pbox_avatar_MouseMove);
+            this.pbox_avatar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Pbox_avatar_MouseUp);
             // 
             // lbl_horizontal_divider_2
             // 
@@ -224,7 +223,7 @@
             this.txt_name.Size = new System.Drawing.Size(368, 117);
             this.txt_name.TabIndex = 13;
             this.txt_name.Text = "";
-            this.txt_name.TextChanged += new System.EventHandler(this.txt_name_TextChanged);
+            this.txt_name.TextChanged += new System.EventHandler(this.Txt_name_TextChanged);
             // 
             // label2
             // 
@@ -270,7 +269,7 @@
             this.lbl_minimize.Tag = "off";
             this.lbl_minimize.Text = "____";
             this.lbl_minimize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lbl_minimize.Click += new System.EventHandler(this.lbl_minimize_Click);
+            this.lbl_minimize.Click += new System.EventHandler(this.Lbl_minimize_Click);
             this.lbl_minimize.MouseEnter += new System.EventHandler(this.LabelZoomIn);
             this.lbl_minimize.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
@@ -286,7 +285,7 @@
             this.lbl_close.Tag = "off";
             this.lbl_close.Text = "\\/\r\n/\\";
             this.lbl_close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_close.Click += new System.EventHandler(this.lbl_close_Click_1);
+            this.lbl_close.Click += new System.EventHandler(this.Lbl_close_Click_1);
             this.lbl_close.MouseEnter += new System.EventHandler(this.LabelZoomIn);
             this.lbl_close.MouseLeave += new System.EventHandler(this.LabelZoomOut);
             // 
@@ -304,21 +303,22 @@
             this.card_moveForm.ShadowDepth = 20;
             this.card_moveForm.Size = new System.Drawing.Size(512, 51);
             this.card_moveForm.TabIndex = 6;
-            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.card_moveForm_MouseDown);
+            this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
+            // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.ForeColor = System.Drawing.Color.Chartreuse;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 1;
             // 
             // timer_animation
             // 
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
-            // 
-            // musicControlButtons1
-            // 
-            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
-            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
-            this.musicControlButtons1.Name = "musicControlButtons1";
-            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
-            this.musicControlButtons1.TabIndex = 1;
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // SettingsScreen
             // 

@@ -56,6 +56,7 @@
             // 
             // lbl_join
             // 
+            this.lbl_join.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_join.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.lbl_join.ForeColor = System.Drawing.Color.Chartreuse;
             this.lbl_join.Location = new System.Drawing.Point(438, 35);
@@ -67,12 +68,13 @@
     "| |/ _ \\| | \'_ \\ \r\n | |__| | (_) | | | | |\r\n  \\____/ \\___/|_|_| |_|\r\n           " +
     "            \r\n                       ";
             this.lbl_join.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_join.Click += new System.EventHandler(this.lbl_join_ClickAsync);
-            this.lbl_join.MouseEnter += new System.EventHandler(this.lbl_join_MouseEnter);
+            this.lbl_join.Click += new System.EventHandler(this.Lbl_join_ClickAsync);
+            this.lbl_join.MouseEnter += new System.EventHandler(this.Lbl_join_MouseEnter);
             this.lbl_join.MouseLeave += new System.EventHandler(this.Lbl_join_MouseLeave);
             // 
             // pbox_player_0
             // 
+            this.pbox_player_0.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_0.Location = new System.Drawing.Point(14, 16);
             this.pbox_player_0.Name = "pbox_player_0";
@@ -86,6 +88,7 @@
             // 
             // pbox_player_7
             // 
+            this.pbox_player_7.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_7.Location = new System.Drawing.Point(332, 122);
             this.pbox_player_7.Name = "pbox_player_7";
@@ -99,6 +102,7 @@
             // 
             // pbox_player_6
             // 
+            this.pbox_player_6.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_6.Location = new System.Drawing.Point(226, 122);
             this.pbox_player_6.Name = "pbox_player_6";
@@ -112,6 +116,7 @@
             // 
             // pbox_player_5
             // 
+            this.pbox_player_5.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_5.Location = new System.Drawing.Point(120, 122);
             this.pbox_player_5.Name = "pbox_player_5";
@@ -125,6 +130,7 @@
             // 
             // pbox_player_4
             // 
+            this.pbox_player_4.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_4.Location = new System.Drawing.Point(14, 122);
             this.pbox_player_4.Name = "pbox_player_4";
@@ -138,6 +144,7 @@
             // 
             // pbox_player_3
             // 
+            this.pbox_player_3.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_3.Location = new System.Drawing.Point(332, 16);
             this.pbox_player_3.Name = "pbox_player_3";
@@ -151,6 +158,7 @@
             // 
             // pbox_player_2
             // 
+            this.pbox_player_2.BackColor = System.Drawing.Color.DarkGreen;
             this.pbox_player_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_2.Location = new System.Drawing.Point(226, 16);
             this.pbox_player_2.Name = "pbox_player_2";
@@ -164,6 +172,7 @@
             // 
             // pbox_player_1
             // 
+            this.pbox_player_1.BackColor = System.Drawing.Color.Transparent;
             this.pbox_player_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbox_player_1.Location = new System.Drawing.Point(120, 16);
             this.pbox_player_1.Name = "pbox_player_1";
@@ -225,9 +234,9 @@
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.BackColor = System.Drawing.Color.DarkGreen;
             this.label2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Chartreuse;
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(-3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 241);

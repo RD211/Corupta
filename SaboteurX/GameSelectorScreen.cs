@@ -111,6 +111,7 @@ namespace SaboteurX
 
         private void GameSelectorScreen_Load(object sender, EventArgs e)
         {
+            this.ChangeFormColor();
             this.Opacity = 0;
             new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
         }

@@ -22,14 +22,14 @@ namespace SaboteurX
             this.Close();
         }
 
-        private void lbl_right_Click(object sender, EventArgs e)
+        private void Lbl_right_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.DialogResult = DialogResult.No;
             this.Close();
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             var tag = selectedLabel.Tag.ToString().Split(';');
             if (tag[1] == "NO")
@@ -44,18 +44,18 @@ namespace SaboteurX
             }
         }
 
-        private void lbl_left_MouseEnter(object sender, EventArgs e)
+        private void Lbl_left_MouseEnter(object sender, EventArgs e)
         {
             this.selectedLabel.Text = this.selectedLabel.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.selectedLabel = (Label)sender;
-            timer_animation_Tick(null, null);
+            Timer_animation_Tick(null, null);
         }
 
-        private void lbl_right_MouseEnter(object sender, EventArgs e)
+        private void Lbl_right_MouseEnter(object sender, EventArgs e)
         {
             this.selectedLabel.Text = this.selectedLabel.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.selectedLabel = (Label)sender;
-            timer_animation_Tick(null, null);
+            Timer_animation_Tick(null, null);
         }
 
         public DialogScreen(string leftAnswer, string rightAnswer, string question)
@@ -70,9 +70,10 @@ namespace SaboteurX
             this.lbl_question.Text = this.lbl_question.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.BackColor = Color.LimeGreen;
             this.TransparencyKey = Color.LimeGreen;
+            this.ChangeFormColor();
         }
 
-        private void lbl_close_Click(object sender, EventArgs e)
+        private void Lbl_close_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();

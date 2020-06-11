@@ -121,7 +121,7 @@
             // 
             // num_diamonds
             // 
-            this.num_diamonds.BackColor = System.Drawing.Color.Black;
+            this.num_diamonds.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_diamonds.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_diamonds.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_diamonds.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -202,9 +202,9 @@
             this.lbl_save.Tag = "Save;NO";
             this.lbl_save.Text = "Save";
             this.lbl_save.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_save.Click += new System.EventHandler(this.lbl_save_Click);
-            this.lbl_save.MouseEnter += new System.EventHandler(this.lbl_save_MouseEnter);
-            this.lbl_save.MouseLeave += new System.EventHandler(this.lbl_save_MouseLeave);
+            this.lbl_save.Click += new System.EventHandler(this.Lbl_save_Click);
+            this.lbl_save.MouseEnter += new System.EventHandler(this.Lbl_save_MouseEnter);
+            this.lbl_save.MouseLeave += new System.EventHandler(this.Lbl_save_MouseLeave);
             // 
             // label14
             // 
@@ -234,7 +234,7 @@
             // 
             // num_archeolog
             // 
-            this.num_archeolog.BackColor = System.Drawing.Color.Black;
+            this.num_archeolog.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_archeolog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_archeolog.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_archeolog.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -268,7 +268,7 @@
             // 
             // num_saboteur
             // 
-            this.num_saboteur.BackColor = System.Drawing.Color.Black;
+            this.num_saboteur.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_saboteur.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_saboteur.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_saboteur.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -302,7 +302,7 @@
             // 
             // num_miner
             // 
-            this.num_miner.BackColor = System.Drawing.Color.Black;
+            this.num_miner.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_miner.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_miner.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_miner.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -348,7 +348,7 @@
             // 
             // num_total
             // 
-            this.num_total.BackColor = System.Drawing.Color.Black;
+            this.num_total.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_total.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_total.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_total.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -405,7 +405,7 @@
             // 
             // num_height
             // 
-            this.num_height.BackColor = System.Drawing.Color.Black;
+            this.num_height.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_height.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_height.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_height.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -418,7 +418,7 @@
             this.num_height.Size = new System.Drawing.Size(120, 29);
             this.num_height.TabIndex = 40;
             this.num_height.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.num_height.ValueChanged += new System.EventHandler(this.num_height_ValueChanged);
+            this.num_height.ValueChanged += new System.EventHandler(this.Num_height_ValueChanged);
             // 
             // label5
             // 
@@ -435,7 +435,7 @@
             // 
             // num_width
             // 
-            this.num_width.BackColor = System.Drawing.Color.Black;
+            this.num_width.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_width.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_width.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_width.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -448,7 +448,7 @@
             this.num_width.Size = new System.Drawing.Size(120, 29);
             this.num_width.TabIndex = 38;
             this.num_width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.num_width.ValueChanged += new System.EventHandler(this.num_width_ValueChanged);
+            this.num_width.ValueChanged += new System.EventHandler(this.Num_width_ValueChanged);
             // 
             // label6
             // 
@@ -491,7 +491,7 @@
             // 
             // num_start_y
             // 
-            this.num_start_y.BackColor = System.Drawing.Color.Black;
+            this.num_start_y.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_start_y.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_start_y.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_start_y.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -525,7 +525,7 @@
             // 
             // num_start_x
             // 
-            this.num_start_x.BackColor = System.Drawing.Color.Black;
+            this.num_start_x.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.num_start_x.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.num_start_x.Cursor = System.Windows.Forms.Cursors.Default;
             this.num_start_x.Font = new System.Drawing.Font("Consolas", 16.25F);
@@ -587,7 +587,7 @@
             // 
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // LobbySettings
             // 

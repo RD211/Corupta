@@ -43,7 +43,7 @@ namespace SaboteurX
             int imageSize = 500;
             bmp = information.GetPictureBitmap(imageSize,imageSize);
             Graphics g = Graphics.FromImage(bmp);
-            Pen pn = new Pen(Color.Chartreuse,1);
+            Pen pn = new Pen(GlobalSettings.secondaryColor,1);
             for(int j = 0;j< PlayerInformation.Dimension; j++)
             {
                 g.DrawLine(pn, j * (imageSize / (float)PlayerInformation.Dimension), 0f, j * (imageSize / (float)PlayerInformation.Dimension), imageSize - 1);
@@ -56,6 +56,7 @@ namespace SaboteurX
         }
         private void SettingsScreen_Load(object sender, EventArgs e)
         {
+            this.ChangeFormColor();
             this.Opacity = 0;
             new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
             lbl_settings.Text = lbl_settings.Tag.ToString().Split(';')[0].ToAsciiArt();
@@ -73,11 +74,11 @@ namespace SaboteurX
             UpdateAvatarImage();
 
         }
-        private void lbl_maximize_Click(object sender, EventArgs e)
+        private void Lbl_maximize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
-        private void card_moveForm_MouseDown(object sender, MouseEventArgs e)
+        private void Card_moveForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -85,19 +86,19 @@ namespace SaboteurX
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-        private void lbl_minimize_Click(object sender, EventArgs e)
+        private void Lbl_minimize_Click(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.WindowState = FormWindowState.Minimized;
         }
-        private void lbl_close_Click_1(object sender, EventArgs e)
+        private void Lbl_close_Click_1(object sender, EventArgs e)
         {
             MusicPlayerHelper.PlayYourAudio(ref MusicPlayerHelper.navigationMusicPlayer);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void txt_name_TextChanged(object sender, EventArgs e)
+        private void Txt_name_TextChanged(object sender, EventArgs e)
         {
             List<string> stringsToReplace = new List<string>();
             foreach(var c in txt_name.Text)
@@ -114,10 +115,10 @@ namespace SaboteurX
         {
             this.selectedLabel.Text = this.selectedLabel.Tag.ToString().Split(';')[0].ToAsciiArt();
             this.selectedLabel = (Label)sender;
-            timer_animation_Tick(null, null);
+            Timer_animation_Tick(null, null);
         }
 
-        private void timer_animation_Tick(object sender, EventArgs e)
+        private void Timer_animation_Tick(object sender, EventArgs e)
         {
             var tag = selectedLabel.Tag.ToString().Split(';');
             if (tag[1] == "NO")
@@ -153,16 +154,17 @@ namespace SaboteurX
         bool holdingDownLeft = false;
         bool holdingDownRight = false;
 
-        private void pbox_avatar_MouseDown(object sender, MouseEventArgs e)
+        private void Pbox_avatar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 holdingDownLeft = true;
             else
                 holdingDownRight = true;
         }
-        int imageSize = 600;
 
-        private void pbox_avatar_MouseMove(object sender, MouseEventArgs e)
+        readonly int imageSize = 600;
+
+        private void Pbox_avatar_MouseMove(object sender, MouseEventArgs e)
         {
             try
             {
@@ -181,20 +183,15 @@ namespace SaboteurX
             
         }
 
-        private void pbox_avatar_MouseUp(object sender, MouseEventArgs e)
+        private void Pbox_avatar_MouseUp(object sender, MouseEventArgs e)
         {
             holdingDownRight = false; holdingDownLeft = false;
         }
 
-        private void pbox_avatar_DoubleClick(object sender, EventArgs e)
+        private void Pbox_avatar_DoubleClick(object sender, EventArgs e)
         {
             information.picture[(int)(((MouseEventArgs)e).X * 2 / ((float)imageSize / (float)PlayerInformation.Dimension)), (int)(((MouseEventArgs)e).Y * 2 / ((float)imageSize / (float)PlayerInformation.Dimension))] = true;
             UpdateAvatarImage();
-        }
-
-        private void pbox_avatar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

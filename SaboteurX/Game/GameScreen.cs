@@ -78,8 +78,10 @@ namespace SaboteurX
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
+            this.ChangeFormColor();
             this.Opacity = 0;
-            new Animator(new WinFormAnimation.Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
+
+            new Animator(new Path(0, 1, 250, 100)).Play(this, Animator.KnownProperties.Opacity);
             lbl_chat_title.Text = "Chat".ToAsciiArt();
             TransparencyKey = Color.LimeGreen;
             BackColor = Color.LimeGreen;
@@ -181,11 +183,15 @@ namespace SaboteurX
             lbl_player.Text = (game.Players[game.currentPlayer].Split(';')[0] + "'s turn");
             if(game.currentPlayer == myId)
             {
-                lbl_player.ForeColor = Color.LightGreen;
+                var LighterColor = Color.FromArgb(
+                    Math.Min(253,GlobalSettings.secondaryColor.R+10), 
+                    Math.Min(253,GlobalSettings.secondaryColor.G+10),
+                    Math.Min(254, GlobalSettings.secondaryColor.B + 10));
+                lbl_player.ForeColor = LighterColor;
             }
             else
             {
-                lbl_player.ForeColor = Color.Chartreuse;
+                lbl_player.ForeColor = GlobalSettings.secondaryColor;
             }
             lbl_cardsLeft.Text = $"Cards left: {game.remainingCards}";
             lbl_discardsLeft.Text = $"Discards left: {game.discardsLeft}";
@@ -262,9 +268,11 @@ namespace SaboteurX
         }
         private void ProcessAvatars()
         {
-            var pictureBoxes = new PictureBox[] { pbox_avatar_1, pbox_avatar_2, pbox_avatar_3, pbox_avatar_4, pbox_avatar_5, pbox_avatar_6, pbox_avatar_7, pbox_avatar_8 }; ;
+            var pictureBoxes = new PictureBox[] { pbox_avatar_1, pbox_avatar_2, pbox_avatar_3, pbox_avatar_4, pbox_avatar_5, pbox_avatar_6, pbox_avatar_7, pbox_avatar_8 };
+            pictureBoxes.ToList().ForEach((pbox) => pbox.Hide());
             for (int i = 0; i < game.Players.Count; i++)
             {
+                pictureBoxes[i].Show();
                 if(i==game.currentPlayer)
                 {
                     pictureBoxes[i].BorderStyle = BorderStyle.Fixed3D;
@@ -282,6 +290,7 @@ namespace SaboteurX
                 }
                 pictureBoxes[i].Image = playerBmp;
             }
+
         }
         private void ProcessDiamonds()
         {

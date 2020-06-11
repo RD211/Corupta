@@ -68,7 +68,7 @@
             this.lbl_left.Text = resources.GetString("lbl_left.Text");
             this.lbl_left.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_left.Click += new System.EventHandler(this.Lbl_left_Click);
-            this.lbl_left.MouseEnter += new System.EventHandler(this.lbl_left_MouseEnter);
+            this.lbl_left.MouseEnter += new System.EventHandler(this.Lbl_left_MouseEnter);
             // 
             // lbl_right
             // 
@@ -82,8 +82,8 @@
             this.lbl_right.Tag = "No;NO";
             this.lbl_right.Text = resources.GetString("lbl_right.Text");
             this.lbl_right.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_right.Click += new System.EventHandler(this.lbl_right_Click);
-            this.lbl_right.MouseEnter += new System.EventHandler(this.lbl_right_MouseEnter);
+            this.lbl_right.Click += new System.EventHandler(this.Lbl_right_Click);
+            this.lbl_right.MouseEnter += new System.EventHandler(this.Lbl_right_MouseEnter);
             // 
             // lbl_question
             // 
@@ -102,7 +102,7 @@
             // 
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
-            this.timer_animation.Tick += new System.EventHandler(this.timer_animation_Tick);
+            this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
             // 
             // DialogScreen
             // 

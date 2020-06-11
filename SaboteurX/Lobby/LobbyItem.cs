@@ -19,7 +19,7 @@ namespace SaboteurX
     {
         KeyValuePair<string, LobbyModel> lobbyData = new KeyValuePair<string, LobbyModel>();
         Label selectedLabel;
-        GameSelectorScreen fatherForm;
+        readonly GameSelectorScreen fatherForm;
         bool loading = false;
         public LobbyItem(KeyValuePair<string, LobbyModel> lobby, GameSelectorScreen father)
         {
@@ -27,6 +27,8 @@ namespace SaboteurX
             this.lobbyData = lobby;
             this.fatherForm = father;
             LoadPlayerImages();
+            this.BackColor = GlobalSettings.mainColor;
+            this.ChangeFormColor();
         }
         private void LoadPlayerImages()
         {
@@ -68,7 +70,7 @@ namespace SaboteurX
             this.lbl_join.Text = this.lbl_join.Tag.ToString().Split(';')[0].ToAsciiArt();
         }
 
-        private void lbl_join_MouseEnter(object sender, EventArgs e)
+        private void Lbl_join_MouseEnter(object sender, EventArgs e)
         {
             this.selectedLabel = (Label)sender;
             Timer_animation_Tick(null, null);
@@ -103,7 +105,7 @@ namespace SaboteurX
 
         }
 
-        private void lbl_join_ClickAsync(object sender, EventArgs e)
+        private void Lbl_join_ClickAsync(object sender, EventArgs e)
         {
             if (!loading)
             {

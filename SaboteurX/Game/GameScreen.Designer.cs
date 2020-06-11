@@ -31,13 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameScreen));
             this.card_moveForm = new Bunifu.Framework.UI.BunifuCards();
-            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.bunifuCards2 = new Bunifu.Framework.UI.BunifuCards();
             this.lbl_maximize = new System.Windows.Forms.Label();
             this.lbl_minimize = new System.Windows.Forms.Label();
             this.lbl_close = new System.Windows.Forms.Label();
             this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
-            this.diamondsCounter1 = new SaboteurX.Game.DiamondsCounter();
             this.lbl_cardsLeft = new System.Windows.Forms.Label();
             this.lbl_discardsLeft = new System.Windows.Forms.Label();
             this.lbl_endRound = new System.Windows.Forms.Label();
@@ -63,6 +61,8 @@
             this.pbox_game = new System.Windows.Forms.PictureBox();
             this.timer_update = new System.Windows.Forms.Timer(this.components);
             this.timer_animation = new System.Windows.Forms.Timer(this.components);
+            this.diamondsCounter1 = new SaboteurX.Game.DiamondsCounter();
+            this.musicControlButtons1 = new SaboteurX.MusicControlButtons();
             this.card_moveForm.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
             this.bunifuCards1.SuspendLayout();
@@ -97,14 +97,6 @@
             this.card_moveForm.Size = new System.Drawing.Size(512, 63);
             this.card_moveForm.TabIndex = 6;
             this.card_moveForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Card_moveForm_MouseDown);
-            // 
-            // musicControlButtons1
-            // 
-            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
-            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
-            this.musicControlButtons1.Name = "musicControlButtons1";
-            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
-            this.musicControlButtons1.TabIndex = 27;
             // 
             // bunifuCards2
             // 
@@ -213,18 +205,10 @@
             this.bunifuCards1.Size = new System.Drawing.Size(989, 722);
             this.bunifuCards1.TabIndex = 8;
             // 
-            // diamondsCounter1
-            // 
-            this.diamondsCounter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.diamondsCounter1.BackColor = System.Drawing.Color.DarkGreen;
-            this.diamondsCounter1.Location = new System.Drawing.Point(572, 122);
-            this.diamondsCounter1.Name = "diamondsCounter1";
-            this.diamondsCounter1.Size = new System.Drawing.Size(112, 42);
-            this.diamondsCounter1.TabIndex = 27;
-            // 
             // lbl_cardsLeft
             // 
             this.lbl_cardsLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_cardsLeft.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_cardsLeft.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
             this.lbl_cardsLeft.ForeColor = System.Drawing.Color.Black;
             this.lbl_cardsLeft.Location = new System.Drawing.Point(3, 595);
@@ -236,6 +220,7 @@
             // 
             // lbl_discardsLeft
             // 
+            this.lbl_discardsLeft.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_discardsLeft.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
             this.lbl_discardsLeft.ForeColor = System.Drawing.Color.Black;
             this.lbl_discardsLeft.Location = new System.Drawing.Point(3, 89);
@@ -248,6 +233,7 @@
             // lbl_endRound
             // 
             this.lbl_endRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_endRound.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_endRound.Font = new System.Drawing.Font("Consolas", 25F, System.Drawing.FontStyle.Bold);
             this.lbl_endRound.ForeColor = System.Drawing.Color.Black;
             this.lbl_endRound.Location = new System.Drawing.Point(448, 633);
@@ -264,7 +250,7 @@
             // lbl_player
             // 
             this.lbl_player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_player.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_player.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_player.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
             this.lbl_player.ForeColor = System.Drawing.Color.Black;
             this.lbl_player.Location = new System.Drawing.Point(455, 90);
@@ -277,6 +263,7 @@
             // lbl_role
             // 
             this.lbl_role.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_role.BackColor = System.Drawing.Color.DarkGreen;
             this.lbl_role.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Bold);
             this.lbl_role.ForeColor = System.Drawing.Color.Black;
             this.lbl_role.Location = new System.Drawing.Point(455, 595);
@@ -385,6 +372,7 @@
             // pbox_card_5
             // 
             this.pbox_card_5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbox_card_5.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.pbox_card_5.Location = new System.Drawing.Point(362, 633);
             this.pbox_card_5.Name = "pbox_card_5";
             this.pbox_card_5.Size = new System.Drawing.Size(80, 80);
@@ -470,10 +458,10 @@
             // 
             this.txt_chat_screen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_chat_screen.BackColor = System.Drawing.SystemColors.WindowText;
+            this.txt_chat_screen.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txt_chat_screen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_chat_screen.Font = new System.Drawing.Font("Consolas", 12.25F);
-            this.txt_chat_screen.ForeColor = System.Drawing.Color.Lime;
+            this.txt_chat_screen.ForeColor = System.Drawing.Color.Chartreuse;
             this.txt_chat_screen.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txt_chat_screen.Location = new System.Drawing.Point(690, 90);
             this.txt_chat_screen.Name = "txt_chat_screen";
@@ -488,7 +476,7 @@
             this.lbl_send_message.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_send_message.BackColor = System.Drawing.Color.Transparent;
             this.lbl_send_message.Font = new System.Drawing.Font("Consolas", 20.25F);
-            this.lbl_send_message.ForeColor = System.Drawing.Color.Chartreuse;
+            this.lbl_send_message.ForeColor = System.Drawing.Color.Black;
             this.lbl_send_message.Location = new System.Drawing.Point(946, 677);
             this.lbl_send_message.Name = "lbl_send_message";
             this.lbl_send_message.Size = new System.Drawing.Size(40, 27);
@@ -501,10 +489,10 @@
             // txt_message
             // 
             this.txt_message.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_message.BackColor = System.Drawing.Color.Black;
+            this.txt_message.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txt_message.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_message.Font = new System.Drawing.Font("Consolas", 12.25F);
-            this.txt_message.ForeColor = System.Drawing.Color.Lime;
+            this.txt_message.ForeColor = System.Drawing.Color.Chartreuse;
             this.txt_message.Location = new System.Drawing.Point(690, 682);
             this.txt_message.Name = "txt_message";
             this.txt_message.Size = new System.Drawing.Size(256, 27);
@@ -540,6 +528,23 @@
             this.timer_animation.Enabled = true;
             this.timer_animation.Interval = 500;
             this.timer_animation.Tick += new System.EventHandler(this.Timer_animation_Tick);
+            // 
+            // diamondsCounter1
+            // 
+            this.diamondsCounter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.diamondsCounter1.BackColor = System.Drawing.Color.DarkGreen;
+            this.diamondsCounter1.Location = new System.Drawing.Point(572, 122);
+            this.diamondsCounter1.Name = "diamondsCounter1";
+            this.diamondsCounter1.Size = new System.Drawing.Size(112, 42);
+            this.diamondsCounter1.TabIndex = 27;
+            // 
+            // musicControlButtons1
+            // 
+            this.musicControlButtons1.BackColor = System.Drawing.Color.Transparent;
+            this.musicControlButtons1.Location = new System.Drawing.Point(3, 3);
+            this.musicControlButtons1.Name = "musicControlButtons1";
+            this.musicControlButtons1.Size = new System.Drawing.Size(80, 40);
+            this.musicControlButtons1.TabIndex = 27;
             // 
             // GameScreen
             // 
